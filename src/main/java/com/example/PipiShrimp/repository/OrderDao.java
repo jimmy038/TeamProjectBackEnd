@@ -3,9 +3,9 @@ package com.example.PipiShrimp.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.PipiShrimp.entity.Orders;
+import com.example.PipiShrimp.entity.Order;
 
 @Repository
-public interface OrdersDao extends JpaRepository<Orders, String>{
+public interface OrderDao extends JpaRepository<Order, Integer>{
 
 }
