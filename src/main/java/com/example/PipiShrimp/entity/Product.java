@@ -7,7 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.mysql.cj.jdbc.Blob;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+
 
 @Entity
 @Table(name = "product")
@@ -19,6 +21,7 @@ public class Product {
 	private int productId;
 
 	@Column(name = "product_name")
+	@JsonProperty("product_name")
 	private String productName;
 
 	@Column(name = "description")
@@ -33,17 +36,19 @@ public class Product {
 
 	// 商品銷售數量
 	@Column(name = "sale_count")
+	@JsonProperty("sale_count")
 	private int saleCount;
 
 	// 商品是否上架(boolean)
 	@Column(name = "shelves")
 	private boolean shelves;
 
-	// Blob 存放二進位制資料的資料型態
+	//用路徑存放圖片
 	@Column(name = "photo")
-	private Blob photo;
+	private String photo;
 
 	@Column(name = "user_id")
+	@JsonProperty("user_id")
 	private int userId;
 
 	public Product() {
@@ -52,7 +57,7 @@ public class Product {
 	}
 
 	public Product(String productName, String description, int price, int inventory, int saleCount, boolean shelves,
-			Blob photo, int userId) {
+			String photo, int userId) {
 		super();
 		this.productName = productName;
 		this.description = description;
@@ -132,11 +137,11 @@ public class Product {
 		this.shelves = shelves;
 	}
 
-	public Blob getPhoto() {
+	public String getPhoto() {
 		return photo;
 	}
 
-	public void setPhoto(Blob photo) {
+	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
 

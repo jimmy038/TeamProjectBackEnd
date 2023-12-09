@@ -7,7 +7,7 @@ CREATE TABLE  IF NOT EXISTS `user` (
   `phone_number` varchar(45) NOT NULL,
   `level` int NOT NULL,
   PRIMARY KEY (`id`)
-)
+);
 
 CREATE TABLE IF NOT EXISTS `product` (
   `product_id` int NOT NULL AUTO_INCREMENT,
@@ -17,10 +17,11 @@ CREATE TABLE IF NOT EXISTS `product` (
   `inventory` int NOT NULL,
   `sale_count` int NOT NULL DEFAULT '0',
   `shelves` tinyint NOT NULL DEFAULT '0',
-  `photo` mediumblob,
+  `photo` varchar(255) DEFAULT NULL,
   `user_id` int NOT NULL,
   PRIMARY KEY (`product_id`)
-)
+);
+
 
 CREATE TABLE IF NOT EXISTS `order` (
   `order_id` int NOT NULL AUTO_INCREMENT,
@@ -31,5 +32,5 @@ CREATE TABLE IF NOT EXISTS `order` (
   `type` varchar(45) NOT NULL,
   `user_id` int NOT NULL,
   PRIMARY KEY (`order_id`)
-)
+);
 
