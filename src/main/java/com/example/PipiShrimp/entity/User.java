@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name = "user")
 public class User {
@@ -23,12 +25,14 @@ public class User {
 	private String email;
 
 	@Column(name = "password")
+	@JsonProperty("password")
 	private String pwd;
 
 	@Column(name = "address")
 	private String address;
 
 	@Column(name = "phone_number")
+	@JsonProperty("phone_number")
 	private String phoneNumber;
 
 	@Column(name = "level")
@@ -36,7 +40,14 @@ public class User {
 
 	public User() {
 		super();
-		// TODO Auto-generated constructor stub
+	}
+
+	// Test用的建構方法
+	public User(String name, String email, String pwd) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.pwd = pwd;
 	}
 
 	public User(String name, String email, String pwd, String address, String phoneNumber, int level) {

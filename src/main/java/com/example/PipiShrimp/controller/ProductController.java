@@ -1,6 +1,9 @@
 package com.example.PipiShrimp.controller;
 
+import javax.annotation.security.PermitAll;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +15,8 @@ import com.example.PipiShrimp.service.ifs.ProductService;
 import com.example.PipiShrimp.vo.ProductCreateRes;
 import com.example.PipiShrimp.vo.ProductSearchRes;
 
+@CrossOrigin
+@PermitAll //不會受到 Spring Security 的影響
 @RestController
 public class ProductController {
 

@@ -6,9 +6,13 @@ public enum RtnCode {
 //	SUCCESSFUL為成功,HTTP狀態碼,主要用200,400,401,403,404, 200為成功,固定的,權限有相關的401&403,404固定就為找不到,剩下歸類到400
 	SUCCESSFUL(200, "Successful!!"), //
 	PARAM_ERROR(400, "Param error!!"), //
-	PRODUCT_CREATE_FAILED(400, "Product create failed!!"),//
-	PRODUCT_IS_EMPTY(400, "Product is empty!!"),//
-	PRODUCT_NOT_FOUND(404, "Product not found!!"),//
+	PRODUCT_CREATE_FAILED(400, "Product create failed!!"), //
+	PRODUCT_IS_EMPTY(400, "Product is empty!!"), //
+	PRODUCT_NOT_FOUND(404, "Product not found!!"), //
+	EMAIL_IS_EXIST(400, "Email is exist!!"),//
+	PASSWORD_FORMAT_ERROR(400, "Password format error!!"),//
+	EMAIL_FORMAT_ERROR(400, "Email format error!!"),//
+	USER_CREATE_FAILED(400, "User create failed!!"), //
 	;
 
 	private int code;
