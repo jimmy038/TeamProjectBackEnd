@@ -1178,3 +1178,5 @@ Caused by: java.lang.Error: Unresolved compilation problems:
 17:54:45.206 INFO  [http-nio-8080-exec-2][[/].log(DirectJDKLog.java:173)] Initializing Spring DispatcherServlet 'dispatcherServlet'
 17:54:45.206 INFO  [http-nio-8080-exec-2][DispatcherServlet.initServletBean(FrameworkServlet.java:525)] Initializing Servlet 'dispatcherServlet'
 17:54:45.211 INFO  [http-nio-8080-exec-2][DispatcherServlet.initServletBean(FrameworkServlet.java:547)] Completed initialization in 0 ms
+19:30:24.185 WARN  [HikariPool-25 housekeeper][HikariPool.run(HikariPool.java:788)] HikariPool-25 - Thread starvation or clock leap detected (housekeeper delta=1h25m29s580ms572µs399ns).
+20:32:54.057 WARN  [HikariPool-25 housekeeper][HikariPool.run(HikariPool.java:788)] HikariPool-25 - Thread starvation or clock leap detected (housekeeper delta=48m29s608ms897µs600ns).

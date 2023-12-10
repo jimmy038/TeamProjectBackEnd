@@ -34,4 +34,14 @@ public class ProductController {
 			@RequestParam(required = false) String productName) {
 		return service.getProductByName(productName);
 	}
+
+	@GetMapping(value = "/product/price/sort")
+	public ProductSearchRes getProductByPrice() {
+		return service.getProductByPrice();
+	}
+
+	@GetMapping(value = "/product/price/sort/desc")
+	public ProductSearchRes getProductByPriceDesc() {
+		return service.getProductByPriceDesc();
+	}
 }

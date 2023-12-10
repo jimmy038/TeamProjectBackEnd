@@ -71,4 +71,14 @@ public class ProductServiceImpl implements ProductService {
 		return new ProductSearchRes(RtnCode.SUCCESSFUL, products);
 	}
 
+	@Override
+	public ProductSearchRes getProductByPrice() {
+		return new ProductSearchRes(RtnCode.SUCCESSFUL, proDao.searchProductByPrice());
+	}
+
+	@Override
+	public ProductSearchRes getProductByPriceDesc() {
+		return new ProductSearchRes(RtnCode.SUCCESSFUL, proDao.searchProductByPriceDesc());
+	}
+
 }

@@ -55,6 +55,26 @@ public class ProductServiceTest {
 	}
 
 	@Test
+	public void getProductByPriceTest() {
+		List<Product> res = service.getProductByPrice().getProducts();
+		for (Product item : res) {
+			System.out.println("產品名稱: " + item.getProductName());
+			System.out.println("產品名稱: " + item.getPrice());
+			System.out.println("-----------------");
+		}
+	}
+
+	@Test
+	public void getProductByPriceDescTest() {
+		List<Product> res = service.getProductByPriceDesc().getProducts();
+		for (Product item : res) {
+			System.out.println("產品名稱: " + item.getProductName());
+			System.out.println("產品名稱: " + item.getPrice());
+			System.out.println("-----------------");
+		}
+	}
+
+	@Test
 	public void deleteAllProduct() {
 		dao.deleteAll();
 		System.out.println("資料已全數清除");

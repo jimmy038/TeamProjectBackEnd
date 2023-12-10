@@ -29,4 +29,20 @@ public interface ProductDao extends JpaRepository<Product, Integer> {
 			+ " ORDER BY product_id DESC;", //
 			nativeQuery = true)
 	public List<Product> searchProductByName(@Param("name") String productName);
+
+	/**
+	 * 依價格排序商品(低 => 高)
+	 **/
+	@Query(value = "SELECT * FROM product"//
+			+ " ORDER BY price", //
+			nativeQuery = true)
+	public List<Product> searchProductByPrice();
+
+	/**
+	 * 依價格排序商品(高 => 低)
+	 **/
+	@Query(value = "SELECT * FROM product"//
+			+ " ORDER BY price DESC", //
+			nativeQuery = true)
+	public List<Product> searchProductByPriceDesc();
 }
