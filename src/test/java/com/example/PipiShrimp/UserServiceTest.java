@@ -8,6 +8,7 @@ import com.example.PipiShrimp.entity.Mail;
 import com.example.PipiShrimp.entity.User;
 import com.example.PipiShrimp.repository.UserDao;
 import com.example.PipiShrimp.service.ifs.UserService;
+import com.example.PipiShrimp.vo.UserReq;
 import com.example.PipiShrimp.vo.UserRes;
 
 @SpringBootTest
@@ -19,7 +20,7 @@ public class UserServiceTest {
 	private UserDao dao;
 
 	@Test
-	public void loginTest() {
+	public void signUpTest() {
 		// 成功新增
 		User user = new User("ian", "ian0217@gmail.com", "ian8787gogo");
 		UserRes res = service.signUp(user);
@@ -47,12 +48,35 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void sentMailTest() {
-		Mail.sentMail();
+	public void loginTest() {
+		UserReq req = new UserReq("ian0217@gmail.com", "ian8787gogo");
+		// 帳號密碼正確
+		UserRes res = service.login(req);
+		System.out.println("執行結果:" + res.getRtnCode().getMessage());
+
+		// email未註冊
+		req = new UserReq("fuck1234@gmail.com", "ian8787gogo");
+		res = service.login(req);
+		System.out.println("執行結果:" + res.getRtnCode().getMessage());
+
+		// 密碼錯誤
+		req = new UserReq("ian0217@gmail.com", "ianGG3cm");
+		res = service.login(req);
+		System.out.println("執行結果:" + res.getRtnCode().getMessage());
+
+		// 未輸入資料
+		req = new UserReq("", "ianGG3cm");
+		res = service.login(req);
+		System.out.println("執行結果:" + res.getRtnCode().getMessage());
 	}
 
-	@Test
-	public void deleteAll() {
-		dao.deleteAll();
-	}
+//	@Test
+//	public void sentMailTest() {
+//		Mail.sentSignUpMail();
+//	}
+
+//	@Test
+//	public void deleteAll() {
+//		dao.deleteAll();
+//	}
 }

@@ -1,19 +1,21 @@
 package com.example.PipiShrimp.controller;
 
-import javax.annotation.security.PermitAll;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.PipiShrimp.constants.RtnCode;
 import com.example.PipiShrimp.entity.User;
 import com.example.PipiShrimp.service.ifs.UserService;
+import com.example.PipiShrimp.vo.UserReq;
 import com.example.PipiShrimp.vo.UserRes;
 
 @CrossOrigin
-@PermitAll //不會受到 Spring Security 的影響
 @RestController
 public class UserController {
 	@Autowired
@@ -22,6 +24,27 @@ public class UserController {
 	@PostMapping(value = "/user/sign_up")
 	public UserRes signUp(@RequestBody User user) {
 		return service.signUp(user);
+	}
+
+	@PostMapping(value = "/user/login")
+	public UserRes login(@RequestBody UserReq req, //
+			HttpSession session) {
+		// 如果session內沒有資料，要求登入帳號
+		if (session.getAttribute(req.getEmail()) == null) {
+			UserRes res = service.login(req);
+			// 儲存使用者資料到session
+			session.setAttribute("user", res.getUser());
+			return res;
+		}
+		return null;
+	}
+
+	@PostMapping(value = "/user/logout")
+	public UserRes logout(HttpSession session) {
+		// 清除session資料
+		session.invalidate();
+		return new UserRes(RtnCode.SUCCESSFUL);
+
 	}
 
 }

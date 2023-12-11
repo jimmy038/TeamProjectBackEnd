@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.example.PipiShrimp.constants.RtnCode;
+import com.example.PipiShrimp.entity.Mail;
 import com.example.PipiShrimp.entity.User;
 import com.example.PipiShrimp.repository.UserDao;
 import com.example.PipiShrimp.service.ifs.UserService;
+import com.example.PipiShrimp.vo.UserReq;
 import com.example.PipiShrimp.vo.UserRes;
 
 @Service
@@ -57,15 +59,47 @@ public class UserServiceImpl implements UserService {
 			userDao.save(user);
 			// 儲存後清空密碼(不回傳)
 			user.setPwd("");
-
 			// 寄電子郵件通知
-			// TODO
+			Mail.sentSignUpMail();
+
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			return new UserRes(RtnCode.USER_CREATE_FAILED);
 		}
 
 		return new UserRes(RtnCode.SUCCESSFUL, user);
+	}
+
+	@Override
+	public UserRes login(UserReq req) {
+		if (!StringUtils.hasText(req.getEmail()) || !StringUtils.hasText(req.getPwd())) {
+			return new UserRes(RtnCode.PARAM_ERROR);
+		}
+
+		// email未註冊
+		if (!userDao.existsByEmail(req.getEmail())) {
+			return new UserRes(RtnCode.EMAIL_NOT_FOUND);
+		}
+
+		User user = userDao.findByEmail(req.getEmail());
+		// 資料庫資料爆炸(資料消失)
+		if (user == null) {
+			return new UserRes(RtnCode.DATABASE_IS_EMPTY);
+		}
+
+		// 密碼不符合帳號
+		if (!req.getPwd().matches(user.getPwd())) {
+			return new UserRes(RtnCode.PASSWORD_ERROR);
+		}
+
+		try {
+			// 發送登入成功通知
+			Mail.sentLoginMail();
+			return new UserRes(RtnCode.SUCCESSFUL);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return new UserRes(RtnCode.SENT_EMAIL_FAILED);
+		}
 	}
 
 }

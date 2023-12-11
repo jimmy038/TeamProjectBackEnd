@@ -33,9 +33,6 @@ dependencies {
 	//Caffeine Cache
 	implementation 'com.github.ben-manes.caffeine:caffeine'
 	
-	//spring security, BCryptPasswordEncoder: ¥[±K±K½X¥Î
-	//implementation 'org.springframework.boot:spring-boot-starter-security'
-	
 	// https://mvnrepository.com/artifact/javax.mail/mail
 	implementation 'com.sun.mail:javax.mail:1.6.2'
 	

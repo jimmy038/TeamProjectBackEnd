@@ -13,6 +13,10 @@ public enum RtnCode {
 	PASSWORD_FORMAT_ERROR(400, "Password format error!!"),//
 	EMAIL_FORMAT_ERROR(400, "Email format error!!"),//
 	USER_CREATE_FAILED(400, "User create failed!!"), //
+	EMAIL_NOT_FOUND(400, "Email not found!!"), //
+	PASSWORD_ERROR(400, "Password error!!"), //
+	DATABASE_IS_EMPTY(400, "Database is empty!!"), //
+	SENT_EMAIL_FAILED(400, "Sent email failed!!"), //
 	;
 
 	private int code;
