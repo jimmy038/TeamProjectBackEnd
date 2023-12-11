@@ -18,10 +18,12 @@ public class UserServiceImpl implements UserService {
 	/* org.slf4j.Logger */
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
+//	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
 	@Autowired
 	private UserDao userDao;
 
-	// TODO 信箱格式判斷(regexp)、寄送信建
+	// TODO 信箱格式判斷(regexp)、寄送信建、密碼加密
 	@Override
 	public UserRes signUp(User user) {
 		// 至少要輸入 name、email、password
@@ -38,16 +40,18 @@ public class UserServiceImpl implements UserService {
 		}
 
 		// 檢查信箱格式
-//		String patternEmail = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-//		if (!user.getPwd().matches(patternEmail)) {
+//		String patternEmail = "[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}";
+//		if (!user.getEmail().matches(patternEmail)) {
 //			return new UserRes(RtnCode.EMAIL_FORMAT_ERROR);
 //		}
 
-		// 檢查密碼格式
+		// 檢查密碼格式(要有英文+數字，至少8字元)
 		String patternPwd = "^(?=.*[A-Za-z])(?=.*\\d).{8,}$";
 		if (!user.getPwd().matches(patternPwd)) {
 			return new UserRes(RtnCode.PASSWORD_FORMAT_ERROR);
 		}
+		// 密碼加密
+//		user.setPwd(encoder.encode(user.getPwd()));
 
 		try {
 			userDao.save(user);

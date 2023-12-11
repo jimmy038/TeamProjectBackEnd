@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.example.PipiShrimp.entity.Mail;
 import com.example.PipiShrimp.entity.User;
 import com.example.PipiShrimp.repository.UserDao;
 import com.example.PipiShrimp.service.ifs.UserService;
@@ -23,8 +24,6 @@ public class UserServiceTest {
 		User user = new User("ian", "ian0217@gmail.com", "ian8787gogo");
 		UserRes res = service.signUp(user);
 		System.out.println("執行結果:" + res.getRtnCode().getMessage());
-		System.out.printf("姓名:%s 信箱:%s 密碼:%s\n", //
-				res.getUser().getName(), res.getUser().getEmail(), res.getUser().getPwd());
 
 		// 資料為空
 		user = new User("", "ian@gmail.com", "");
@@ -40,6 +39,16 @@ public class UserServiceTest {
 		user = new User("jack", "jack@gmail.com", "12346789");
 		res = service.signUp(user);
 		System.out.println("執行結果:" + res.getRtnCode().getMessage());
+
+		// email格式不符
+//		user = new User("jack", "jackl.com", "ian1234fff");
+//		res = service.signUp(user);
+//		System.out.println("執行結果:" + res.getRtnCode().getMessage());
+	}
+
+	@Test
+	public void sentMailTest() {
+		Mail.sentMail();
 	}
 
 	@Test

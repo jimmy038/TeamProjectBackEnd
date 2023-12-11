@@ -1,0 +1,63 @@
+package com.example.PipiShrimp.entity;
+
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.util.Properties;
+
+import javax.mail.PasswordAuthentication;
+
+public class Mail {
+
+	public static void sentMail() {
+
+		// 寄件人
+		String senderName = "皮皮蝦員工";
+		String senderEmail = "ian20000217@gmail.com";
+		String senderPassword = "應用程式密碼";
+
+		// 收件人
+		String recipientEmail = "qtp1520@gmail.com";
+
+		// 設定SMTP
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtp.gmail.com"); // 以 Gmail 为例
+		props.put("mail.smtp.port", "587");
+		props.put("mail.smtp.ssl.protocols", "TLSv1.2"); // 指定協議
+
+		// 創建 Session
+		Session session = Session.getInstance(props, new Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(senderEmail, senderPassword);
+			}
+		});
+
+		try {
+			// 設定 MimeMessage 
+			Message message = new MimeMessage(session);
+
+			// 設定寄件人
+			message.setFrom(new InternetAddress(senderEmail, senderName));
+
+			// 設定收件人
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
+
+			// 設定信件主題
+			message.setSubject("註冊成功");
+
+			// 設定信件內容
+			message.setText("你成為了皮皮蝦會員");
+
+			// 發送信件
+			Transport.send(message);
+
+			System.out.println("發送成功!!!");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("發送失敗!!!");
+		}
+	}
+}
