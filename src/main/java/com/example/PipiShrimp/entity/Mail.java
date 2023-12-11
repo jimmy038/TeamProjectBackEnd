@@ -14,30 +14,30 @@ public class Mail {
 	private static String pwd = "tcog rtbx cbqx jyrm";
 
 	// 取得使用者ip
-	private static String getClientIP(HttpServletRequest request) {
-		String ipAddress = request.getHeader("X-Forwarded-For");
-		if (ipAddress == null || ipAddress.isEmpty() || "unknown".equalsIgnoreCase(ipAddress)) {
-			ipAddress = request.getHeader("Proxy-Client-IP");
-		}
-		if (ipAddress == null || ipAddress.isEmpty() || "unknown".equalsIgnoreCase(ipAddress)) {
-			ipAddress = request.getHeader("WL-Proxy-Client-IP");
-		}
-		if (ipAddress == null || ipAddress.isEmpty() || "unknown".equalsIgnoreCase(ipAddress)) {
-			ipAddress = request.getRemoteAddr();
-		}
-		return ipAddress;
-	}
+//	private static String getClientIP(HttpServletRequest request) {
+//		String ipAddress = request.getHeader("X-Forwarded-For");
+//		if (ipAddress == null || ipAddress.isEmpty() || "unknown".equalsIgnoreCase(ipAddress)) {
+//			ipAddress = request.getHeader("Proxy-Client-IP");
+//		}
+//		if (ipAddress == null || ipAddress.isEmpty() || "unknown".equalsIgnoreCase(ipAddress)) {
+//			ipAddress = request.getHeader("WL-Proxy-Client-IP");
+//		}
+//		if (ipAddress == null || ipAddress.isEmpty() || "unknown".equalsIgnoreCase(ipAddress)) {
+//			ipAddress = request.getRemoteAddr();
+//		}
+//		return ipAddress;
+//	}
 
 	// 註冊成功發送通知信件
-	public static void sentSignUpMail() {
+	public static void sentSignUpMail(String email) {
 
 		// 寄件人
-		String senderName = "皮皮蝦員工";
+		String senderName = "皮皮蝦負責人沒料彥茗";
 		String senderEmail = "ian20000217@gmail.com";
 		String senderPassword = pwd;
 
 		// 收件人
-		String recipientEmail = "luffy20000217@gmail.com";
+		String recipientEmail = email;
 
 		// 設定SMTP
 		Properties props = new Properties();
@@ -68,7 +68,7 @@ public class Mail {
 			message.setSubject("註冊成功");
 
 			// 設定信件內容
-			message.setText("你成為了皮皮蝦會員");
+			message.setText("你成為了皮皮蝦會員，負責人沒料彥茗感謝你的加入");
 
 			// 發送信件
 			Transport.send(message);
@@ -83,15 +83,15 @@ public class Mail {
 
 	// 登入成功通知使用者信件
 	// TODO 取得登入者IP
-	public static void sentLoginMail() {
+	public static void sentLoginMail(String email) {
 
 		// 寄件人
-		String senderName = "皮皮蝦員工";
+		String senderName = "皮皮蝦負責人沒料彥茗";
 		String senderEmail = "ian20000217@gmail.com";
 		String senderPassword = "tcog rtbx cbqx jyrm";
 
 		// 收件人
-		String recipientEmail = "luffy20000217@gmail.com";
+		String recipientEmail = email;
 
 		// 設定SMTP
 		Properties props = new Properties();
@@ -122,7 +122,7 @@ public class Mail {
 			message.setSubject("登入通知");
 
 			// 設定信件內容
-			message.setText("登入成功!!!");
+			message.setText("登入成功!!!用戶:料老大");
 
 			// 發送信件
 			Transport.send(message);

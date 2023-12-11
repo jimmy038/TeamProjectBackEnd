@@ -3,6 +3,7 @@ package com.example.PipiShrimp.service.Impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -20,12 +21,12 @@ public class UserServiceImpl implements UserService {
 	/* org.slf4j.Logger */
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
-//	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 	@Autowired
 	private UserDao userDao;
 
-	// TODO 信箱格式判斷(regexp)、寄送信建、密碼加密
+	// TODO 信箱格式判斷(regexp)
 	@Override
 	public UserRes signUp(User user) {
 		// 至少要輸入 name、email、password
@@ -53,14 +54,14 @@ public class UserServiceImpl implements UserService {
 			return new UserRes(RtnCode.PASSWORD_FORMAT_ERROR);
 		}
 		// 密碼加密
-//		user.setPwd(encoder.encode(user.getPwd()));
+		user.setPwd(encoder.encode(user.getPwd()));
 
 		try {
 			userDao.save(user);
 			// 儲存後清空密碼(不回傳)
 			user.setPwd("");
 			// 寄電子郵件通知
-			Mail.sentSignUpMail();
+			Mail.sentSignUpMail(user.getEmail());
 
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -88,13 +89,14 @@ public class UserServiceImpl implements UserService {
 		}
 
 		// 密碼不符合帳號
-		if (!req.getPwd().matches(user.getPwd())) {
+		if (!encoder.matches(req.getPwd(), user.getPwd())) {
 			return new UserRes(RtnCode.PASSWORD_ERROR);
 		}
 
 		try {
 			// 發送登入成功通知
-			Mail.sentLoginMail();
+			Mail.sentLoginMail(req.getEmail());
+			logger.info("login successful");
 			return new UserRes(RtnCode.SUCCESSFUL);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
