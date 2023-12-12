@@ -1,6 +1,7 @@
 package com.example.PipiShrimp.service.Impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +13,7 @@ import com.example.PipiShrimp.constants.RtnCode;
 import com.example.PipiShrimp.entity.Product;
 import com.example.PipiShrimp.repository.ProductDao;
 import com.example.PipiShrimp.service.ifs.ProductService;
-import com.example.PipiShrimp.vo.ProductCreateRes;
+import com.example.PipiShrimp.vo.ProductRes;
 import com.example.PipiShrimp.vo.ProductSearchRes;
 
 @Service
@@ -24,14 +25,15 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private ProductDao proDao;
 
+	//TODO 儲存圖片方式
 	@Override
-	public ProductCreateRes create(Product product) {
+	public ProductRes create(Product product) {
 		if (!StringUtils.hasText(product.getProductName()) || //
 				!StringUtils.hasText(product.getDescription()) || //
 				product.getPrice() <= 0 || //
 				product.getInventory() < 0 //
 		) {
-			return new ProductCreateRes(RtnCode.PARAM_ERROR);
+			return new ProductRes(RtnCode.PARAM_ERROR);
 		}
 
 		try {
@@ -39,9 +41,43 @@ public class ProductServiceImpl implements ProductService {
 
 		} catch (Exception e) {
 			logger.error(e.getMessage());
-			return new ProductCreateRes(RtnCode.PRODUCT_CREATE_FAILED);
+			return new ProductRes(RtnCode.PRODUCT_CREATE_FAILED);
 		}
-		return new ProductCreateRes(RtnCode.SUCCESSFUL, product);
+		return new ProductRes(RtnCode.SUCCESSFUL, product);
+	}
+
+	@Override
+	public ProductRes delete(int id) {
+		// 找不到該商品id
+		if (!proDao.existsById(id)) {
+			return new ProductRes(RtnCode.PRODUCT_ID_NOT_FOUND);
+		}
+
+		// 取得刪除商品資訊，用於回傳給使用者
+		Product res = proDao.findById(id).get();
+
+		try {
+			proDao.deleteById(id);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return new ProductRes(RtnCode.PRODUCT_DELETE_FAILED);
+		}
+
+		return new ProductRes(RtnCode.SUCCESSFUL, res);
+	}
+
+	@Override
+	public ProductRes getProductInfo(int id) {
+		if (!proDao.existsById(id)) {
+			return new ProductRes(RtnCode.PRODUCT_ID_NOT_FOUND);
+		}
+
+		Optional<Product> op = proDao.findById(id);
+		// 資料為空(資料有問題)
+		if (op.isEmpty()) {
+			return new ProductRes(RtnCode.DATABASE_IS_EMPTY);
+		}
+		return new ProductRes(RtnCode.SUCCESSFUL, op.get());
 	}
 
 	@Override

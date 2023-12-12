@@ -3,21 +3,22 @@ package com.example.PipiShrimp.vo;
 import com.example.PipiShrimp.constants.RtnCode;
 import com.example.PipiShrimp.entity.Product;
 
-public class ProductCreateRes {
+
+public class ProductRes {
 	private RtnCode rtnCode;
 
 	private Product product;
 
-	public ProductCreateRes() {
+	public ProductRes() {
 		super();
 	}
 
-	public ProductCreateRes(RtnCode rtnCode) {
+	public ProductRes(RtnCode rtnCode) {
 		super();
 		this.rtnCode = rtnCode;
 	}
 
-	public ProductCreateRes(RtnCode rtnCode, Product product) {
+	public ProductRes(RtnCode rtnCode, Product product) {
 		super();
 		this.rtnCode = rtnCode;
 		this.product = product;

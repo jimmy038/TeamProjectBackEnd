@@ -122,7 +122,7 @@ public class Mail {
 			message.setSubject("登入通知");
 
 			// 設定信件內容
-			message.setText("登入成功!!!用戶:料老大");
+			message.setText("登入成功!!!");
 
 			// 發送信件
 			Transport.send(message);

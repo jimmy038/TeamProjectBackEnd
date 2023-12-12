@@ -17,6 +17,8 @@ public enum RtnCode {
 	PASSWORD_ERROR(400, "Password error!!"), //
 	DATABASE_IS_EMPTY(400, "Database is empty!!"), //
 	SENT_EMAIL_FAILED(400, "Sent email failed!!"), //
+	PRODUCT_ID_NOT_FOUND(400, "Product id not found!!"), //
+	PRODUCT_DELETE_FAILED(400, "Product delete failed!!"), //
 	;
 
 	private int code;

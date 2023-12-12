@@ -1,7 +1,5 @@
 package com.example.PipiShrimp.controller;
 
-import javax.annotation.security.PermitAll;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,11 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.PipiShrimp.entity.Product;
 import com.example.PipiShrimp.service.ifs.ProductService;
-import com.example.PipiShrimp.vo.ProductCreateRes;
+import com.example.PipiShrimp.vo.ProductRes;
 import com.example.PipiShrimp.vo.ProductSearchRes;
 
 @CrossOrigin
-@PermitAll //不會受到 Spring Security 的影響
 @RestController
 public class ProductController {
 
@@ -24,9 +21,21 @@ public class ProductController {
 	private ProductService service;
 
 	@PostMapping(value = "/product/create")
-	public ProductCreateRes create(@RequestBody Product product) {
+	public ProductRes create(@RequestBody Product product) {
 		// TODO 只有登入者可以新增商品
 		return service.create(product);
+	}
+
+	@PostMapping(value = "/product/delete")
+	public ProductRes delete(@RequestParam(value = "id") int id) {
+		// TODO 只有登入者可以刪除商品
+		return service.delete(id);
+	}
+
+	@GetMapping(value = "/product/get/info")
+	public ProductRes getProductInfo(//
+			@RequestParam(value = "id") int id) {
+		return service.getProductInfo(id);
 	}
 
 	@GetMapping(value = "/product/get")

@@ -1,5 +1,7 @@
 package com.example.PipiShrimp.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +32,10 @@ public class UserController {
 			HttpSession session) {
 		// 如果session內沒有資料，要求登入帳號
 		if (session.getAttribute(req.getEmail()) == null) {
-			UserRes res = service.login(req);
+			UserRes result = service.login(req);
 			// 儲存使用者資料到session
-			session.setAttribute("user", res.getUser());
-			return res;
+			session.setAttribute("user", result.getUser());
+			return result;
 		}
 		return null;
 	}
@@ -43,7 +45,6 @@ public class UserController {
 		// 清除session資料
 		session.invalidate();
 		return new UserRes(RtnCode.SUCCESSFUL);
-
 	}
 
 }
