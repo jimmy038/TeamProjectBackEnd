@@ -22,15 +22,19 @@ CREATE TABLE IF NOT EXISTS `product` (
   PRIMARY KEY (`product_id`)
 );
 
-
-CREATE TABLE IF NOT EXISTS `order` (
-  `order_id` int NOT NULL AUTO_INCREMENT,
-  `order_date` datetime NOT NULL,
-  `amount` int NOT NULL,
+CREATE TABLE IF NOT EXISTS `record` (
+  `record_id` int NOT NULL AUTO_INCREMENT,
+  `record_date` datetime DEFAULT NULL,
+  `product_count` int NOT NULL DEFAULT '0',
+  `product_amount` int NOT NULL DEFAULT '0',
   `status` varchar(45) NOT NULL,
   `product_name` varchar(45) NOT NULL,
-  `type` varchar(45) NOT NULL,
-  `user_id` int NOT NULL,
-  PRIMARY KEY (`order_id`)
+  `record_type` varchar(45) NOT NULL,
+  `user_id` int NOT NULL DEFAULT '0',
+  `product_id` int NOT NULL DEFAULT '0',
+  PRIMARY KEY (`record_id`)
 );
+
+
+
 

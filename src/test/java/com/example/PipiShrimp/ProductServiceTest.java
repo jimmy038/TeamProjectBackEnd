@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.example.PipiShrimp.entity.Product;
 import com.example.PipiShrimp.repository.ProductDao;
 import com.example.PipiShrimp.service.ifs.ProductService;
-import com.example.PipiShrimp.vo.ProductCreateRes;
+import com.example.PipiShrimp.vo.ProductRes;
 
 @SpringBootTest
 public class ProductServiceTest {
@@ -23,7 +23,7 @@ public class ProductServiceTest {
 	@Test
 	public void createTest() {
 		Product product = new Product("拖鞋", "可以穿的拖鞋", 100, 25, 0, true, "", 1);
-		ProductCreateRes res = service.create(product);
+		ProductRes res = service.create(product);
 		System.out.println("儲存結果: " + res.getRtnCode().getMessage());
 		System.out.println("儲存產品:" + res.getProduct().getProductName());
 

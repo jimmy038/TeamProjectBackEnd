@@ -19,6 +19,10 @@ public enum RtnCode {
 	SENT_EMAIL_FAILED(400, "Sent email failed!!"), //
 	PRODUCT_ID_NOT_FOUND(400, "Product id not found!!"), //
 	PRODUCT_DELETE_FAILED(400, "Product delete failed!!"), //
+	RECORD_CREATE_FAILED(400, "Record create failed!!"), //
+	RECORD_ID_NOT_FOUND(400, "Record id not found!!"), //
+	RECORD_IS_EMPTY(400, "Record is empty!!"), //
+	RECORD_CANCEL_FAILED(400, "Record cancel failed!!"), //
 	;
 
 	private int code;
