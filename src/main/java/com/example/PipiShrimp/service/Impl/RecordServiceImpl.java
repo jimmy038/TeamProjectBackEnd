@@ -1,5 +1,7 @@
 package com.example.PipiShrimp.service.Impl;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -11,8 +13,10 @@ import org.springframework.util.StringUtils;
 import com.example.PipiShrimp.constants.RtnCode;
 import com.example.PipiShrimp.entity.Record;
 import com.example.PipiShrimp.repository.RecordDao;
+import com.example.PipiShrimp.repository.UserDao;
 import com.example.PipiShrimp.service.ifs.RecordService;
 import com.example.PipiShrimp.vo.RecordRes;
+import com.example.PipiShrimp.vo.RecordSearchRes;
 
 @Service
 public class RecordServiceImpl implements RecordService {
@@ -23,7 +27,10 @@ public class RecordServiceImpl implements RecordService {
 	@Autowired
 	private RecordDao dao;
 
-	// TODO 發送信件給買家和賣家
+	@Autowired
+	private UserDao userDao;
+
+	// TODO 發送信件給買家和賣家，訂單成立PRODUCT庫存變更
 	@Override
 	public RecordRes create(Record record) {
 
@@ -47,6 +54,8 @@ public class RecordServiceImpl implements RecordService {
 		return new RecordRes(RtnCode.SUCCESSFUL, record);
 	}
 
+	// TODO 發送信件給買家(取消成功)和賣家(客戶取消訂單)
+	// TODO 訂單成立PRODUCT庫存變更
 	@Override
 	public RecordRes cancel(int id) {
 		// 確認訂單是否存在
@@ -75,6 +84,28 @@ public class RecordServiceImpl implements RecordService {
 		}
 
 		return new RecordRes(RtnCode.SUCCESSFUL, record);
+	}
+
+	@Override
+	public RecordSearchRes getRecordInfoByUserId(int id) {
+		// 確認使用者是否存在
+		if (!userDao.existsById(id)) {
+			return new RecordSearchRes(RtnCode.USER_ID_NOT_FOUND);
+		}
+
+		List<Record> recordList = dao.findAllByUserId(id);
+
+		// 有可能會沒有購買或賣商品的交易紀錄->不用防recordList為空，
+		// 但要給一個空List，讓他不是null
+		recordList = recordList.size() != 0 ? recordList : Collections.emptyList();
+
+		return new RecordSearchRes(RtnCode.SUCCESSFUL, recordList);
+	}
+
+	@Override
+	public RecordSearchRes getRecordInfoByProductId(int id) {
+		// TODO Auto-generated method stub
+		return new RecordSearchRes();
 	}
 
 }

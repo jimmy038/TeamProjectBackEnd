@@ -23,6 +23,7 @@ public enum RtnCode {
 	RECORD_ID_NOT_FOUND(400, "Record id not found!!"), //
 	RECORD_IS_EMPTY(400, "Record is empty!!"), //
 	RECORD_CANCEL_FAILED(400, "Record cancel failed!!"), //
+	USER_ID_NOT_FOUND(400, "User id not found!!"), //
 	;
 
 	private int code;

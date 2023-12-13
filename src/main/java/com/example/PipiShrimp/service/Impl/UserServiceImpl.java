@@ -97,10 +97,10 @@ public class UserServiceImpl implements UserService {
 			// 發送登入成功通知
 			Mail.sentLoginMail(req.getEmail());
 			logger.info("login successful");
-			//清除密碼(不回傳)
+			// 清除密碼(不回傳)
 			user.setPwd("");
 			return new UserRes(RtnCode.SUCCESSFUL, user);
-			
+
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			return new UserRes(RtnCode.SENT_EMAIL_FAILED);
