@@ -21,7 +21,8 @@ public interface RecordService {
 	public RecordSearchRes getRecordInfoByUserId(int id);
 
 	/**
-	 * 查詢商品銷量記錄(參數:product_id) #查詢商品銷量之類的
+	 * 查詢商品銷量記錄(參數:product_id) #查詢商品銷量之類的 
+	 * 兩張資料表的商品名稱要對應
 	 **/
 	public RecordSearchRes getRecordInfoByProductId(int id);
 }

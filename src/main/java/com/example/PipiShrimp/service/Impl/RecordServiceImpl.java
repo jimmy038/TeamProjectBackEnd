@@ -12,6 +12,7 @@ import org.springframework.util.StringUtils;
 
 import com.example.PipiShrimp.constants.RtnCode;
 import com.example.PipiShrimp.entity.Record;
+import com.example.PipiShrimp.repository.ProductDao;
 import com.example.PipiShrimp.repository.RecordDao;
 import com.example.PipiShrimp.repository.UserDao;
 import com.example.PipiShrimp.service.ifs.RecordService;
@@ -29,6 +30,9 @@ public class RecordServiceImpl implements RecordService {
 
 	@Autowired
 	private UserDao userDao;
+
+	@Autowired
+	private ProductDao productDao;
 
 	// TODO 發送信件給買家和賣家，訂單成立PRODUCT庫存變更
 	@Override
@@ -104,8 +108,18 @@ public class RecordServiceImpl implements RecordService {
 
 	@Override
 	public RecordSearchRes getRecordInfoByProductId(int id) {
-		// TODO Auto-generated method stub
-		return new RecordSearchRes();
+		// 確認使用者是否存在
+		if (!productDao.existsById(id)) {
+			return new RecordSearchRes(RtnCode.PRODUCT_ID_NOT_FOUND);
+		}
+
+		List<Record> recordList = dao.findAllByProductId(id);
+
+		// 有可能會沒有購買或賣商品的交易紀錄->不用防recordList為空，
+		// 但要給一個空List，讓他不是null
+		recordList = recordList.size() != 0 ? recordList : Collections.emptyList();
+
+		return new RecordSearchRes(RtnCode.SUCCESSFUL, recordList);
 	}
 
 }

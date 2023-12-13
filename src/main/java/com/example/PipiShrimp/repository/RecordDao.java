@@ -13,4 +13,9 @@ public interface RecordDao extends JpaRepository<Record, Integer> {
 	 * ㄏノuser_idт┮Τ癸莱List(把计user_id)
 	 **/
 	public List<Record> findAllByUserId(int id);
+	
+	/**
+	 * ㄏノproduct_idт┮Τ癸莱List(把计product_id)
+	 **/
+	public List<Record> findAllByProductId(int id);
 }

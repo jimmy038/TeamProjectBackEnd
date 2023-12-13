@@ -38,4 +38,10 @@ public class RecordController {
 			@RequestParam(value = "id") int id) {
 		return service.getRecordInfoByUserId(id);
 	}
+	
+	@GetMapping(value = "/record/get/product_id")
+	public RecordSearchRes getRecordInfoByProductId(//
+			@RequestParam(value = "id") int id) {
+		return service.getRecordInfoByProductId(id);
+	}
 }
