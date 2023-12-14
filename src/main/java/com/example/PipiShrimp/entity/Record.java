@@ -21,6 +21,7 @@ public class Record {
 	@JsonProperty("record_id")
 	private int recordId;
 
+	// 購買、賣商品日期
 	@Column(name = "record_date")
 	@JsonProperty("record_date")
 	private LocalDateTime recordDate;

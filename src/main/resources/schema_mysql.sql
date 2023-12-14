@@ -35,6 +35,16 @@ CREATE TABLE IF NOT EXISTS `record` (
   PRIMARY KEY (`record_id`)
 );
 
+CREATE TABLE IF NOT EXISTS `cart` (
+  `cart_id` int NOT NULL AUTO_INCREMENT,
+  `cart_date` datetime DEFAULT NULL,
+  `cart_count` int NOT NULL,
+  `cart_amount` int NOT NULL,
+  `product_name` varchar(45) NOT NULL,
+  `user_id` int NOT NULL,
+  `product_id` int NOT NULL,
+  PRIMARY KEY (`cart_id`)
+);
 
 
 
