@@ -2,6 +2,7 @@ package com.example.PipiShrimp.service.ifs;
 
 import com.example.PipiShrimp.entity.Cart;
 import com.example.PipiShrimp.vo.CartRes;
+import com.example.PipiShrimp.vo.CartSearchRes;
 
 public interface CartService {
 
@@ -14,4 +15,9 @@ public interface CartService {
 	 * 清除購物車商品(參數:cart_id) #將購物車商品清除
 	 **/
 	public CartRes delete(int id);
+
+	/**
+	 * 依照使用者id顯示對應的購物車資訊(參數:user_id) #user查看購物車
+	 **/
+	public CartSearchRes getCartInfoByUserId(int id);
 }

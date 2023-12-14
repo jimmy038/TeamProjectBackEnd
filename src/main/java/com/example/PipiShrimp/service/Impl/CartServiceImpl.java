@@ -1,5 +1,8 @@
 package com.example.PipiShrimp.service.Impl;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +12,10 @@ import org.springframework.util.StringUtils;
 import com.example.PipiShrimp.constants.RtnCode;
 import com.example.PipiShrimp.entity.Cart;
 import com.example.PipiShrimp.repository.CartDao;
+import com.example.PipiShrimp.repository.UserDao;
 import com.example.PipiShrimp.service.ifs.CartService;
 import com.example.PipiShrimp.vo.CartRes;
+import com.example.PipiShrimp.vo.CartSearchRes;
 
 //TODO 所有操作都必須先登入帳號才能進行
 @Service
@@ -21,6 +26,9 @@ public class CartServiceImpl implements CartService {
 
 	@Autowired
 	private CartDao dao;
+
+	@Autowired
+	private UserDao userDao;
 
 	@Override
 	public CartRes create(Cart cart) {
@@ -59,5 +67,20 @@ public class CartServiceImpl implements CartService {
 		}
 
 		return new CartRes(RtnCode.SUCCESSFUL, res);
+	}
+
+	@Override
+	public CartSearchRes getCartInfoByUserId(int id) {
+		// 檢查user_id是否存在
+		if (!userDao.existsById(id)) {
+			return new CartSearchRes(RtnCode.USER_ID_NOT_FOUND);
+		}
+
+		List<Cart> cartList = dao.findAllByUserId(id);
+
+		// 如果購物車是空的，要給他一個empty List，不能是null
+		cartList = cartList.size() != 0 ? cartList : Collections.emptyList();
+
+		return new CartSearchRes(RtnCode.SUCCESSFUL, cartList);
 	}
 }
