@@ -35,6 +35,7 @@ public class RecordServiceImpl implements RecordService {
 	private ProductDao productDao;
 
 	// TODO 發送信件給買家和賣家，訂單成立PRODUCT庫存變更
+	// TODO 購買數 > product庫存數，無法購買
 	@Override
 	public RecordRes create(Record record) {
 
