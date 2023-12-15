@@ -17,11 +17,14 @@ CREATE TABLE IF NOT EXISTS `product` (
   `price` int NOT NULL,
   `inventory` int NOT NULL,
   `sale_count` int NOT NULL DEFAULT '0',
+  `specification` varchar(45) DEFAULT NULL,
+  `product_type` varchar(45) NOT NULL,
   `shelves` tinyint NOT NULL DEFAULT '0',
   `photo` varchar(255) DEFAULT NULL,
   `user_id` int NOT NULL,
   PRIMARY KEY (`product_id`)
 );
+
 
 
 CREATE TABLE IF NOT EXISTS `record` (
