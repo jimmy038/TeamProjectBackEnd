@@ -32,6 +32,13 @@ public class ProductController {
 		return service.delete(id);
 	}
 
+	@GetMapping(value = "/product/get/info/user_id")
+	public ProductSearchRes getProductInfoByUserId(//
+			@RequestParam(value = "id") int id) {
+		// TODO 只有登入者可以查看自己的商品
+		return service.getProductInfoByUserId(id);
+	}
+
 	@GetMapping(value = "/product/get/info")
 	public ProductRes getProductInfo(//
 			@RequestParam(value = "id") int id) {

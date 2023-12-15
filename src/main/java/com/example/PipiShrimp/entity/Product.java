@@ -49,6 +49,15 @@ public class Product {
 	@JsonProperty("sale_count")
 	private int saleCount;
 
+	// 商品規格(例如:服裝S、M、L)
+	@Column(name = "specification")
+	private String specification;
+
+	// 商品類型
+	@Column(name = "product_type")
+	@JsonProperty("product_type")
+	private String productType;
+
 	// 商品是否上架(boolean)
 	@Column(name = "shelves")
 	private boolean shelves;
@@ -67,8 +76,9 @@ public class Product {
 		// TODO Auto-generated constructor stub
 	}
 
+	// 沒有id、規格
 	public Product(String productName, String description, LocalDate releaseDate, int price, int inventory,
-			int saleCount, boolean shelves, String photo, int userId) {
+			int saleCount, String productType, boolean shelves, String photo, int userId) {
 		super();
 		this.productName = productName;
 		this.description = description;
@@ -76,22 +86,46 @@ public class Product {
 		this.price = price;
 		this.inventory = inventory;
 		this.saleCount = saleCount;
+		this.productType = productType;
 		this.shelves = shelves;
 		this.photo = photo;
 		this.userId = userId;
 	}
 
-	public Product(Product product) {
+	// 沒有規格(用來更新商品資訊)
+	public Product(int productId, String productName, String description, LocalDate releaseDate, int price,
+			int inventory, int saleCount, String productType, boolean shelves, String photo, int userId) {
 		super();
-		this.productName = product.getProductName();
-		this.description = product.getDescription();
-		this.releaseDate = product.getReleaseDate();
-		this.price = product.getPrice();
-		this.inventory = product.getInventory();
-		this.saleCount = product.getSaleCount();
-		this.shelves = product.isShelves();
-		this.photo = product.getPhoto();
-		this.userId = product.getUserId();
+		this.productId = productId;
+		this.productName = productName;
+		this.description = description;
+		this.releaseDate = releaseDate;
+		this.price = price;
+		this.inventory = inventory;
+		this.saleCount = saleCount;
+		this.productType = productType;
+		this.shelves = shelves;
+		this.photo = photo;
+		this.userId = userId;
+	}
+
+	// 全部都有
+	public Product(int productId, String productName, String description, LocalDate releaseDate, int price,
+			int inventory, int saleCount, String specification, String productType, boolean shelves, String photo,
+			int userId) {
+		super();
+		this.productId = productId;
+		this.productName = productName;
+		this.description = description;
+		this.releaseDate = releaseDate;
+		this.price = price;
+		this.inventory = inventory;
+		this.saleCount = saleCount;
+		this.specification = specification;
+		this.productType = productType;
+		this.shelves = shelves;
+		this.photo = photo;
+		this.userId = userId;
 	}
 
 	public int getProductId() {

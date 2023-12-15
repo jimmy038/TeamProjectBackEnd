@@ -1,5 +1,6 @@
 package com.example.PipiShrimp.service.Impl;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,7 @@ import org.springframework.util.StringUtils;
 import com.example.PipiShrimp.constants.RtnCode;
 import com.example.PipiShrimp.entity.Product;
 import com.example.PipiShrimp.repository.ProductDao;
+import com.example.PipiShrimp.repository.UserDao;
 import com.example.PipiShrimp.service.ifs.ProductService;
 import com.example.PipiShrimp.vo.ProductRes;
 import com.example.PipiShrimp.vo.ProductSearchRes;
@@ -25,7 +27,10 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private ProductDao proDao;
 
-	//TODO 儲存圖片方式
+	@Autowired
+	private UserDao userDao;
+
+	// TODO 儲存圖片方式
 	@Override
 	public ProductRes create(Product product) {
 		if (!StringUtils.hasText(product.getProductName()) || //
@@ -64,6 +69,20 @@ public class ProductServiceImpl implements ProductService {
 		}
 
 		return new ProductRes(RtnCode.SUCCESSFUL, res);
+	}
+
+	@Override
+	public ProductSearchRes getProductInfoByUserId(int id) {
+		// user_id不存在
+		if (!userDao.existsById(id)) {
+			return new ProductSearchRes(RtnCode.USER_ID_NOT_FOUND);
+		}
+
+		List<Product> res = proDao.searchProductByUserId(id);
+		// 如果商品為空 => 給一個空List
+		res = res.size() != 0 ? res : Collections.emptyList();
+
+		return new ProductSearchRes(RtnCode.SUCCESSFUL, res);
 	}
 
 	@Override
