@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   `product_id` int NOT NULL AUTO_INCREMENT,
   `product_name` varchar(100) NOT NULL,
   `description` varchar(45) DEFAULT NULL,
+  `release_date` date DEFAULT NULL,
   `price` int NOT NULL,
   `inventory` int NOT NULL,
   `sale_count` int NOT NULL DEFAULT '0',
@@ -21,6 +22,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   `user_id` int NOT NULL,
   PRIMARY KEY (`product_id`)
 );
+
 
 CREATE TABLE IF NOT EXISTS `record` (
   `record_id` int NOT NULL AUTO_INCREMENT,

@@ -1,6 +1,5 @@
 package com.example.PipiShrimp;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -16,8 +15,4 @@ public class CartServiceTest {
 	@Autowired
 	private CartDao dao;
 
-	@Test
-	public void deleteAll() {
-		dao.deleteAll();
-	}
 }

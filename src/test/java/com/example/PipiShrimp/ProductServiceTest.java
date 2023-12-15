@@ -1,5 +1,6 @@
 package com.example.PipiShrimp;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -22,17 +23,17 @@ public class ProductServiceTest {
 
 	@Test
 	public void createTest() {
-		Product product = new Product("拖鞋", "可以穿的拖鞋", 100, 25, 0, true, "", 1);
+		Product product = new Product("拖鞋", "可以穿的拖鞋", LocalDate.of(2022, 12, 25), 100, 25, 0, true, "", 1);
 		ProductRes res = service.create(product);
 		System.out.println("儲存結果: " + res.getRtnCode().getMessage());
 		System.out.println("儲存產品:" + res.getProduct().getProductName());
 
-		product = new Product("掃把", "用來掃地的", 299, 25, 12, true, "", 1);
+		product = new Product("掃把", "用來掃地的", LocalDate.of(2023, 12, 1), 299, 25, 12, true, "", 1);
 		res = service.create(product);
 		System.out.println("儲存結果: " + res.getRtnCode().getMessage());
 		System.out.println("儲存產品:" + res.getProduct().getProductName());
 
-		product = new Product("大麻", "吸食用藥物", 3999, 10, 999, false, "", 1);
+		product = new Product("大麻", "吸食用藥物", LocalDate.of(2010, 1, 1), 3999, 10, 999, false, "", 1);
 		res = service.create(product);
 		System.out.println("儲存結果: " + res.getRtnCode().getMessage());
 		System.out.println("儲存產品:" + res.getProduct().getProductName());

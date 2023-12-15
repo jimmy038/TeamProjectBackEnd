@@ -1,5 +1,7 @@
 package com.example.PipiShrimp.entity;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,6 +30,11 @@ public class Product {
 	// 產品描述
 	@Column(name = "description")
 	private String description;
+
+	// 產品上架日期
+	@Column(name = "release_date")
+	@JsonProperty("release_date")
+	private LocalDate releaseDate;
 
 	// 產品價格
 	@Column(name = "price")
@@ -60,11 +67,12 @@ public class Product {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Product(String productName, String description, int price, int inventory, int saleCount, boolean shelves,
-			String photo, int userId) {
+	public Product(String productName, String description, LocalDate releaseDate, int price, int inventory,
+			int saleCount, boolean shelves, String photo, int userId) {
 		super();
 		this.productName = productName;
 		this.description = description;
+		this.releaseDate = releaseDate;
 		this.price = price;
 		this.inventory = inventory;
 		this.saleCount = saleCount;
@@ -77,6 +85,7 @@ public class Product {
 		super();
 		this.productName = product.getProductName();
 		this.description = product.getDescription();
+		this.releaseDate = product.getReleaseDate();
 		this.price = product.getPrice();
 		this.inventory = product.getInventory();
 		this.saleCount = product.getSaleCount();
@@ -107,6 +116,14 @@ public class Product {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public LocalDate getReleaseDate() {
+		return releaseDate;
+	}
+
+	public void setReleaseDate(LocalDate releaseDate) {
+		this.releaseDate = releaseDate;
 	}
 
 	public int getPrice() {

@@ -16,9 +16,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Cart {
 
 	// 對應user資料表ID、也是主鍵
-	@Column(name = "user_id")
-	@JsonProperty("user_id")
-	private int userId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "cart_id")
+	@JsonProperty("cart_id")
+	private int cartId;
+	
 
 	// 商品加入購物車日期
 	@Column(name = "cart_date")
@@ -39,6 +42,11 @@ public class Cart {
 	@Column(name = "product_name")
 	@JsonProperty("product_name")
 	private String productName;
+	
+	// 對應user資料表ID
+	@Column(name = "user_id")
+	@JsonProperty("user_id")
+	private int userId;
 
 	// 對應product資料表ID
 	@Column(name = "product_id")
