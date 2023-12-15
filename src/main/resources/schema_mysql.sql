@@ -36,15 +36,15 @@ CREATE TABLE IF NOT EXISTS `record` (
 );
 
 CREATE TABLE IF NOT EXISTS `cart` (
-  `cart_id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
   `cart_date` datetime DEFAULT NULL,
   `cart_count` int NOT NULL,
   `cart_amount` int NOT NULL,
   `product_name` varchar(45) NOT NULL,
-  `user_id` int NOT NULL,
   `product_id` int NOT NULL,
-  PRIMARY KEY (`cart_id`)
+  PRIMARY KEY (`user_id`)
 );
+
 
 
 
