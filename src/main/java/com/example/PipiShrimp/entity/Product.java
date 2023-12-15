@@ -9,24 +9,27 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
-
 @Entity
 @Table(name = "product")
 public class Product {
 
+	// 訂單id(產品int AI)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "product_id")
+	@JsonProperty("product_id")
 	private int productId;
 
+	// 產品名稱
 	@Column(name = "product_name")
 	@JsonProperty("product_name")
 	private String productName;
 
+	// 產品描述
 	@Column(name = "description")
 	private String description;
 
+	// 產品價格
 	@Column(name = "price")
 	private int price;
 
@@ -43,10 +46,11 @@ public class Product {
 	@Column(name = "shelves")
 	private boolean shelves;
 
-	//用路徑存放圖片
+	// 用路徑存放圖片
 	@Column(name = "photo")
 	private String photo;
 
+	// 對應user_id(外部鍵)
 	@Column(name = "user_id")
 	@JsonProperty("user_id")
 	private int userId;

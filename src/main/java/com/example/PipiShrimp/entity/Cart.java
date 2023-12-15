@@ -15,10 +15,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Table(name = "cart")
 public class Cart {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "cart_id")
-	private int cartId;
+	// 對應user資料表ID、也是主鍵
+	@Column(name = "user_id")
+	@JsonProperty("user_id")
+	private int userId;
 
 	// 商品加入購物車日期
 	@Column(name = "cart_date")
@@ -35,14 +35,10 @@ public class Cart {
 	@JsonProperty("cart_amount")
 	private int productAmount;
 
+	// 產品名稱
 	@Column(name = "product_name")
 	@JsonProperty("product_name")
 	private String productName;
-
-	// 對應user資料表ID ↓
-	@Column(name = "user_id")
-	@JsonProperty("user_id")
-	private int userId;
 
 	// 對應product資料表ID
 	@Column(name = "product_id")
@@ -54,23 +50,15 @@ public class Cart {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Cart(LocalDateTime cartDate, int cartCount, int productAmount, String productName, int userId,
+	public Cart(int userId, LocalDateTime cartDate, int cartCount, int productAmount, String productName,
 			int productId) {
 		super();
+		this.userId = userId;
 		this.cartDate = cartDate;
 		this.cartCount = cartCount;
 		this.productAmount = productAmount;
 		this.productName = productName;
-		this.userId = userId;
 		this.productId = productId;
-	}
-
-	public int getCartId() {
-		return cartId;
-	}
-
-	public void setCartId(int cartId) {
-		this.cartId = cartId;
 	}
 
 	public LocalDateTime getCartDate() {

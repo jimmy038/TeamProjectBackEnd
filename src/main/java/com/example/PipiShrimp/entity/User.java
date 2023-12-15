@@ -13,28 +13,35 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Table(name = "user")
 public class User {
 
+	// 使用者id(遞增int AI)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 
+	// 使用者名稱
 	@Column(name = "name")
 	private String name;
 
+	// 使用者信箱
 	@Column(name = "email")
 	private String email;
 
+	// 使用者密碼
 	@Column(name = "password")
 	@JsonProperty("password")
 	private String pwd;
 
+	// 地址
 	@Column(name = "address")
 	private String address;
 
+	// 電話號碼
 	@Column(name = "phone_number")
 	@JsonProperty("phone_number")
 	private String phoneNumber;
 
+	// 權限(使用者、管理者之類的)
 	@Column(name = "level")
 	private int level;
 
