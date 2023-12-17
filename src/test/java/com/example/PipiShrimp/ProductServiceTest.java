@@ -1,5 +1,7 @@
 package com.example.PipiShrimp;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -19,38 +21,39 @@ public class ProductServiceTest {
 
 	@Autowired
 	private ProductDao dao;
-
 	@Test
 	public void createTest() {
-		Product product = new Product("©ì¾c", "¥i¥H¬ïªº©ì¾c", 100, 25, 0, true, "", 1);
-		ProductRes res = service.create(product);
-		System.out.println("Àx¦sµ²ªG: " + res.getRtnCode().getMessage());
-		System.out.println("Àx¦s²£«~:" + res.getProduct().getProductName());
+	    LocalDate currentDate = LocalDate.now();
 
-		product = new Product("±½§â", "¥Î¨Ó±½¦aªº", 299, 25, 12, true, "", 1);
-		res = service.create(product);
-		System.out.println("Àx¦sµ²ªG: " + res.getRtnCode().getMessage());
-		System.out.println("Àx¦s²£«~:" + res.getProduct().getProductName());
+	    Product product1 = new Product(1, "æ‹–é‹", "å¯ä»¥ç©¿çš„æ‹–é‹", 100, 25, 0, true, "", 1, currentDate);
+	    ProductRes res1 = service.create(product1);
+	    System.out.println("å„²å­˜çµæœ: " + res1.getRtnCode().getMessage());
+	    System.out.println("å„²å­˜ç”¢å“:" + res1.getProduct().getProductName());
 
-		product = new Product("¤j³Â", "§l­¹¥ÎÃÄª«", 3999, 10, 999, false, "", 1);
-		res = service.create(product);
-		System.out.println("Àx¦sµ²ªG: " + res.getRtnCode().getMessage());
-		System.out.println("Àx¦s²£«~:" + res.getProduct().getProductName());
+	    Product product2 = new Product(2, "æƒæŠŠ", "ç”¨ä¾†æƒåœ°çš„", 299, 25, 12, true, "", 1, currentDate);
+	    ProductRes res2 = service.create(product2);
+	    System.out.println("å„²å­˜çµæœ: " + res2.getRtnCode().getMessage());
+	    System.out.println("å„²å­˜ç”¢å“:" + res2.getProduct().getProductName());
+
+	    Product product3 = new Product(3, "å¤§éº»", "å¸é£Ÿç”¨è—¥ç‰©", 3999, 10, 999, false, "", 1, currentDate);
+	    ProductRes res3 = service.create(product3);
+	    System.out.println("å„²å­˜çµæœ: " + res3.getRtnCode().getMessage());
+	    System.out.println("å„²å­˜ç”¢å“:" + res3.getProduct().getProductName());
 	}
 
 	@Test
 	public void searchAllTest() {
 		List<Product> res = service.getAllProductInfo().getProducts();
 		for (Product item : res) {
-			System.out.println("²£«~¦WºÙ: " + item.getProductName());
+			System.out.println("ç”¢å“åç¨±: " + item.getProductName());
 		}
 	}
 
 	@Test
 	public void searchByNameTest() {
-		List<Product> res = service.getProductByName("¥¬¤B").getProducts();
+		List<Product> res = service.getProductByName("å¸ƒä¸").getProducts();
 		for (Product item : res) {
-			System.out.println("²£«~¦WºÙ: " + item.getProductName());
+			System.out.println("ç”¢å“åç¨±: " + item.getProductName());
 		}
 	}
 
@@ -58,8 +61,8 @@ public class ProductServiceTest {
 	public void getProductByPriceTest() {
 		List<Product> res = service.getProductByPrice().getProducts();
 		for (Product item : res) {
-			System.out.println("²£«~¦WºÙ: " + item.getProductName());
-			System.out.println("²£«~¦WºÙ: " + item.getPrice());
+			System.out.println("ç”¢å“åç¨±: " + item.getProductName());
+			System.out.println("ç”¢å“åç¨±: " + item.getPrice());
 			System.out.println("-----------------");
 		}
 	}
@@ -68,8 +71,8 @@ public class ProductServiceTest {
 	public void getProductByPriceDescTest() {
 		List<Product> res = service.getProductByPriceDesc().getProducts();
 		for (Product item : res) {
-			System.out.println("²£«~¦WºÙ: " + item.getProductName());
-			System.out.println("²£«~¦WºÙ: " + item.getPrice());
+			System.out.println("ç”¢å“åç¨±: " + item.getProductName());
+			System.out.println("ç”¢å“åç¨±: " + item.getPrice());
 			System.out.println("-----------------");
 		}
 	}
@@ -77,6 +80,6 @@ public class ProductServiceTest {
 	@Test
 	public void deleteAllProduct() {
 		dao.deleteAll();
-		System.out.println("¸ê®Æ¤w¥ş¼Æ²M°£");
+		System.out.println("è³‡æ–™å·²å…¨æ•¸æ¸…é™¤");
 	}
 }
