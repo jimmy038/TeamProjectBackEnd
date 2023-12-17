@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 配置檔案修改時重新載入，預設true -->
+<!-- scanPeriod: 檢測文件是否有修改的時間間隔，時間單位預設為毫秒，當scan=true時生效，預設時間間隔為1分鐘 -->
+<configuration scan="true" scanPeriod="60 seconds">
+
+	<!-- 日誌輸出的編碼方式 ,中文就使用UTF8 -->
+	<property name="Charset" value="UTF-8" />
+	<property name="FileName" value="PipiShrimp" />
+	<!--定義日誌檔案的儲存地址-->
+	<property name="LogsLocation" value="logs" />
+	<!--格式化輸出：%d表示日期，%-5level：級別從左顯示5個字元寬度，%thread表示執行緒名，%msg：日誌訊息，%n是換行符-->
+	<property name="Format1" value="%d{HH:mm:ss.SSS} %-5level [%thread][%logger{0}.%M\\(%F:%L\\)] %msg%n" />
+
+	<!-- appender -->
+	<!-- ConsoleAppender: 控制台輸出，其實就是System.out -->
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${Format1}</pattern>
+		</encoder>
+	</appender>
+	<!-- RollingFileAppender: 按照每天生成日誌文件，滾動式輸出(寫入)到日誌檔，超出設置大小後壓縮檔案 -->
+	<appender name="fileout" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- 每日生成日誌檔案或日誌檔案大小超出限制後輸出的檔名模板 -->
+			<fileNamePattern>${LogsLocation}/${FileName}.%d{yyyyMMdd}.%i.log</fileNamePattern>
+			<!-- 日誌檔案保留天數 -->
+			<maxHistory>30</maxHistory>
+			<!-- 每個日誌檔案最大大小：256MB -->
+			<maxFileSize>256MB</maxFileSize>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>${Format1}</pattern>
+			<charset>${Charset}</charset>
+		</encoder>
+	</appender>
+
+	<!-- logger -->
+	<!-- 設定日誌輸出級別: fatal > error > warn > info > debug > trace，只能輸出大於或等於設定的日誌級別 -->
+	<!-- spring boot 預設級別為 info，則輸出的日誌級別為 info、warn、error、fatal -->
+	<root level="info">
+	 	<appender-ref ref="fileout" />
+		<appender-ref ref="stdout" />
+	</root>
+	<!-- 自定義logger -->
+	<!-- name：用來指定受此logger約束的某一個包或者具體的某一個class -->
+	<!-- additivity: 是否向上級logger傳遞輸出信息，預設為true。若 additivity=false，表示 log 只展現到本 logger 中，而不再傳入 root 的 Logger.appender -->
+	<!-- <logger name="com.health" level="debug" additivity="true"/> -->
+	<!--  <appender-ref ref="stdout" />-->
+
+</configuration>
