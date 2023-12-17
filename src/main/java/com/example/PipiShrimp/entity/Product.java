@@ -1,12 +1,17 @@
 package com.example.PipiShrimp.entity;
 
 import java.time.LocalDate;
+<<<<<<< HEAD
+=======
+import java.time.LocalDateTime;
+>>>>>>> kamishu
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -40,15 +45,16 @@ public class Product {
 	@Column(name = "price")
 	private int price;
 
-	// °Ó«~®w¦s¼Æ¶q
+	// å•†å“åº«å­˜æ•¸é‡
 	@Column(name = "inventory")
 	private int inventory;
 
-	// °Ó«~¾P°â¼Æ¶q
+	// å•†å“éŠ·å”®æ•¸é‡
 	@Column(name = "sale_count")
 	@JsonProperty("sale_count")
 	private int saleCount;
 
+<<<<<<< HEAD
 	// °Ó«~³W®æ(¨Ò¦p:ªA¸ËS¡BM¡BL)
 	@Column(name = "specification")
 	private String specification;
@@ -67,19 +73,45 @@ public class Product {
 	private String photo;
 
 	// ¹ïÀ³user_id(¥~³¡Áä)
+=======
+	// å•†å“æ˜¯å¦ä¸Šæ¶(boolean)
+	@Column(name = "shelves")
+	private boolean shelves;
+
+	//ç”¨json 64base
+	@Column(name = "photo", columnDefinition = "LONGTEXT")  // ä½¿ç”¨æ­£ç¡®çš„åˆ—å®šä¹‰ï¼Œä¾‹å¦‚ "LONGTEXT"ï¼Œæ ¹æ®å®é™…æƒ…å†µé€‰æ‹©
+	@Lob
+	private String photo;
+
+	
+>>>>>>> kamishu
 	@Column(name = "user_id")
 	@JsonProperty("user_id")
 	private int userId;
+	
+	@Column(name = "upload_time")
+	@JsonProperty("upload_time")
+	private LocalDate uploadTime;
 
 	public Product() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+<<<<<<< HEAD
 	// ¨S¦³id¡B³W®æ
 	public Product(String productName, String description, LocalDate releaseDate, int price, int inventory,
 			int saleCount, String productType, boolean shelves, String photo, int userId) {
+=======
+	
+	
+
+	
+	public Product(int productId, String productName, String description, int price, int inventory, int saleCount,
+			boolean shelves, String photo, int userId, LocalDate currentDate) {
+>>>>>>> kamishu
 		super();
+		this.productId = productId;
 		this.productName = productName;
 		this.description = description;
 		this.releaseDate = releaseDate;
@@ -90,8 +122,10 @@ public class Product {
 		this.shelves = shelves;
 		this.photo = photo;
 		this.userId = userId;
+		this.uploadTime = currentDate;
 	}
 
+<<<<<<< HEAD
 	// ¨S¦³³W®æ(¥Î¨Ó§ó·s°Ó«~¸ê°T)
 	public Product(int productId, String productName, String description, LocalDate releaseDate, int price,
 			int inventory, int saleCount, String productType, boolean shelves, String photo, int userId) {
@@ -126,6 +160,23 @@ public class Product {
 		this.shelves = shelves;
 		this.photo = photo;
 		this.userId = userId;
+=======
+
+
+
+
+	public Product(Product product, LocalDate currentDate) {
+		super();
+		this.productName = product.getProductName();
+		this.description = product.getDescription();
+		this.price = product.getPrice();
+		this.inventory = product.getInventory();
+		this.saleCount = product.getSaleCount();
+		this.shelves = product.isShelves();
+		this.photo = product.getPhoto();
+		this.userId = product.getUserId();
+
+>>>>>>> kamishu
 	}
 
 	public int getProductId() {
@@ -207,5 +258,29 @@ public class Product {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+
+
+
+
+
+	public LocalDate getUploadTime() {
+		return uploadTime;
+	}
+
+
+
+
+
+	public void setUploadTime(LocalDate uploadTime) {
+		this.uploadTime = uploadTime;
+	}
+
+
+
+
+
+
+
+	
 
 }
