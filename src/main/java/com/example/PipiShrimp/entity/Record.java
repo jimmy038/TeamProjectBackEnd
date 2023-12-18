@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Entity
+@Entity //­q³æ
 @Table(name = "record")
 public class Record {
 

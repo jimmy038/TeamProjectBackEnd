@@ -4,6 +4,7 @@ import com.example.PipiShrimp.constants.RtnCode;
 import com.example.PipiShrimp.entity.User;
 
 public class UserRes {
+	
 	private RtnCode rtnCode;
 
 	private User user;
