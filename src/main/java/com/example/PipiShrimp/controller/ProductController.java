@@ -32,22 +32,11 @@ public class ProductController {
 	    // TODO 只有登入者可以刪除商品
 	    return service.delete(id);
 	}
-<<<<<<< HEAD
-
-	@GetMapping(value = "/product/get/info/user_id")
-	public ProductSearchRes getProductInfoByUserId(//
-			@RequestParam(value = "id") int id) {
-		// TODO 只有登入者可以查看自己的商品
-		return service.getProductInfoByUserId(id);
-	}
-
-=======
 	
 	
 	/**
 	 * 取得單一商品資訊(參數使用product_id)
 	 **/
->>>>>>> kamishu
 	@GetMapping(value = "/product/get/info")
 	public ProductRes getProductInfo(//
 			@RequestParam(value = "id") int id) {

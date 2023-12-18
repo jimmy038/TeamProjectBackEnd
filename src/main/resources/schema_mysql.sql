@@ -13,19 +13,14 @@ CREATE TABLE IF NOT EXISTS `product` (
   `product_id` int NOT NULL AUTO_INCREMENT,
   `product_name` varchar(100) NOT NULL,
   `description` varchar(45) DEFAULT NULL,
-  `release_date` date DEFAULT NULL,
   `price` int NOT NULL,
   `inventory` int NOT NULL,
   `sale_count` int NOT NULL DEFAULT '0',
-  `specification` varchar(45) DEFAULT NULL,
-  `product_type` varchar(45) NOT NULL,
   `shelves` tinyint NOT NULL DEFAULT '0',
   `photo` varchar(255) DEFAULT NULL,
   `user_id` int NOT NULL,
   PRIMARY KEY (`product_id`)
 );
-
-
 
 CREATE TABLE IF NOT EXISTS `record` (
   `record_id` int NOT NULL AUTO_INCREMENT,
@@ -41,15 +36,15 @@ CREATE TABLE IF NOT EXISTS `record` (
 );
 
 CREATE TABLE IF NOT EXISTS `cart` (
-  `user_id` int NOT NULL,
+  `cart_id` int NOT NULL AUTO_INCREMENT,
   `cart_date` datetime DEFAULT NULL,
   `cart_count` int NOT NULL,
   `cart_amount` int NOT NULL,
   `product_name` varchar(45) NOT NULL,
+  `user_id` int NOT NULL,
   `product_id` int NOT NULL,
-  PRIMARY KEY (`user_id`)
+  PRIMARY KEY (`cart_id`)
 );
-
 
 
 

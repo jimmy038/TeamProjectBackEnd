@@ -1,11 +1,7 @@
 package com.example.PipiShrimp.service.Impl;
 
-<<<<<<< HEAD
-import java.util.Collections;
-=======
 import java.time.LocalDate;
 import java.time.LocalDateTime;
->>>>>>> kamishu
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +17,6 @@ import org.springframework.util.StringUtils;
 import com.example.PipiShrimp.constants.RtnCode;
 import com.example.PipiShrimp.entity.Product;
 import com.example.PipiShrimp.repository.ProductDao;
-import com.example.PipiShrimp.repository.UserDao;
 import com.example.PipiShrimp.service.ifs.ProductService;
 import com.example.PipiShrimp.vo.ProductRes;
 import com.example.PipiShrimp.vo.ProductSearchRes;
@@ -35,21 +30,6 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private ProductDao proDao;
 
-<<<<<<< HEAD
-	@Autowired
-	private UserDao userDao;
-
-	// TODO ¿x¶sπœ§˘§Ë¶°
-	@Override
-	public ProductRes create(Product product) {
-		if (!StringUtils.hasText(product.getProductName()) || //
-				!StringUtils.hasText(product.getDescription()) || //
-				product.getPrice() <= 0 || //
-				product.getInventory() < 0 //
-		) {
-			return new ProductRes(RtnCode.PARAM_ERROR);
-		}
-=======
 	//TODO ÂÑ≤Â≠òÂúñÁâáÊñπÂºè
 	 @Override
 	    public ProductRes create(Product product) {
@@ -60,7 +40,6 @@ public class ProductServiceImpl implements ProductService {
 	        ) {
 	            return new ProductRes(RtnCode.PARAM_ERROR);
 	        }
->>>>>>> kamishu
 
 	        // Â§ÑÁêÜBase64ÁºñÁ†ÅÁöÑÂõæÂÉèÊï∞ÊçÆ
 	        String base64Image = product.getPhoto();
@@ -110,20 +89,6 @@ public class ProductServiceImpl implements ProductService {
 		}
 
 		return new ProductRes(RtnCode.SUCCESSFUL, res);
-	}
-
-	@Override
-	public ProductSearchRes getProductInfoByUserId(int id) {
-		// user_id§£¶s¶b
-		if (!userDao.existsById(id)) {
-			return new ProductSearchRes(RtnCode.USER_ID_NOT_FOUND);
-		}
-
-		List<Product> res = proDao.searchProductByUserId(id);
-		// ¶p™G∞”´~¨∞™≈ => µπ§@≠”™≈List
-		res = res.size() != 0 ? res : Collections.emptyList();
-
-		return new ProductSearchRes(RtnCode.SUCCESSFUL, res);
 	}
 
 	@Override

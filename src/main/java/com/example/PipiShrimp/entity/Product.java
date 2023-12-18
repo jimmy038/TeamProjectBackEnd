@@ -1,10 +1,7 @@
 package com.example.PipiShrimp.entity;
 
 import java.time.LocalDate;
-<<<<<<< HEAD
-=======
 import java.time.LocalDateTime;
->>>>>>> kamishu
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,32 +13,24 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+
+
 @Entity
 @Table(name = "product")
 public class Product {
 
-	// ­q³æid(²£«~int AI)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "product_id")
-	@JsonProperty("product_id")
 	private int productId;
 
-	// ²£«~¦WºÙ
 	@Column(name = "product_name")
 	@JsonProperty("product_name")
 	private String productName;
 
-	// ²£«~´y­z
 	@Column(name = "description")
 	private String description;
 
-	// ²£«~¤W¬[¤é´Á
-	@Column(name = "release_date")
-	@JsonProperty("release_date")
-	private LocalDate releaseDate;
-
-	// ²£«~»ù®æ
 	@Column(name = "price")
 	private int price;
 
@@ -54,26 +43,6 @@ public class Product {
 	@JsonProperty("sale_count")
 	private int saleCount;
 
-<<<<<<< HEAD
-	// °Ó«~³W®æ(¨Ò¦p:ªA¸ËS¡BM¡BL)
-	@Column(name = "specification")
-	private String specification;
-
-	// °Ó«~Ãþ«¬
-	@Column(name = "product_type")
-	@JsonProperty("product_type")
-	private String productType;
-
-	// °Ó«~¬O§_¤W¬[(boolean)
-	@Column(name = "shelves")
-	private boolean shelves;
-
-	// ¥Î¸ô®|¦s©ñ¹Ï¤ù
-	@Column(name = "photo")
-	private String photo;
-
-	// ¹ïÀ³user_id(¥~³¡Áä)
-=======
 	// å•†å“æ˜¯å¦ä¸Šæž¶(boolean)
 	@Column(name = "shelves")
 	private boolean shelves;
@@ -84,7 +53,6 @@ public class Product {
 	private String photo;
 
 	
->>>>>>> kamishu
 	@Column(name = "user_id")
 	@JsonProperty("user_id")
 	private int userId;
@@ -98,69 +66,25 @@ public class Product {
 		// TODO Auto-generated constructor stub
 	}
 
-<<<<<<< HEAD
-	// ¨S¦³id¡B³W®æ
-	public Product(String productName, String description, LocalDate releaseDate, int price, int inventory,
-			int saleCount, String productType, boolean shelves, String photo, int userId) {
-=======
 	
 	
 
 	
 	public Product(int productId, String productName, String description, int price, int inventory, int saleCount,
 			boolean shelves, String photo, int userId, LocalDate currentDate) {
->>>>>>> kamishu
 		super();
 		this.productId = productId;
 		this.productName = productName;
 		this.description = description;
-		this.releaseDate = releaseDate;
 		this.price = price;
 		this.inventory = inventory;
 		this.saleCount = saleCount;
-		this.productType = productType;
 		this.shelves = shelves;
 		this.photo = photo;
 		this.userId = userId;
 		this.uploadTime = currentDate;
 	}
 
-<<<<<<< HEAD
-	// ¨S¦³³W®æ(¥Î¨Ó§ó·s°Ó«~¸ê°T)
-	public Product(int productId, String productName, String description, LocalDate releaseDate, int price,
-			int inventory, int saleCount, String productType, boolean shelves, String photo, int userId) {
-		super();
-		this.productId = productId;
-		this.productName = productName;
-		this.description = description;
-		this.releaseDate = releaseDate;
-		this.price = price;
-		this.inventory = inventory;
-		this.saleCount = saleCount;
-		this.productType = productType;
-		this.shelves = shelves;
-		this.photo = photo;
-		this.userId = userId;
-	}
-
-	// ¥þ³¡³£¦³
-	public Product(int productId, String productName, String description, LocalDate releaseDate, int price,
-			int inventory, int saleCount, String specification, String productType, boolean shelves, String photo,
-			int userId) {
-		super();
-		this.productId = productId;
-		this.productName = productName;
-		this.description = description;
-		this.releaseDate = releaseDate;
-		this.price = price;
-		this.inventory = inventory;
-		this.saleCount = saleCount;
-		this.specification = specification;
-		this.productType = productType;
-		this.shelves = shelves;
-		this.photo = photo;
-		this.userId = userId;
-=======
 
 
 
@@ -176,7 +100,6 @@ public class Product {
 		this.photo = product.getPhoto();
 		this.userId = product.getUserId();
 
->>>>>>> kamishu
 	}
 
 	public int getProductId() {
@@ -201,14 +124,6 @@ public class Product {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public LocalDate getReleaseDate() {
-		return releaseDate;
-	}
-
-	public void setReleaseDate(LocalDate releaseDate) {
-		this.releaseDate = releaseDate;
 	}
 
 	public int getPrice() {
