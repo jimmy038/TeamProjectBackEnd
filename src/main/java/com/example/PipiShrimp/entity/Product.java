@@ -1,21 +1,17 @@
 package com.example.PipiShrimp.entity;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 
-@Entity
+@Entity //²£«~¸ê°T
 @Table(name = "product")
 public class Product {
 
@@ -34,46 +30,35 @@ public class Product {
 	@Column(name = "price")
 	private int price;
 
-	// å•†å“åº«å­˜æ•¸é‡
+	// °Ó«~®w¦s¼Æ¶q
 	@Column(name = "inventory")
 	private int inventory;
 
-	// å•†å“éŠ·å”®æ•¸é‡
+	// °Ó«~¾P°â¼Æ¶q
 	@Column(name = "sale_count")
 	@JsonProperty("sale_count")
 	private int saleCount;
 
-	// å•†å“æ˜¯å¦ä¸Šæ¶(boolean)
+	// °Ó«~¬O§_¤W¬[(boolean)
 	@Column(name = "shelves")
 	private boolean shelves;
 
-	//ç”¨json 64base
-	@Column(name = "photo", columnDefinition = "LONGTEXT")  // ä½¿ç”¨æ­£ç¡®çš„åˆ—å®šä¹‰ï¼Œä¾‹å¦‚ "LONGTEXT"ï¼Œæ ¹æ®å®é™…æƒ…å†µé€‰æ‹©
-	@Lob
+	//¥Î¸ô®|¦s©ñ¹Ï¤ù
+	@Column(name = "photo")
 	private String photo;
 
-	
 	@Column(name = "user_id")
 	@JsonProperty("user_id")
 	private int userId;
-	
-	@Column(name = "upload_time")
-	@JsonProperty("upload_time")
-	private LocalDate uploadTime;
 
 	public Product() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	
-	
-
-	
-	public Product(int productId, String productName, String description, int price, int inventory, int saleCount,
-			boolean shelves, String photo, int userId, LocalDate currentDate) {
+	public Product(String productName, String description, int price, int inventory, int saleCount, boolean shelves,
+			String photo, int userId) {
 		super();
-		this.productId = productId;
 		this.productName = productName;
 		this.description = description;
 		this.price = price;
@@ -82,14 +67,9 @@ public class Product {
 		this.shelves = shelves;
 		this.photo = photo;
 		this.userId = userId;
-		this.uploadTime = currentDate;
 	}
 
-
-
-
-
-	public Product(Product product, LocalDate currentDate) {
+	public Product(Product product) {
 		super();
 		this.productName = product.getProductName();
 		this.description = product.getDescription();
@@ -99,7 +79,6 @@ public class Product {
 		this.shelves = product.isShelves();
 		this.photo = product.getPhoto();
 		this.userId = product.getUserId();
-
 	}
 
 	public int getProductId() {
@@ -173,29 +152,5 @@ public class Product {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-
-
-
-
-
-	public LocalDate getUploadTime() {
-		return uploadTime;
-	}
-
-
-
-
-
-	public void setUploadTime(LocalDate uploadTime) {
-		this.uploadTime = uploadTime;
-	}
-
-
-
-
-
-
-
-	
 
 }

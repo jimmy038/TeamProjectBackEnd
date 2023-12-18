@@ -3,7 +3,6 @@ package com.example.PipiShrimp.entity;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletRequest;
 
 import java.util.Properties;
 
@@ -135,4 +134,109 @@ public class Mail {
 		}
 	}
 
+	// 忘記密碼 通知使用者信件
+	public static void sentForgotPwdMail(String email) {
+
+		// 寄件人
+		String senderName = "皮皮蝦負責人沒料彥茗";
+		String senderEmail = "ian20000217@gmail.com";
+		String senderPassword = pwd;
+
+		// 收件人
+		String recipientEmail = email;
+
+		// 設定SMTP
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtp.gmail.com"); // 以 Gmail 为例
+		props.put("mail.smtp.port", "587");
+		props.put("mail.smtp.ssl.protocols", "TLSv1.2"); // 指定協議
+
+		// 創建 Session
+		Session session = Session.getInstance(props, new Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(senderEmail, senderPassword);
+			}
+		});
+
+		try {
+			// 設定 MimeMessage
+			Message message = new MimeMessage(session);
+
+			// 設定寄件人
+			message.setFrom(new InternetAddress(senderEmail, senderName));
+
+			// 設定收件人
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
+
+			// 設定信件主題
+			message.setSubject("請至信箱收取簡訊，重新設定您的密碼");
+
+			// 設定信件內容
+			message.setText("請重新設定您的新密碼");
+
+			// 發送信件
+			Transport.send(message);
+
+			System.out.println("發送成功!!!");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("發送失敗!!!");
+		}
+	}
+
+	// 更改密碼 通知使用者信件
+	public static void sentChangePwdMail(String email) {
+
+		// 寄件人
+		String senderName = "皮皮蝦負責人沒料彥茗";
+		String senderEmail = "ian20000217@gmail.com";
+		String senderPassword = pwd;
+
+		// 收件人
+		String recipientEmail = email;
+
+		// 設定SMTP
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtp.gmail.com"); // 以 Gmail 为例
+		props.put("mail.smtp.port", "587");
+		props.put("mail.smtp.ssl.protocols", "TLSv1.2"); // 指定協議
+
+		// 創建 Session
+		Session session = Session.getInstance(props, new Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(senderEmail, senderPassword);
+			}
+		});
+
+		try {
+			// 設定 MimeMessage
+			Message message = new MimeMessage(session);
+
+			// 設定寄件人
+			message.setFrom(new InternetAddress(senderEmail, senderName));
+
+			// 設定收件人
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
+
+			// 設定信件主題
+			message.setSubject("請變更您的密碼");
+
+			// 設定信件內容
+			message.setText("新密碼不能與舊密碼相符，至少要有英文及數字，最少8個字元)");
+
+			// 發送信件
+			Transport.send(message);
+
+			System.out.println("發送成功!!!");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("發送失敗!!!");
+		}
+	}
 }

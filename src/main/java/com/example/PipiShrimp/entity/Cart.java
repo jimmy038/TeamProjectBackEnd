@@ -1,3 +1,4 @@
+
 package com.example.PipiShrimp.entity;
 
 import java.time.LocalDateTime;
@@ -11,7 +12,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Entity
+@Entity //┴╩клио
 @Table(name = "cart")
 public class Cart {
 

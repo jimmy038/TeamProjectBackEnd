@@ -9,7 +9,7 @@ import com.example.PipiShrimp.entity.User;
 public interface UserDao extends JpaRepository<User, Integer> {
 
 	/**
-	 * 判斷信箱是否已經註冊過
+	 * 判斷信箱是否已經註冊過 
 	 **/
 	public boolean existsByEmail(String email);
 	
