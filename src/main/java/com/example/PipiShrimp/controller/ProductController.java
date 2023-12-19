@@ -1,5 +1,7 @@
 package com.example.PipiShrimp.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.PipiShrimp.constants.RtnCode;
 import com.example.PipiShrimp.entity.Product;
+import com.example.PipiShrimp.entity.User;
+import com.example.PipiShrimp.repository.UserDao;
 import com.example.PipiShrimp.service.ifs.ProductService;
 import com.example.PipiShrimp.vo.ProductRes;
 import com.example.PipiShrimp.vo.ProductSearchRes;
@@ -18,11 +23,23 @@ import com.example.PipiShrimp.vo.ProductSearchRes;
 public class ProductController {
 
 	@Autowired
+	private UserDao userDao;
+
+	@Autowired
 	private ProductService service;
 
 	@PostMapping(value = "/product/create")
-	public ProductRes create(@RequestBody Product product) {
-		// TODO 只有登入者可以新增商品
+	public ProductRes create(@RequestBody Product product, //
+			HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		// 判斷是否登入，只有登入者可以新增商品
+		if (user == null) {
+			return new ProductRes(RtnCode.LOGIN_FIRST);
+		}
+
+		if (!userDao.existsById(user.getId())) {
+			return new ProductRes(RtnCode.USER_ID_NOT_FOUND);
+		}
 		return service.create(product);
 	}
 

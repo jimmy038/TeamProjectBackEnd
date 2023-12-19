@@ -28,6 +28,7 @@ public enum RtnCode {
 	CART_ID_NOT_FOUND(400, "Cart id not found!!"), //
 	CART_IS_EMPTY(400, "Cart is empty!!"), //
 	CART_DELETE_FAILED(400, "Cart delete failed!!"), //
+	LOGIN_FIRST(400, "Login first!!"), //
 	;
 
 	private int code;

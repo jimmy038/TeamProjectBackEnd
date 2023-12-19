@@ -31,6 +31,7 @@ public class UserController {
 		// 如果session內沒有資料，要求登入帳號
 		if (session.getAttribute(req.getEmail()) == null) {
 			UserRes result = service.login(req);
+
 			// 儲存使用者資料到session
 			session.setAttribute("user", result.getUser());
 			return result;

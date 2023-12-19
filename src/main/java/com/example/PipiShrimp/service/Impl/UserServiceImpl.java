@@ -1,5 +1,7 @@
 package com.example.PipiShrimp.service.Impl;
 
+
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,12 +101,12 @@ public class UserServiceImpl implements UserService {
 			logger.info("login successful");
 			// 清除密碼(不回傳)
 			user.setPwd("");
-			return new UserRes(RtnCode.SUCCESSFUL, user);
 
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			return new UserRes(RtnCode.SENT_EMAIL_FAILED);
 		}
+		return new UserRes(RtnCode.SUCCESSFUL, user);
 	}
 
 }
