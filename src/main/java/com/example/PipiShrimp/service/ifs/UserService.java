@@ -15,14 +15,5 @@ public interface UserService {
 	 * 查詢DB內是否有符合的資料 #登入
 	 **/
 	public UserRes login(UserReq req);
-	
-	/**
-	 * 忘記密碼**/
-	public UserRes sentForgotPwd(int id, String email);
-
-	/**
-	 * 更改密碼**/
-	public UserRes changePwd(String email, String oldPwd, String newPwd);
-	
 
 }

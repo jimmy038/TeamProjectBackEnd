@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.PipiShrimp.constants.RtnCode;
 import com.example.PipiShrimp.entity.User;
 import com.example.PipiShrimp.service.ifs.UserService;
-import com.example.PipiShrimp.vo.ChangePasswordReq;
 import com.example.PipiShrimp.vo.UserReq;
 import com.example.PipiShrimp.vo.UserRes;
 
@@ -44,20 +43,6 @@ public class UserController {
 		// 清除session資料
 		session.invalidate();
 		return new UserRes(RtnCode.SUCCESSFUL);
-	}
-	
-	@PostMapping(value = "/user/sentForgotPwd")
-	public UserRes sentForgotPwd(@RequestBody int id, String email) {
-		return service.sentForgotPwd(id, email);
-	}
-	
-	@PostMapping(value = "/user/changePwd")
-	public UserRes changePwd(@RequestBody ChangePasswordReq req, HttpSession session) {
-		//要更改密碼請先登入
-		if(session.getAttribute(req.getEmail()) == null ) {
-			return new UserRes(RtnCode.PLEASE_LOGIN_FIRST);
-		}
-		return service.changePwd(req.getEmail(), req.getOldPwd(), req.getNewPwd());
 	}
 
 }

@@ -1,8 +1,5 @@
 package com.example.PipiShrimp.service.Impl;
 
-import java.time.LocalDateTime;
-import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +15,6 @@ import com.example.PipiShrimp.service.ifs.UserService;
 import com.example.PipiShrimp.vo.UserReq;
 import com.example.PipiShrimp.vo.UserRes;
 
-import net.bytebuddy.utility.RandomString;
-
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -32,7 +27,7 @@ public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 
 	// TODO 信箱格式判斷(regexp)
-	@Override // 註冊
+	@Override
 	public UserRes signUp(User user) {
 		// 至少要輸入 name、email、password
 		if (!StringUtils.hasText(user.getName()) || //
@@ -72,6 +67,7 @@ public class UserServiceImpl implements UserService {
 			logger.error(e.getMessage());
 			return new UserRes(RtnCode.USER_CREATE_FAILED);
 		}
+
 		return new UserRes(RtnCode.SUCCESSFUL, user);
 	}
 
@@ -87,7 +83,7 @@ public class UserServiceImpl implements UserService {
 		}
 
 		User user = userDao.findByEmail(req.getEmail());
-		// 防止資料庫資料爆炸(資料消失)
+		// 資料庫資料爆炸(資料消失)
 		if (user == null) {
 			return new UserRes(RtnCode.DATABASE_IS_EMPTY);
 		}
@@ -111,74 +107,4 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
-	@Override /** 忘記密碼 **/
-	public UserRes sentForgotPwd(int id, String email) {
-		if (id < 0 && !StringUtils.hasText(email)) {
-			return new UserRes(RtnCode.PARAM_ERROR);
-		}
-		// 設置初始值，避免後續空指針
-		User user = null;
-		// 假設ID有值
-		if (id > 0) {
-			Optional<User> op = userDao.findById(id);
-			// 判斷ID如果為空回傳USER_ID_NOT_FOUND
-			if (op.isEmpty()) {
-				return new UserRes(RtnCode.USER_ID_NOT_FOUND);
-			}
-			user = op.get();
-		} else {
-			user = userDao.findByEmail(email);
-			//假設 user撈回來的email沒東西時，回EMAIL_NOT_FOUND
-			if (user == null) {
-				return new UserRes(RtnCode.EMAIL_NOT_FOUND);
-			}
-		}
-		// RandomString.make產生包含大小寫英文數字都有的亂數，產生10碼的亂數的密碼
-		// 產生新密碼↓
-		String randomPwd = RandomString.make(10);	
-		// 發送忘記密碼通知mail
-		Mail.sentForgotPwdMail(email);
-		user.setPwd(encoder.encode(randomPwd)); 
-		try {
-			userDao.save(user);
-			logger.info("ForgotPassword sent successful");
-			
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-			return new UserRes(RtnCode.FORGOT_PASSWORD_ERROR);
-		}
-		return new UserRes(RtnCode.SUCCESSFUL, user);
-	}
-
-	@Override /** 更改密碼 **/
-	public UserRes changePwd(String email, String oldPwd, String newPwd) {
-		if(!StringUtils.hasText(email) || !StringUtils.hasText(oldPwd)|| !StringUtils.hasText(newPwd)) {
-			return new UserRes(RtnCode.PARAM_ERROR);
-		}
-		//判斷新的密碼不能與舊密碼相同
-		if(oldPwd.equals(newPwd)) {
-			return new UserRes(RtnCode.OLD_PASSWORD_AND_NEW_PASSWORD_ARE_IDENITCAL);
-		}
-		
-		User user = userDao.findByEmail(email);
-		
-		if(!encoder.matches(oldPwd,user.getPwd() )) {
-			return new UserRes(RtnCode.PASSWORD_ERROR);
-		}
-		//設定新密碼為加密後的密碼
-		user.setPwd(encoder.encode(newPwd));
-		try {
-			userDao.save(user);
-			// 儲存後清空密碼(不回傳)
-			user.setPwd("");
-			logger.info("ChangePssword sent successful");
-			// 發送更改密碼通知mail
-			Mail.sentChangePwdMail(email);
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-			return new UserRes(RtnCode.CHANGE_PASSWORD_ERROR);
-		}
-		return new UserRes(RtnCode.SUCCESSFUL);
-	}
-	
 }
