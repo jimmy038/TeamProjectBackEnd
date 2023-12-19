@@ -29,6 +29,7 @@ public enum RtnCode {
 	CART_IS_EMPTY(400, "Cart is empty!!"), //
 	CART_DELETE_FAILED(400, "Cart delete failed!!"), //
 	LOGIN_FIRST(400, "Login first!!"), //
+	USER_IS_EMPTY(400, "User is empty!!"), //
 	;
 
 	private int code;
