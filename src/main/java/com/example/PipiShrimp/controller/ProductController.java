@@ -44,8 +44,17 @@ public class ProductController {
 	}
 
 	@PostMapping(value = "/product/delete")
-	public ProductRes delete(@RequestParam(value = "id") int id) {
-		// TODO 只有登入者可以刪除商品
+	public ProductRes delete(@RequestParam(value = "id") int id, //
+			HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		// 判斷是否登入，只有登入者可以新增商品
+		if (user == null) {
+			return new ProductRes(RtnCode.LOGIN_FIRST);
+		}
+
+		if (!userDao.existsById(user.getId())) {
+			return new ProductRes(RtnCode.USER_ID_NOT_FOUND);
+		}
 		return service.delete(id);
 	}
 
