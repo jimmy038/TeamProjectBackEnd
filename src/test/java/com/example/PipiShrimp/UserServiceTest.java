@@ -3,7 +3,6 @@ package com.example.PipiShrimp;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.access.event.PublicInvocationEvent;
 
 import com.example.PipiShrimp.entity.Mail;
 import com.example.PipiShrimp.entity.User;
@@ -73,7 +72,7 @@ public class UserServiceTest {
 
 //	@Test
 //	public void sentMailTest() {
-//		Mail.sendForgetPwdMail();
+//		Mail.sentSignUpMail();
 //	}
 
 //	@Test

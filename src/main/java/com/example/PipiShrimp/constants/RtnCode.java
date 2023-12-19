@@ -6,6 +6,8 @@ public enum RtnCode {
 //	SUCCESSFUL為成功,HTTP狀態碼,主要用200,400,401,403,404, 200為成功,固定的,權限有相關的401&403,404固定就為找不到,剩下歸類到400
 	SUCCESSFUL(200, "Successful!!"), //
 	PARAM_ERROR(400, "Param error!!"), //
+	FILE_ERROR(400, "Param error!!"), //
+
 	PRODUCT_CREATE_FAILED(400, "Product create failed!!"), //
 	PRODUCT_IS_EMPTY(400, "Product is empty!!"), //
 	PRODUCT_NOT_FOUND(404, "Product not found!!"), //
@@ -27,8 +29,11 @@ public enum RtnCode {
 	CART_CREATE_FAILED(400, "Cart create failed!!"), //
 	CART_ID_NOT_FOUND(400, "Cart id not found!!"), //
 	CART_IS_EMPTY(400, "Cart is empty!!"), //
+<<<<<<< HEAD
 	CART_DELETE_FAILED(400, "Cart delete failed!!"), //
 	LOGIN_FIRST(400, "Login first!!"), //
+=======
+>>>>>>> ccb53b51ab44c1d0c7b76bcaa39d540e26c9b224
 	;
 
 	private int code;

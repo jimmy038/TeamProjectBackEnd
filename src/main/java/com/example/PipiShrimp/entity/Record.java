@@ -15,7 +15,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Table(name = "record")
 public class Record {
 
-	// 訂單id(遞增int AI)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "record_id")
@@ -41,7 +40,6 @@ public class Record {
 	@Column(name = "status")
 	private String status;
 
-	// 產品名稱
 	@Column(name = "product_name")
 	@JsonProperty("product_name")
 	private String productName;

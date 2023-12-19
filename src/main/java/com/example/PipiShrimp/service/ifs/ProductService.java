@@ -17,11 +17,6 @@ public interface ProductService {
 	public ProductRes delete(int id);
 
 	/**
-	 * 取得user的商品資訊(複數)(參數使用user_id) #user查看自己有賣那些商品
-	 **/
-	public ProductSearchRes getProductInfoByUserId(int id);
-
-	/**
 	 * 取得單一商品資訊(參數使用product_id)
 	 **/
 	public ProductRes getProductInfo(int id);
