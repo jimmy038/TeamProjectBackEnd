@@ -47,7 +47,7 @@ public class ProductController {
 	public ProductRes delete(@RequestParam(value = "id") int id, //
 			HttpSession session) {
 		User user = (User) session.getAttribute("user");
-		// 判斷是否登入，只有登入者可以新增商品
+		// 判斷是否登入，只有登入者可以刪除商品
 		if (user == null) {
 			return new ProductRes(RtnCode.LOGIN_FIRST);
 		}
@@ -60,8 +60,17 @@ public class ProductController {
 
 	@GetMapping(value = "/product/get/info/user_id")
 	public ProductSearchRes getProductInfoByUserId(//
-			@RequestParam(value = "id") int id) {
-		// TODO 只有登入者可以查看自己的商品
+			@RequestParam(value = "id") int id, //
+			HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		// 判斷是否登入，只有登入者可以取得商品資訊
+		if (user == null) {
+			return new ProductSearchRes(RtnCode.LOGIN_FIRST);
+		}
+
+		if (!userDao.existsById(user.getId())) {
+			return new ProductSearchRes(RtnCode.USER_ID_NOT_FOUND);
+		}
 		return service.getProductInfoByUserId(id);
 	}
 
