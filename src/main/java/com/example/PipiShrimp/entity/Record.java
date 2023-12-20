@@ -55,7 +55,7 @@ public class Record {
 	@Column(name = "valid")
 	private boolean valid;
 
-	// 對應user資料表ID ↓
+	// 對應user資料表ID
 	@Column(name = "user_id")
 	@JsonProperty("user_id")
 	private int userId;
