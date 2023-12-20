@@ -61,11 +61,4 @@ public class CommentServiceImpl implements CommentService {
 
 		return new CommentSearchRes(RtnCode.SUCCESSFUL, commentList);
 	}
-
-	@Override
-	public CommentRes delete(Comment comment) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

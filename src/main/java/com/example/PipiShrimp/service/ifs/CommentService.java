@@ -14,9 +14,5 @@ public interface CommentService {
 	 * 依據商品id查看對商品的評論(參數:product_id)
 	 **/
 	public CommentSearchRes getCommentInfo(int id);
-	
-	/**
-	 * 刪除的評論(user的id = comment的user_id) 
-	 **/
-	public CommentRes delete(Comment comment);
+
 }

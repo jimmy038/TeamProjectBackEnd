@@ -113,14 +113,14 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ProductSearchRes getProductByName(String productName) {
 		List<Product> products = proDao.searchProductByName(productName);
-		// 搜尋欄未輸入->顯示全部
+		// 搜尋欄未輸入=>顯示全部
 		if (!StringUtils.hasText(productName)) {
 			getAllProductInfo();
 		}
 
-		// 找不到搜尋商品
+		// 找不到搜尋商品 => 給一個空陣列
 		if (products.size() == 0) {
-			return new ProductSearchRes(RtnCode.PRODUCT_NOT_FOUND);
+			products = Collections.emptyList();
 		}
 
 		return new ProductSearchRes(RtnCode.SUCCESSFUL, products);

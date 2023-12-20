@@ -35,7 +35,7 @@ public class UserController {
 			UserRes result = service.login(req);
 
 			// 儲存使用者資料到session
-			session.setAttribute("user", result.getUser());
+//			session.setAttribute("user", result.getUser());
 			return result;
 		}
 		return null;
