@@ -54,4 +54,9 @@ public class UserController {
 		return service.getUserInfo(id);
 	}
 
+	@PostMapping(value = "/user/edit")
+	public UserRes editUserInfo(@RequestBody User user) {
+		return service.editUserInfo(user);
+	}
+
 }

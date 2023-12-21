@@ -77,6 +77,18 @@ public class User {
 		this.level = user.getLevel();
 	}
 
+	// 更新資料表
+	public User(int id, String name, String email, String pwd, String address, String phoneNumber, int level) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.pwd = pwd;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
+		this.level = level;
+	}
+
 	public int getId() {
 		return id;
 	}

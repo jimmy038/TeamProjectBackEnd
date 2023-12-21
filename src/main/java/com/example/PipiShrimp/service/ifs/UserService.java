@@ -22,5 +22,10 @@ public interface UserService {
 	 * 查詢user資料
 	 **/
 	public UserRes getUserInfo(int id);
+	
+	/**
+	 * 編輯user資料
+	 **/
+	public UserRes editUserInfo(User user);
 
 }

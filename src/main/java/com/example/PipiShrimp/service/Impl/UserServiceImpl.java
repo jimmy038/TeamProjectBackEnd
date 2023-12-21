@@ -121,8 +121,30 @@ public class UserServiceImpl implements UserService {
 		if (op.isEmpty()) {
 			return new UserRes(RtnCode.USER_IS_EMPTY);
 		}
-		
+
 		return new UserRes(RtnCode.SUCCESSFUL, op.get());
+	}
+
+	@Override
+	public UserRes editUserInfo(User user) {
+
+		// 確認User是否為空
+		if (user == null) {
+			return new UserRes(RtnCode.USER_IS_EMPTY);
+		}
+
+		// TODO 不能更改信箱和密碼
+
+		try {
+			userDao.save(user);
+			// 清空密碼(不回傳)
+			user.setPwd("");
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return new UserRes(RtnCode.USER_UPDATE_FAILED);
+		}
+
+		return new UserRes(RtnCode.SUCCESSFUL, user);
 	}
 
 }

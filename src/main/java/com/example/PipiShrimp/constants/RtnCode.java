@@ -35,6 +35,7 @@ public enum RtnCode {
 	COMMENT_ID_NOT_FOUND(400, "Comment id not found!!"), //
 	COMMENT_IS_EMPTY(400, "Comment is empty!!"), //
 	COMMENT_UPDATE_FAILED(400, "Comment update failed!!"), //
+	USER_UPDATE_FAILED(400, "User update failed!!"), //
 	;
 
 	private int code;
