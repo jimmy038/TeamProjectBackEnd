@@ -103,7 +103,13 @@ public class RecordServiceImpl implements RecordService {
 
 		// 存放刪除record資料
 		List<Record> records = dao.findAllById(idList);
-		dao.deleteAllById(idList);
+
+		try {
+			dao.deleteAllById(idList);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return new RecordSearchRes(RtnCode.RECORD_DELETE_FAILED);
+		}
 
 		return new RecordSearchRes(RtnCode.SUCCESSFUL, records);
 	}

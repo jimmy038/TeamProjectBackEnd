@@ -29,4 +29,14 @@ public class CommentController {
 	public CommentSearchRes getCommentInfo(@RequestParam int id) {
 		return service.getCommentInfo(id);
 	}
+
+	@PostMapping(value = "/comment/like")
+	public CommentRes addLike(@RequestParam int id) {
+		return service.addLike(id);
+	}
+	
+	@PostMapping(value = "/comment/dislike")
+	public CommentRes addDislike(@RequestParam int id) {
+		return service.addDislike(id);
+	}
 }

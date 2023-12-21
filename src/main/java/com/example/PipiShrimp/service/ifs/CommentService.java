@@ -15,4 +15,13 @@ public interface CommentService {
 	 **/
 	public CommentSearchRes getCommentInfo(int id);
 
+	/**
+	 * 苂(把计:comment_id)
+	 **/
+	public CommentRes addLike(int id);
+	
+	/**
+	 * 苂(把计:comment_id)
+	 **/
+	public CommentRes addDislike(int id);
 }
