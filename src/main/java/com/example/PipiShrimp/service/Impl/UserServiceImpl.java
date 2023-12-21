@@ -127,13 +127,26 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserRes editUserInfo(User user) {
+		// 確認id是否存在
+		if (!userDao.existsById(user.getId())) {
+			return new UserRes(RtnCode.USER_ID_NOT_FOUND);
+		}
+
+		Optional<User> op = userDao.findById(user.getId());
 
 		// 確認User是否為空
-		if (user == null) {
+		if (op.isEmpty()) {
 			return new UserRes(RtnCode.USER_IS_EMPTY);
 		}
 
-		// TODO 不能更改信箱和密碼
+		// 不能更改信箱和密碼
+		if (!op.get().getEmail().matches(user.getEmail()) || //
+				!encoder.matches(user.getPwd(), op.get().getPwd())) {
+			return new UserRes(RtnCode.PARAM_ERROR);
+		}
+
+		//加密後存入DB
+		user.setPwd(encoder.encode(user.getPwd()));
 
 		try {
 			userDao.save(user);

@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,6 +19,12 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
+
+	// @Lob用來標記屬於大型文件(Lob)
+	@Lob
+	// columnDefinition定義資料庫的資料型態
+	@Column(name = "photo", columnDefinition = "MEDIUMBLOB")
+	private byte[] photo;
 
 	// 使用者名稱
 	@Column(name = "name")
@@ -49,7 +56,7 @@ public class User {
 		super();
 	}
 
-	// Test用的建構方法
+	// 註冊用的建構方法
 	public User(String name, String email, String pwd) {
 		super();
 		this.name = name;
@@ -77,10 +84,23 @@ public class User {
 		this.level = user.getLevel();
 	}
 
-	// 更新資料表
-	public User(int id, String name, String email, String pwd, String address, String phoneNumber, int level) {
+	// 更新user資料表時使用
+	public User(int id, byte[] photo, String name, String email, String pwd, String address, String phoneNumber) {
 		super();
 		this.id = id;
+		this.photo = photo;
+		this.name = name;
+		this.email = email;
+		this.pwd = pwd;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
+	}
+
+	public User(int id, byte[] photo, String name, String email, String pwd, String address, String phoneNumber,
+			int level) {
+		super();
+		this.id = id;
+		this.photo = photo;
 		this.name = name;
 		this.email = email;
 		this.pwd = pwd;
@@ -95,6 +115,14 @@ public class User {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public byte[] getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
 	}
 
 	public String getName() {
