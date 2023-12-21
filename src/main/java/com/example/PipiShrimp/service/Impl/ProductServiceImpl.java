@@ -119,14 +119,22 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ProductSearchRes getProductByName(String productName) {
 		List<Product> products = proDao.searchProductByName(productName);
+<<<<<<< HEAD
 		// æœå°‹æ¬„æœªè¼¸å…¥->é¡¯ç¤ºå…¨éƒ¨
+=======
+		// ·j´MÄæ¥¼¿é¤J=>Åã¥Ü¥þ³¡
+>>>>>>> ian
 		if (!StringUtils.hasText(productName)) {
 			getAllProductInfo();
 		}
 
+<<<<<<< HEAD
 		// æ‰¾ä¸åˆ°æœå°‹å•†å“
+=======
+		// §ä¤£¨ì·j´M°Ó«~ => µ¹¤@­ÓªÅ°}¦C
+>>>>>>> ian
 		if (products.size() == 0) {
-			return new ProductSearchRes(RtnCode.PRODUCT_NOT_FOUND);
+			products = Collections.emptyList();
 		}
 
 		return new ProductSearchRes(RtnCode.SUCCESSFUL, products);

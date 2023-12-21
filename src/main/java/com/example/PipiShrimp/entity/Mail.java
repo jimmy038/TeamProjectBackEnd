@@ -32,7 +32,7 @@ public class Mail {
 	public static void sentSignUpMail(String email) {
 
 		// 寄件人
-		String senderName = "皮皮蝦負責人沒料彥茗";
+		String senderName = "皮皮蝦股份無限公司";
 		String senderEmail = "ian20000217@gmail.com";
 		String senderPassword = pwd;
 
@@ -68,7 +68,7 @@ public class Mail {
 			message.setSubject("註冊成功");
 
 			// 設定信件內容
-			message.setText("你成為了皮皮蝦會員，負責人沒料彥茗感謝你的加入");
+			message.setText("你成為了皮皮蝦會員，皮皮蝦全體人員感謝你的加入");
 
 			// 發送信件
 			Transport.send(message);
@@ -86,7 +86,7 @@ public class Mail {
 	public static void sentLoginMail(String email) {
 
 		// 寄件人
-		String senderName = "皮皮蝦負責人沒料彥茗";
+		String senderName = "皮皮蝦股份無限公司";
 		String senderEmail = "ian20000217@gmail.com";
 		String senderPassword = "tcog rtbx cbqx jyrm";
 

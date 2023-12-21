@@ -11,9 +11,9 @@ public enum RtnCode {
 	PRODUCT_CREATE_FAILED(400, "Product create failed!!"), //
 	PRODUCT_IS_EMPTY(400, "Product is empty!!"), //
 	PRODUCT_NOT_FOUND(404, "Product not found!!"), //
-	EMAIL_IS_EXIST(400, "Email is exist!!"),//
-	PASSWORD_FORMAT_ERROR(400, "Password format error!!"),//
-	EMAIL_FORMAT_ERROR(400, "Email format error!!"),//
+	EMAIL_IS_EXIST(400, "Email is exist!!"), //
+	PASSWORD_FORMAT_ERROR(400, "Password format error!!"), //
+	EMAIL_FORMAT_ERROR(400, "Email format error!!"), //
 	USER_CREATE_FAILED(400, "User create failed!!"), //
 	EMAIL_NOT_FOUND(400, "Email not found!!"), //
 	PASSWORD_ERROR(400, "Password error!!"), //
@@ -32,8 +32,18 @@ public enum RtnCode {
 <<<<<<< HEAD
 	CART_DELETE_FAILED(400, "Cart delete failed!!"), //
 	LOGIN_FIRST(400, "Login first!!"), //
+<<<<<<< HEAD
 =======
 >>>>>>> ccb53b51ab44c1d0c7b76bcaa39d540e26c9b224
+=======
+	USER_IS_EMPTY(400, "User is empty!!"), //
+	COMMENT_CREATE_FAILED(400, "Comment create failed!!"), //
+	RECORD_DELETE_FAILED(400, "Record delete failed!!"), //
+	COMMENT_ID_NOT_FOUND(400, "Comment id not found!!"), //
+	COMMENT_IS_EMPTY(400, "Comment is empty!!"), //
+	COMMENT_UPDATE_FAILED(400, "Comment update failed!!"), //
+	USER_UPDATE_FAILED(400, "User update failed!!"), //
+>>>>>>> ian
 	;
 
 	private int code;

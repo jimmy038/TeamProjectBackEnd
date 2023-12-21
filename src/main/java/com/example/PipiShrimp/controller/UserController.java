@@ -4,8 +4,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.PipiShrimp.constants.RtnCode;
@@ -33,7 +35,7 @@ public class UserController {
 			UserRes result = service.login(req);
 
 			// 儲存使用者資料到session
-			session.setAttribute("user", result.getUser());
+//			session.setAttribute("user", result.getUser());
 			return result;
 		}
 		return null;
@@ -44,6 +46,17 @@ public class UserController {
 		// 清除session資料
 		session.invalidate();
 		return new UserRes(RtnCode.SUCCESSFUL);
+	}
+
+	@GetMapping(value = "/user/info")
+	public UserRes getUserInfo(@RequestParam(name = "id") int id) {
+
+		return service.getUserInfo(id);
+	}
+
+	@PostMapping(value = "/user/edit")
+	public UserRes editUserInfo(@RequestBody User user) {
+		return service.editUserInfo(user);
 	}
 
 }

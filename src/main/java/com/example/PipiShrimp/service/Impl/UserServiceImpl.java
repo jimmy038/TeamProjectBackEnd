@@ -1,6 +1,6 @@
 package com.example.PipiShrimp.service.Impl;
 
-
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -106,6 +106,44 @@ public class UserServiceImpl implements UserService {
 			logger.error(e.getMessage());
 			return new UserRes(RtnCode.SENT_EMAIL_FAILED);
 		}
+		return new UserRes(RtnCode.SUCCESSFUL, user);
+	}
+
+	@Override
+	public UserRes getUserInfo(int id) {
+		// 確認id是否存在
+		if (!userDao.existsById(id)) {
+			return new UserRes(RtnCode.USER_ID_NOT_FOUND);
+		}
+
+		Optional<User> op = userDao.findById(id);
+		// 確認User是否為空
+		if (op.isEmpty()) {
+			return new UserRes(RtnCode.USER_IS_EMPTY);
+		}
+
+		return new UserRes(RtnCode.SUCCESSFUL, op.get());
+	}
+
+	@Override
+	public UserRes editUserInfo(User user) {
+
+		// 確認User是否為空
+		if (user == null) {
+			return new UserRes(RtnCode.USER_IS_EMPTY);
+		}
+
+		// TODO 不能更改信箱和密碼
+
+		try {
+			userDao.save(user);
+			// 清空密碼(不回傳)
+			user.setPwd("");
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return new UserRes(RtnCode.USER_UPDATE_FAILED);
+		}
+
 		return new UserRes(RtnCode.SUCCESSFUL, user);
 	}
 

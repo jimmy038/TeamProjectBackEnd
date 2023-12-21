@@ -92,6 +92,29 @@ public class RecordServiceImpl implements RecordService {
 	}
 
 	@Override
+	public RecordSearchRes delete(List<Integer> idList) {
+		// 確認訂單id是否存在
+		for (int id : idList) {
+			if (!dao.existsById(id)) {
+				return new RecordSearchRes(RtnCode.USER_ID_NOT_FOUND);
+			}
+
+		}
+
+		// 存放刪除record資料
+		List<Record> records = dao.findAllById(idList);
+
+		try {
+			dao.deleteAllById(idList);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return new RecordSearchRes(RtnCode.RECORD_DELETE_FAILED);
+		}
+
+		return new RecordSearchRes(RtnCode.SUCCESSFUL, records);
+	}
+
+	@Override
 	public RecordSearchRes getRecordInfoByUserId(int id) {
 		// 確認使用者是否存在
 		if (!userDao.existsById(id)) {

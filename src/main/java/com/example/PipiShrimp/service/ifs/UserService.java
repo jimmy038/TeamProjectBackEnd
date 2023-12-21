@@ -17,5 +17,15 @@ public interface UserService {
 	 * 查詢DB內是否有符合的資料 #登入
 	 **/
 	public UserRes login(UserReq req);
+	
+	/**
+	 * 查詢user資料
+	 **/
+	public UserRes getUserInfo(int id);
+	
+	/**
+	 * 編輯user資料
+	 **/
+	public UserRes editUserInfo(User user);
 
 }

@@ -1,5 +1,7 @@
 package com.example.PipiShrimp.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +59,11 @@ public class RecordController {
 		}
 
 		return service.cancel(id);
+	}
+
+	@PostMapping(value = "/record/delete")
+	public RecordSearchRes delete(@RequestParam List<Integer> idList) {
+		return service.delete(idList);
 	}
 
 	@GetMapping(value = "/record/get/user_id")
