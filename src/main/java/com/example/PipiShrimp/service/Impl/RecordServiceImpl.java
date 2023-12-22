@@ -34,7 +34,7 @@ public class RecordServiceImpl implements RecordService {
 	@Autowired
 	private ProductDao productDao;
 
-	// TODO 發送信件給買家和賣家，訂單成立PRODUCT庫存變更
+	// TODO 訂單成立PRODUCT庫存變更
 	// TODO 購買數 > product庫存數，無法購買
 	@Override
 	public RecordRes create(Record record) {
@@ -48,13 +48,17 @@ public class RecordServiceImpl implements RecordService {
 			return new RecordRes(RtnCode.PARAM_ERROR);
 		}
 
+		// 設定購買訂單給買家
+		record.setRecordType("buy");
+
 		try {
 			dao.save(record);
-			// TODO 發送信件給買家和賣家
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			return new RecordRes(RtnCode.RECORD_CREATE_FAILED);
 		}
+		
+		// TODO 發送信件給賣家
 
 		return new RecordRes(RtnCode.SUCCESSFUL, record);
 	}

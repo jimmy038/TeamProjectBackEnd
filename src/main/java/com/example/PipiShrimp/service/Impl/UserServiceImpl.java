@@ -62,8 +62,10 @@ public class UserServiceImpl implements UserService {
 			userDao.save(user);
 			// 儲存後清空密碼(不回傳)
 			user.setPwd("");
-			// 寄電子郵件通知
-			Mail.sentSignUpMail(user.getEmail());
+			// 寄電子郵件通知(使用)
+			new Thread(() -> {
+				Mail.sentSignUpMail(user.getEmail());
+			}).start();
 
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -97,7 +99,10 @@ public class UserServiceImpl implements UserService {
 
 		try {
 			// 發送登入成功通知
-			Mail.sentLoginMail(req.getEmail());
+			new Thread(() -> {
+				Mail.sentLoginMail(req.getEmail());
+			}).start();
+
 			logger.info("login successful");
 			// 清除密碼(不回傳)
 			user.setPwd("");
@@ -145,8 +150,11 @@ public class UserServiceImpl implements UserService {
 			return new UserRes(RtnCode.PARAM_ERROR);
 		}
 
-		//加密後存入DB
+		// 加密後存入DB
 		user.setPwd(encoder.encode(user.getPwd()));
+
+		// 更新照片
+		op.get().setPhoto(user.getPhoto());
 
 		try {
 			userDao.save(user);
