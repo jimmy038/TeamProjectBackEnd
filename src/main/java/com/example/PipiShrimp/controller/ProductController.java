@@ -33,7 +33,14 @@ public class ProductController {
 	    return service.delete(id);
 	}
 	
-	
+	//每個帳號顯示不同商品
+
+	@GetMapping(value = "/product/get/info/user_id")
+	 public ProductSearchRes getProductInfoByUserId(//
+	   @RequestParam(value = "id") int id) {
+
+	  return service.getProductInfoByUserId(id);
+	 }
 	/**
 	 * 取得單一商品資訊(參數使用product_id)
 	 **/

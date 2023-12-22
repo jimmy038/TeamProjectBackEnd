@@ -1,5 +1,7 @@
 package com.example.PipiShrimp.service.ifs;
 
+import javax.servlet.http.HttpSession;
+
 import com.example.PipiShrimp.entity.User;
 import com.example.PipiShrimp.vo.UserReq;
 import com.example.PipiShrimp.vo.UserRes;
@@ -7,13 +9,14 @@ import com.example.PipiShrimp.vo.UserRes;
 public interface UserService {
 
 	/**
-	 * ·s¼W¤@µ§user¸ê®Æ¨ìDB #µù¥U
+	 * åš™ç·¨åš™ç£•åš™ç‘¾åš™è¸è•­useråš™è¸è•­ïš¸åš™ç˜©B #åš™è¸è•­åš™ç£Š
 	 **/
 	public UserRes signUp(User user);
 
 	/**
-	 * ¬d¸ßDB¤º¬O§_¦³²Å¦Xªº¸ê®Æ #µn¤J
+	 * åš™ç¯„åš™è¸è•­DBåš™è¸è•­åš™çŒåš™ç¨»åš™è¸è•­åš™è¤åˆåš™è¸è•­åš™è¸è•­åš™ï¿½ #åš™ç·¯åš™çšš
 	 **/
-	public UserRes login(UserReq req);
+	public UserRes login(UserReq req, HttpSession session);
+	public UserRes getUserInfo(int id);
 
-}
+	public UserRes editUserInfo(User user);}

@@ -29,6 +29,10 @@ public enum RtnCode {
 	CART_CREATE_FAILED(400, "Cart create failed!!"), //
 	CART_ID_NOT_FOUND(400, "Cart id not found!!"), //
 	CART_IS_EMPTY(400, "Cart is empty!!"), //
+	USER_IS_EMPTY(400, "Use is empty!!"), //
+	RECORD_DELETE_FAILED(400, "Record delete failed!!"), //
+	USER_UPDATE_FAILED(400, "user update failed!!"), //
+
 	;
 
 	private int code;

@@ -1,5 +1,7 @@
 package com.example.PipiShrimp.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,12 +29,12 @@ public class RecordController {
 		return service.create(record);
 	}
 
-	// TODO 需要登入才能操作
+	// 取消訂單
 	@PostMapping(value = "/record/cancel")
 	public RecordRes cancel(@RequestParam(value = "id") int id) {
 		return service.cancel(id);
 	}
-
+//顯示購買清單
 	@GetMapping(value = "/record/get/user_id")
 	public RecordSearchRes getRecordInfoByUserId(//
 			@RequestParam(value = "id") int id) {
@@ -44,4 +46,9 @@ public class RecordController {
 			@RequestParam(value = "id") int id) {
 		return service.getRecordInfoByProductId(id);
 	}
+	
+	@PostMapping(value = "/record/delete")
+	 public RecordSearchRes delete(@RequestParam List<Integer> idList) {
+	  return service.delete(idList);
+	 }
 }

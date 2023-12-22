@@ -1,5 +1,7 @@
 package com.example.PipiShrimp.service.ifs;
 
+import java.util.List;
+
 import com.example.PipiShrimp.entity.Record;
 import com.example.PipiShrimp.vo.RecordRes;
 import com.example.PipiShrimp.vo.RecordSearchRes;
@@ -25,4 +27,6 @@ public interface RecordService {
 	 * 兩張資料表的商品名稱要對應
 	 **/
 	public RecordSearchRes getRecordInfoByProductId(int id);
+	
+	public RecordSearchRes delete(List<Integer> idList);
 }

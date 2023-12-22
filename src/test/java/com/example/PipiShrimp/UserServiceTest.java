@@ -21,53 +21,53 @@ public class UserServiceTest {
 
 	@Test
 	public void signUpTest() {
-		// ¦¨¥\·s¼W
+		// ï¿½ï¿½ï¿½\ï¿½sï¿½W
 		User user = new User("ian", "ian0217@gmail.com", "ian8787gogo");
 		UserRes res = service.signUp(user);
-		System.out.println("°õ¦æµ²ªG:" + res.getRtnCode().getMessage());
+		System.out.println("ï¿½ï¿½ï¿½æµ²ï¿½G:" + res.getRtnCode().getMessage());
 
-		// ¸ê®Æ¬°ªÅ
+		// ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½
 		user = new User("", "ian@gmail.com", "");
 		res = service.signUp(user);
-		System.out.println("°õ¦æµ²ªG:" + res.getRtnCode().getMessage());
+		System.out.println("ï¿½ï¿½ï¿½æµ²ï¿½G:" + res.getRtnCode().getMessage());
 
-		// «H½c¤w¦s¦b
+		// ï¿½Hï¿½cï¿½wï¿½sï¿½b
 		user = new User("jack", "ian0217@gmail.com", "ian1234fff");
 		res = service.signUp(user);
-		System.out.println("°õ¦æµ²ªG:" + res.getRtnCode().getMessage());
+		System.out.println("ï¿½ï¿½ï¿½æµ²ï¿½G:" + res.getRtnCode().getMessage());
 
-		// ±K½X®æ¦¡¤£²Å
+		// ï¿½Kï¿½Xï¿½æ¦¡ï¿½ï¿½ï¿½ï¿½
 		user = new User("jack", "jack@gmail.com", "12346789");
 		res = service.signUp(user);
-		System.out.println("°õ¦æµ²ªG:" + res.getRtnCode().getMessage());
+		System.out.println("ï¿½ï¿½ï¿½æµ²ï¿½G:" + res.getRtnCode().getMessage());
 
-		// email®æ¦¡¤£²Å
+		// emailï¿½æ¦¡ï¿½ï¿½ï¿½ï¿½
 //		user = new User("jack", "jackl.com", "ian1234fff");
 //		res = service.signUp(user);
-//		System.out.println("°õ¦æµ²ªG:" + res.getRtnCode().getMessage());
+//		System.out.println("ï¿½ï¿½ï¿½æµ²ï¿½G:" + res.getRtnCode().getMessage());
 	}
 
 	@Test
 	public void loginTest() {
 		UserReq req = new UserReq("ian0217@gmail.com", "ian8787gogo");
-		// ±b¸¹±K½X¥¿½T
-		UserRes res = service.login(req);
-		System.out.println("°õ¦æµ²ªG:" + res.getRtnCode().getMessage());
+		// ï¿½bï¿½ï¿½ï¿½Kï¿½Xï¿½ï¿½ï¿½T
+		UserRes res = service.login(req, null);
+		System.out.println("ï¿½ï¿½ï¿½æµ²ï¿½G:" + res.getRtnCode().getMessage());
 
-		// email¥¼µù¥U
+		// emailï¿½ï¿½ï¿½ï¿½ï¿½U
 		req = new UserReq("fuck1234@gmail.com", "ian8787gogo");
-		res = service.login(req);
-		System.out.println("°õ¦æµ²ªG:" + res.getRtnCode().getMessage());
+		res = service.login(req, null);
+		System.out.println("ï¿½ï¿½ï¿½æµ²ï¿½G:" + res.getRtnCode().getMessage());
 
-		// ±K½X¿ù»~
+		// ï¿½Kï¿½Xï¿½ï¿½ï¿½~
 		req = new UserReq("ian0217@gmail.com", "ianGG3cm");
-		res = service.login(req);
-		System.out.println("°õ¦æµ²ªG:" + res.getRtnCode().getMessage());
+		res = service.login(req, null);
+		System.out.println("ï¿½ï¿½ï¿½æµ²ï¿½G:" + res.getRtnCode().getMessage());
 
-		// ¥¼¿é¤J¸ê®Æ
+		// ï¿½ï¿½ï¿½ï¿½Jï¿½ï¿½ï¿½
 		req = new UserReq("", "ianGG3cm");
-		res = service.login(req);
-		System.out.println("°õ¦æµ²ªG:" + res.getRtnCode().getMessage());
+		res = service.login(req, null);
+		System.out.println("ï¿½ï¿½ï¿½æµ²ï¿½G:" + res.getRtnCode().getMessage());
 	}
 
 //	@Test

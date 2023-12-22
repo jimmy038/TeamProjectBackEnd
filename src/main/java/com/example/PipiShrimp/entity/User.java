@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -37,12 +38,28 @@ public class User {
 
 	@Column(name = "level")
 	private int level;
+	
+	@Column(name = "remittance_title")
+	@JsonProperty("remittance_title")
+	private String remittanceTitle;
+	
+	@Column(name = "remittance_number")
+	@JsonProperty("remittance_number")
+	private String remittanceNumber;
+	
 
+		@Column(name = "user_photo", columnDefinition = "LONGTEXT")  // 雿輻甇�蝖桃�������� "LONGTEXT"嚗�摰���
+		@Lob
+		private String userPhoto;
+		@Column(name = "seller_name")
+		@JsonProperty("seller_name")
+		private String sellerName;
+		
 	public User() {
 		super();
 	}
 
-	// Test�Ϊ��غc��k
+	// Test用的建構方法
 	public User(String name, String email, String pwd) {
 		super();
 		this.name = name;
@@ -50,14 +67,24 @@ public class User {
 		this.pwd = pwd;
 	}
 
-	public User(String name, String email, String pwd, String address, String phoneNumber, int level) {
+	
+
+	
+
+	public User(int id, String name, String email, String pwd, String address, String phoneNumber, int level,
+			String remittanceTitle, String remittanceNumber, String userPhoto, String sellerName) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.pwd = pwd;
 		this.address = address;
 		this.phoneNumber = phoneNumber;
 		this.level = level;
+		this.remittanceTitle = remittanceTitle;
+		this.remittanceNumber = remittanceNumber;
+		this.userPhoto = userPhoto;
+		this.sellerName = sellerName;
 	}
 
 	public User(User user) {
@@ -68,6 +95,32 @@ public class User {
 		this.address = user.getAddress();
 		this.phoneNumber = user.getPhoneNumber();
 		this.level = user.getLevel();
+	}
+	
+	
+
+	public String getRemittanceTitle() {
+		return remittanceTitle;
+	}
+
+	public void setRemittanceTitle(String remittanceTitle) {
+		this.remittanceTitle = remittanceTitle;
+	}
+
+	public String getRemittanceNumber() {
+		return remittanceNumber;
+	}
+
+	public void setRemittanceNumber(String remittanceNumber) {
+		this.remittanceNumber = remittanceNumber;
+	}
+
+	public String getUserPhoto() {
+		return userPhoto;
+	}
+
+	public void setUserPhoto(String userPhoto) {
+		this.userPhoto = userPhoto;
 	}
 
 	public int getId() {
