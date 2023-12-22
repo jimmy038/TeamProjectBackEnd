@@ -23,9 +23,25 @@ public class ProductController {
 //剩圖片
 	@PostMapping(value = "/product/create")
 	public ProductRes create(@RequestBody Product product) {
-		// TODO 只有登入者可以新增商品
+
 		return service.create(product);
 	}
+<<<<<<< HEAD
+
+	@PostMapping(value = "/product/delete")
+	public ProductRes delete(@RequestParam(value = "id") int id) {
+
+		return service.delete(id);
+	}
+
+	@GetMapping(value = "/product/get/info/user_id")
+	public ProductSearchRes getProductInfoByUserId(//
+			@RequestParam(value = "id") int id) {
+
+		return service.getProductInfoByUserId(id);
+	}
+
+=======
 //搞定
 	@DeleteMapping(value = "/product/delete")
 	public ProductRes delete(@RequestParam(value = "id") int id) {
@@ -44,6 +60,7 @@ public class ProductController {
 	/**
 	 * 取得單一商品資訊(參數使用product_id)
 	 **/
+>>>>>>> ccb53b51ab44c1d0c7b76bcaa39d540e26c9b224
 	@GetMapping(value = "/product/get/info")
 	public ProductRes getProductInfo(//
 			@RequestParam(value = "id") int id) {
@@ -58,7 +75,7 @@ public class ProductController {
 	//上面收尋功能
 	@GetMapping(value = "/product/search")
 	public ProductSearchRes getProductByName(//
-			@RequestParam(required = false) String productName) {
+			@RequestParam(value = "product", required = false) String productName) {
 		return service.getProductByName(productName);
 	}
 //種類

@@ -2,8 +2,11 @@ package com.example.PipiShrimp.service.Impl;
 
 import java.util.Optional;
 
+<<<<<<< HEAD
 import javax.servlet.http.HttpSession;
 
+=======
+>>>>>>> b5ea93e62384850c6a89db11dd00712137c68d3b
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,6 +85,7 @@ public class UserServiceImpl implements UserService {
 	        return new UserRes(RtnCode.DATABASE_IS_EMPTY);
 	    }
 
+<<<<<<< HEAD
 	    if (!encoder.matches(req.getPwd(), user.getPwd())) {
 	        return new UserRes(RtnCode.PASSWORD_ERROR);
 	    }
@@ -100,6 +104,58 @@ public class UserServiceImpl implements UserService {
 	        logger.error(e.getMessage());
 	        return new UserRes(RtnCode.SENT_EMAIL_FAILED);
 	    }
+=======
+		try {
+			// 發送登入成功通知
+			Mail.sentLoginMail(req.getEmail());
+			logger.info("login successful");
+			// 清除密碼(不回傳)
+			user.setPwd("");
+
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return new UserRes(RtnCode.SENT_EMAIL_FAILED);
+		}
+		return new UserRes(RtnCode.SUCCESSFUL, user);
+	}
+
+	@Override
+	public UserRes getUserInfo(int id) {
+		// 確認id是否存在
+		if (!userDao.existsById(id)) {
+			return new UserRes(RtnCode.USER_ID_NOT_FOUND);
+		}
+
+		Optional<User> op = userDao.findById(id);
+		// 確認User是否為空
+		if (op.isEmpty()) {
+			return new UserRes(RtnCode.USER_IS_EMPTY);
+		}
+
+		return new UserRes(RtnCode.SUCCESSFUL, op.get());
+	}
+
+	@Override
+	public UserRes editUserInfo(User user) {
+
+		// 確認User是否為空
+		if (user == null) {
+			return new UserRes(RtnCode.USER_IS_EMPTY);
+		}
+
+		// TODO 不能更改信箱和密碼
+
+		try {
+			userDao.save(user);
+			// 清空密碼(不回傳)
+			user.setPwd("");
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return new UserRes(RtnCode.USER_UPDATE_FAILED);
+		}
+
+		return new UserRes(RtnCode.SUCCESSFUL, user);
+>>>>>>> b5ea93e62384850c6a89db11dd00712137c68d3b
 	}
 	@Override
 	 public UserRes getUserInfo(int id) {

@@ -65,12 +65,26 @@ public class Cart {
 		this.productId = productId;
 	}
 
+<<<<<<< HEAD
 	public int getCartId() {
 		return cartId;
 	}
 
 	public void setCartId(int cartId) {
 		this.cartId = cartId;
+=======
+	// 更新資料
+	public Cart(int cartId, LocalDateTime cartDate, int cartCount, int productAmount, String productName, int userId,
+			int productId) {
+		super();
+		this.cartId = cartId;
+		this.cartDate = cartDate;
+		this.cartCount = cartCount;
+		this.productAmount = productAmount;
+		this.productName = productName;
+		this.userId = userId;
+		this.productId = productId;
+>>>>>>> ian
 	}
 
 	public LocalDateTime getCartDate() {

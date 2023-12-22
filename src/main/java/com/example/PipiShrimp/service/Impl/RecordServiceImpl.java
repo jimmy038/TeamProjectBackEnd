@@ -95,6 +95,29 @@ public class RecordServiceImpl implements RecordService {
 	}
 
 	@Override
+	public RecordSearchRes delete(List<Integer> idList) {
+		// ½T»{­q³æid¬O§_¦s¦b
+		for (int id : idList) {
+			if (!dao.existsById(id)) {
+				return new RecordSearchRes(RtnCode.USER_ID_NOT_FOUND);
+			}
+
+		}
+
+		// ¦s©ñ§R°£record¸ê®Æ
+		List<Record> records = dao.findAllById(idList);
+
+		try {
+			dao.deleteAllById(idList);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return new RecordSearchRes(RtnCode.RECORD_DELETE_FAILED);
+		}
+
+		return new RecordSearchRes(RtnCode.SUCCESSFUL, records);
+	}
+
+	@Override
 	public RecordSearchRes getRecordInfoByUserId(int id) {
 		// ç¢ºèªä½¿ç”¨è€…æ˜¯å¦å­˜åœ¨
 		if (!userDao.existsById(id)) {

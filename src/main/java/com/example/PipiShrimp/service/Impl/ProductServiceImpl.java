@@ -123,14 +123,30 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ProductSearchRes getProductByName(String productName) {
 		List<Product> products = proDao.searchProductByName(productName);
+<<<<<<< HEAD
 		// ����頛詨->憿舐內��
+=======
+<<<<<<< HEAD
+		// 搜尋欄未輸入->顯示全部
+=======
+		// �j�M�楼��J=>��ܥ���
+>>>>>>> ian
+>>>>>>> b5ea93e62384850c6a89db11dd00712137c68d3b
 		if (!StringUtils.hasText(productName)) {
 			getAllProductInfo();
 		}
 
+<<<<<<< HEAD
 		// �銝������
+=======
+<<<<<<< HEAD
+		// 找不到搜尋商品
+=======
+		// �䤣��j�M�ӫ~ => ���@�ӪŰ}�C
+>>>>>>> ian
+>>>>>>> b5ea93e62384850c6a89db11dd00712137c68d3b
 		if (products.size() == 0) {
-			return new ProductSearchRes(RtnCode.PRODUCT_NOT_FOUND);
+			products = Collections.emptyList();
 		}
 
 		return new ProductSearchRes(RtnCode.SUCCESSFUL, products);

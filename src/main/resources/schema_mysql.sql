@@ -1,13 +1,14 @@
-CREATE TABLE  IF NOT EXISTS `user` (
+CREATE TABLE IF NOT EXISTS `user` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   `password` varchar(60) NOT NULL,
   `address` varchar(45) DEFAULT NULL,
-  `phone_number` varchar(45) NOT NULL,
-  `level` int NOT NULL,
+  `phone_number` varchar(45) DEFAULT NULL,
+  `level` int DEFAULT '0',
   PRIMARY KEY (`id`)
 );
+
 
 CREATE TABLE IF NOT EXISTS `product` (
   `product_id` int NOT NULL AUTO_INCREMENT,
@@ -22,6 +23,12 @@ CREATE TABLE IF NOT EXISTS `product` (
   PRIMARY KEY (`product_id`)
 );
 
+<<<<<<< HEAD
+
+
+
+=======
+>>>>>>> ccb53b51ab44c1d0c7b76bcaa39d540e26c9b224
 CREATE TABLE IF NOT EXISTS `record` (
   `record_id` int NOT NULL AUTO_INCREMENT,
   `record_date` datetime DEFAULT NULL,
@@ -30,10 +37,12 @@ CREATE TABLE IF NOT EXISTS `record` (
   `status` varchar(45) NOT NULL,
   `product_name` varchar(45) NOT NULL,
   `record_type` varchar(45) NOT NULL,
+  `valid` tinyint NOT NULL DEFAULT '1',
   `user_id` int NOT NULL DEFAULT '0',
   `product_id` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`record_id`)
 );
+
 
 CREATE TABLE IF NOT EXISTS `cart` (
   `cart_id` int NOT NULL AUTO_INCREMENT,
@@ -48,3 +57,8 @@ CREATE TABLE IF NOT EXISTS `cart` (
 
 
 
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> ccb53b51ab44c1d0c7b76bcaa39d540e26c9b224

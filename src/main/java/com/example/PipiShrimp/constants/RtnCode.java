@@ -11,9 +11,9 @@ public enum RtnCode {
 	PRODUCT_CREATE_FAILED(400, "Product create failed!!"), //
 	PRODUCT_IS_EMPTY(400, "Product is empty!!"), //
 	PRODUCT_NOT_FOUND(404, "Product not found!!"), //
-	EMAIL_IS_EXIST(400, "Email is exist!!"),//
-	PASSWORD_FORMAT_ERROR(400, "Password format error!!"),//
-	EMAIL_FORMAT_ERROR(400, "Email format error!!"),//
+	EMAIL_IS_EXIST(400, "Email is exist!!"), //
+	PASSWORD_FORMAT_ERROR(400, "Password format error!!"), //
+	EMAIL_FORMAT_ERROR(400, "Email format error!!"), //
 	USER_CREATE_FAILED(400, "User create failed!!"), //
 	EMAIL_NOT_FOUND(400, "Email not found!!"), //
 	PASSWORD_ERROR(400, "Password error!!"), //
@@ -29,10 +29,28 @@ public enum RtnCode {
 	CART_CREATE_FAILED(400, "Cart create failed!!"), //
 	CART_ID_NOT_FOUND(400, "Cart id not found!!"), //
 	CART_IS_EMPTY(400, "Cart is empty!!"), //
+<<<<<<< HEAD
 	USER_IS_EMPTY(400, "Use is empty!!"), //
 	RECORD_DELETE_FAILED(400, "Record delete failed!!"), //
 	USER_UPDATE_FAILED(400, "user update failed!!"), //
 
+=======
+<<<<<<< HEAD
+	CART_DELETE_FAILED(400, "Cart delete failed!!"), //
+	LOGIN_FIRST(400, "Login first!!"), //
+<<<<<<< HEAD
+=======
+>>>>>>> ccb53b51ab44c1d0c7b76bcaa39d540e26c9b224
+=======
+	USER_IS_EMPTY(400, "User is empty!!"), //
+	COMMENT_CREATE_FAILED(400, "Comment create failed!!"), //
+	RECORD_DELETE_FAILED(400, "Record delete failed!!"), //
+	COMMENT_ID_NOT_FOUND(400, "Comment id not found!!"), //
+	COMMENT_IS_EMPTY(400, "Comment is empty!!"), //
+	COMMENT_UPDATE_FAILED(400, "Comment update failed!!"), //
+	USER_UPDATE_FAILED(400, "User update failed!!"), //
+>>>>>>> ian
+>>>>>>> b5ea93e62384850c6a89db11dd00712137c68d3b
 	;
 
 	private int code;
