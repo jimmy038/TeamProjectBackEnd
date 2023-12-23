@@ -39,6 +39,7 @@ public enum RtnCode {
 	PRODUCT_IS_SHORTAGE(400, "Product is shortage!!"), //
 	RECORD_IS_CANCELED(400, "Record is canceled!!"), //
 	RECORD_COMPLETED_FAILED(400, "Record completed failed!!"), //
+	RECORD_SHIPPING_FAILED(400, "Record shipping failed!!"), //
 	;
 
 	private int code;

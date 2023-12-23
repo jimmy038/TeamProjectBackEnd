@@ -16,6 +16,11 @@ public interface RecordService {
 	 * 璹虫(valid => false)(把计:record_id)
 	 **/
 	public RecordRes cancel(int id);
+	
+	/**
+	 * 璹虫砯(status => 砯)(把计:record_id)
+	 **/
+	public RecordRes shipping(int id);
 
 	/**
 	 * ЧΘ璹虫(status => ЧΘ)(把计:record_id)
