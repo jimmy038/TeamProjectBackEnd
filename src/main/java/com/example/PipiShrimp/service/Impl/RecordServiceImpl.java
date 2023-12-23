@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.example.PipiShrimp.constants.RtnCode;
+import com.example.PipiShrimp.entity.Product;
 import com.example.PipiShrimp.entity.Record;
 import com.example.PipiShrimp.repository.ProductDao;
 import com.example.PipiShrimp.repository.RecordDao;
@@ -34,8 +35,6 @@ public class RecordServiceImpl implements RecordService {
 	@Autowired
 	private ProductDao productDao;
 
-	// TODO 訂單成立PRODUCT庫存變更
-	// TODO 購買數 > product庫存數，無法購買
 	@Override
 	public RecordRes create(Record record) {
 
@@ -48,23 +47,35 @@ public class RecordServiceImpl implements RecordService {
 			return new RecordRes(RtnCode.PARAM_ERROR);
 		}
 
-		// 設定購買訂單給買家
-		record.setRecordType("buy");
+		// 取得商品資訊
+		Optional<Product> op = productDao.findById(record.getProductId());
+		if (op.isEmpty()) {
+			return new RecordRes(RtnCode.PRODUCT_IS_EMPTY);
+		}
+
+		Product product = op.get();
+		// 確認購買數量 <= 庫存
+		if (product.getInventory() < record.getProductCount()) {
+			return new RecordRes(RtnCode.PRODUCT_IS_SHORTAGE);
+		}
+
+		// 商品庫存 - 購買數
+		product.setInventory(product.getInventory() - record.getProductCount());
 
 		try {
+			productDao.save(product);
 			dao.save(record);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			return new RecordRes(RtnCode.RECORD_CREATE_FAILED);
 		}
-		
+
 		// TODO 發送信件給賣家
 
 		return new RecordRes(RtnCode.SUCCESSFUL, record);
 	}
 
 	// TODO 發送信件給買家(取消成功)和賣家(客戶取消訂單)
-	// TODO 訂單成立PRODUCT庫存變更
 	@Override
 	public RecordRes cancel(int id) {
 		// 確認訂單是否存在
@@ -83,8 +94,20 @@ public class RecordServiceImpl implements RecordService {
 		Record record = op.get();
 		record.setValid(false);
 
+		// 取得商品資訊
+		Optional<Product> proOp = productDao.findById(record.getProductId());
+		if (proOp.isEmpty()) {
+			return new RecordRes(RtnCode.PRODUCT_IS_EMPTY);
+		}
+
+		Product product = proOp.get();
+
+		// 商品庫存 + 購買數
+		product.setInventory(product.getInventory() + record.getProductCount());
+
 		// 將更新的資料存入DB
 		try {
+			productDao.save(product);
 			dao.save(record);
 			// TODO 發送信件給買家和賣家
 		} catch (Exception e) {
