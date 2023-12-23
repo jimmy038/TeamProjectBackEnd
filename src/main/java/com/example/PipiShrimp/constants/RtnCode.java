@@ -37,6 +37,8 @@ public enum RtnCode {
 	COMMENT_UPDATE_FAILED(400, "Comment update failed!!"), //
 	USER_UPDATE_FAILED(400, "User update failed!!"), //
 	PRODUCT_IS_SHORTAGE(400, "Product is shortage!!"), //
+	RECORD_IS_CANCELED(400, "Record is canceled!!"), //
+	RECORD_COMPLETED_FAILED(400, "Record completed failed!!"), //
 	;
 
 	private int code;

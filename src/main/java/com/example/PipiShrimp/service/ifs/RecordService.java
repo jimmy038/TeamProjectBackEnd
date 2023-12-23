@@ -18,6 +18,11 @@ public interface RecordService {
 	public RecordRes cancel(int id);
 
 	/**
+	 * 完成訂單(status => 已完成)，(參數:record_id)
+	 **/
+	public RecordRes completed(int id);
+
+	/**
 	 * 使用者刪除訂單記錄(參數:record_id) #刪除歷史紀錄
 	 **/
 	public RecordSearchRes delete(List<Integer> idList);

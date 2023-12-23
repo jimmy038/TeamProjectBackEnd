@@ -7,12 +7,15 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.event.PublicInvocationEvent;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.example.PipiShrimp.constants.RtnCode;
+import com.example.PipiShrimp.entity.Maintenance;
 import com.example.PipiShrimp.entity.Product;
 import com.example.PipiShrimp.entity.Record;
+import com.example.PipiShrimp.repository.MaintenanceDao;
 import com.example.PipiShrimp.repository.ProductDao;
 import com.example.PipiShrimp.repository.RecordDao;
 import com.example.PipiShrimp.repository.UserDao;
@@ -34,6 +37,9 @@ public class RecordServiceImpl implements RecordService {
 
 	@Autowired
 	private ProductDao productDao;
+
+	@Autowired
+	private MaintenanceDao maintenanceDao;
 
 	@Override
 	public RecordRes create(Record record) {
@@ -113,6 +119,46 @@ public class RecordServiceImpl implements RecordService {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			return new RecordRes(RtnCode.RECORD_CANCEL_FAILED);
+		}
+
+		return new RecordRes(RtnCode.SUCCESSFUL, record);
+	}
+
+	@Override
+	public RecordRes completed(int id) {
+		// 確認訂單是否存在
+		if (!dao.existsById(id)) {
+			return new RecordRes(RtnCode.RECORD_ID_NOT_FOUND);
+		}
+		// 取得訂單資訊
+		Optional<Record> op = dao.findById(id);
+
+		// 訂單資料為空
+		if (op.isEmpty()) {
+			return new RecordRes(RtnCode.RECORD_IS_EMPTY);
+		}
+
+		// 更改訂單狀態(status => "已完成")
+		Record record = op.get();
+		if (record.getStatus().matches("取消訂單")) {
+			return new RecordRes(RtnCode.RECORD_IS_CANCELED);
+		}
+
+		record.setStatus("已完成");
+
+		// 訂單完成後，電商抽取3%手續費
+
+		Maintenance maintenance = new Maintenance(record.getRecordId(), //
+				(int) Math.floor(record.getProductAmount() * 0.03));
+
+		// 將更新的資料存入DB
+		try {
+			dao.save(record);
+			maintenanceDao.save(maintenance);
+			// TODO 發送信件給買家和賣家
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return new RecordRes(RtnCode.RECORD_COMPLETED_FAILED);
 		}
 
 		return new RecordRes(RtnCode.SUCCESSFUL, record);
