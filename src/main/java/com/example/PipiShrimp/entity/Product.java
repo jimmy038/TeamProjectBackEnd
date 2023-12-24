@@ -27,7 +27,11 @@ public class Product {
 	@Column(name = "product_name")
 	@JsonProperty("product_name")
 	private String productName;
-
+	
+	@Column(name = "product_type")
+	@JsonProperty("product_type")
+	private String productType;
+	
 	@Column(name = "description")
 	private String description;
 
@@ -66,15 +70,12 @@ public class Product {
 		// TODO Auto-generated constructor stub
 	}
 
-	
-	
-
-	
-	public Product(int productId, String productName, String description, int price, int inventory, int saleCount,
-			boolean shelves, String photo, int userId, LocalDate currentDate) {
+	public Product(int productId, String productName, String productType, String description, int price, int inventory,
+			int saleCount, boolean shelves, String photo, int userId, LocalDate uploadTime) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
+		this.productType = productType;
 		this.description = description;
 		this.price = price;
 		this.inventory = inventory;
@@ -82,16 +83,13 @@ public class Product {
 		this.shelves = shelves;
 		this.photo = photo;
 		this.userId = userId;
-		this.uploadTime = currentDate;
+		this.uploadTime = uploadTime;
 	}
-
-
-
-
 
 	public Product(Product product, LocalDate currentDate) {
 		super();
 		this.productName = product.getProductName();
+		this.productType = product.getProductType();
 		this.description = product.getDescription();
 		this.price = product.getPrice();
 		this.inventory = product.getInventory();
@@ -188,6 +186,34 @@ public class Product {
 
 	public void setUploadTime(LocalDate uploadTime) {
 		this.uploadTime = uploadTime;
+	}
+
+
+
+
+
+
+
+
+
+
+
+	public String getProductType() {
+		return productType;
+	}
+
+
+
+
+
+
+
+
+
+
+
+	public void setProductType(String productType) {
+		this.productType = productType;
 	}
 
 

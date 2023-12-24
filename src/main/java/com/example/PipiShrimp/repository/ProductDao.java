@@ -11,7 +11,13 @@ import com.example.PipiShrimp.entity.Product;
 
 @Repository
 public interface ProductDao extends JpaRepository<Product, Integer> {
-
+	
+	
+	@Query(value = "SELECT * FROM product"//
+			   + " WHERE user_id = :id"//
+			   + " ORDER BY product_id DESC", //
+			   nativeQuery = true)
+			 public List<Product> searchProductByUserId(@Param("id") int id);
 	/**
 	 * 取的所有商品資料
 	 **/

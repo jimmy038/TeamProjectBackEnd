@@ -30,23 +30,36 @@ public class UserController {
 	@PostMapping(value = "/user/login")
 	public UserRes login(@RequestBody UserReq req, //
 			HttpSession session) {
-		// 如果session內沒有資料，要求登入帳號
 		if (session.getAttribute(req.getEmail()) == null) {
+<<<<<<< HEAD
+			UserRes result = service.login(req, session);
+			session.setAttribute("user", result.getUser());
+=======
 			UserRes result = service.login(req);
 
 			// 儲存使用者資料到session
 //			session.setAttribute("user", result.getUser());
+>>>>>>> b5ea93e62384850c6a89db11dd00712137c68d3b
 			return result;
 		}
+		
 		return null;
 	}
 
 	@PostMapping(value = "/user/logout")
 	public UserRes logout(HttpSession session) {
-		// 清除session資料
 		session.invalidate();
 		return new UserRes(RtnCode.SUCCESSFUL);
 	}
+	@GetMapping(value = "/user/info")
+	 public UserRes getUserInfo(@RequestParam(name = "id") int id) {
+
+	  return service.getUserInfo(id);
+	 }
+	@PostMapping(value = "/user/edit")
+	 public UserRes editUserInfo(@RequestBody User user) {
+	  return service.editUserInfo(user);
+	 }
 
 	@GetMapping(value = "/user/info")
 	public UserRes getUserInfo(@RequestParam(name = "id") int id) {

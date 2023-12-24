@@ -5,7 +5,10 @@ import com.example.PipiShrimp.vo.ProductRes;
 import com.example.PipiShrimp.vo.ProductSearchRes;
 
 public interface ProductService {
-
+	
+	
+	//每個帳號顯示不同商品
+	public ProductSearchRes getProductInfoByUserId(int id);
 	/**
 	 * 新增商品&編輯商品
 	 **/

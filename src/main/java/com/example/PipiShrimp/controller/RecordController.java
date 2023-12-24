@@ -2,8 +2,11 @@ package com.example.PipiShrimp.controller;
 
 import java.util.List;
 
+<<<<<<< HEAD
+=======
 import javax.servlet.http.HttpSession;
 
+>>>>>>> b5ea93e62384850c6a89db11dd00712137c68d3b
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,6 +49,10 @@ public class RecordController {
 		return service.create(record);
 	}
 
+<<<<<<< HEAD
+	// 取消訂單
+=======
+>>>>>>> b5ea93e62384850c6a89db11dd00712137c68d3b
 	@PostMapping(value = "/record/cancel")
 	public RecordRes cancel(@RequestParam(value = "id") int id, HttpSession session) {
 		User user = (User) session.getAttribute("user");
@@ -60,12 +67,16 @@ public class RecordController {
 
 		return service.cancel(id);
 	}
+<<<<<<< HEAD
+//顯示購買清單
+=======
 
 	@PostMapping(value = "/record/delete")
 	public RecordSearchRes delete(@RequestParam List<Integer> idList) {
 		return service.delete(idList);
 	}
 
+>>>>>>> b5ea93e62384850c6a89db11dd00712137c68d3b
 	@GetMapping(value = "/record/get/user_id")
 	public RecordSearchRes getRecordInfoByUserId(//
 			@RequestParam(value = "id") int id, HttpSession session) {
@@ -97,4 +108,9 @@ public class RecordController {
 
 		return service.getRecordInfoByProductId(id);
 	}
+	
+	@PostMapping(value = "/record/delete")
+	 public RecordSearchRes delete(@RequestParam List<Integer> idList) {
+	  return service.delete(idList);
+	 }
 }

@@ -48,16 +48,39 @@ public class User {
 
 	@Column(name = "level")
 	private int level;
+	
+	@Column(name = "remittance_title")
+	@JsonProperty("remittance_title")
+	private String remittanceTitle;
+	
+	@Column(name = "remittance_number")
+	@JsonProperty("remittance_number")
+	private String remittanceNumber;
+	
 
+<<<<<<< HEAD
 	// ·|­ûÂI¼Æ
 	@Column(name = "points")
 	private int points;
 
+=======
+		@Column(name = "user_photo", columnDefinition = "LONGTEXT")  // é›¿è¼»îœ…ç”‡ï¿½è–æ¡ƒï¿½ï„’ï¿½î¤™ï¿½î«¯ï¿½ï­ï¿½ï—¹ï¿½ï•ï¿½ï¿½ "LONGTEXT"åš—ï—»î¹²ï¿½ï™ æ‘°îµ¨ï¿½ï†°ï¿½ï†¯ïˆœï¿½ï¤ï”¡
+		@Lob
+		private String userPhoto;
+		@Column(name = "seller_name")
+		@JsonProperty("seller_name")
+		private String sellerName;
+		
+>>>>>>> 4f8cb30f04fb6a7c1560c35271114125a67650fb
 	public User() {
 		super();
 	}
 
+<<<<<<< HEAD
 	// µù¥U¥Îªº«Øºc¤èªk
+=======
+	// Testç”¨çš„å»ºæ§‹æ–¹æ³•
+>>>>>>> 4f8cb30f04fb6a7c1560c35271114125a67650fb
 	public User(String name, String email, String pwd) {
 		super();
 		this.name = name;
@@ -65,14 +88,24 @@ public class User {
 		this.pwd = pwd;
 	}
 
-	public User(String name, String email, String pwd, String address, String phoneNumber, int level) {
+	
+
+	
+
+	public User(int id, String name, String email, String pwd, String address, String phoneNumber, int level,
+			String remittanceTitle, String remittanceNumber, String userPhoto, String sellerName) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.pwd = pwd;
 		this.address = address;
 		this.phoneNumber = phoneNumber;
 		this.level = level;
+		this.remittanceTitle = remittanceTitle;
+		this.remittanceNumber = remittanceNumber;
+		this.userPhoto = userPhoto;
+		this.sellerName = sellerName;
 	}
 
 	public User(User user) {
@@ -83,6 +116,32 @@ public class User {
 		this.address = user.getAddress();
 		this.phoneNumber = user.getPhoneNumber();
 		this.level = user.getLevel();
+	}
+	
+	
+
+	public String getRemittanceTitle() {
+		return remittanceTitle;
+	}
+
+	public void setRemittanceTitle(String remittanceTitle) {
+		this.remittanceTitle = remittanceTitle;
+	}
+
+	public String getRemittanceNumber() {
+		return remittanceNumber;
+	}
+
+	public void setRemittanceNumber(String remittanceNumber) {
+		this.remittanceNumber = remittanceNumber;
+	}
+
+	public String getUserPhoto() {
+		return userPhoto;
+	}
+
+	public void setUserPhoto(String userPhoto) {
+		this.userPhoto = userPhoto;
 	}
 
 	// §ó·suser¸ê®Æªí®É¨Ï¥Î

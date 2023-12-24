@@ -41,5 +41,10 @@ public interface RecordService {
 	 * 查詢商品銷量記錄(參數:product_id) #查詢商品銷量之類的 兩張資料表的商品名稱要對應
 	 **/
 	public RecordSearchRes getRecordInfoByProductId(int id);
+<<<<<<< HEAD
+	
+	public RecordSearchRes delete(List<Integer> idList);
+=======
 
+>>>>>>> b5ea93e62384850c6a89db11dd00712137c68d3b
 }

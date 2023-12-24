@@ -30,6 +30,12 @@ public enum RtnCode {
 	CART_ID_NOT_FOUND(400, "Cart id not found!!"), //
 	CART_IS_EMPTY(400, "Cart is empty!!"), //
 <<<<<<< HEAD
+	USER_IS_EMPTY(400, "Use is empty!!"), //
+	RECORD_DELETE_FAILED(400, "Record delete failed!!"), //
+	USER_UPDATE_FAILED(400, "user update failed!!"), //
+
+=======
+<<<<<<< HEAD
 	CART_DELETE_FAILED(400, "Cart delete failed!!"), //
 	LOGIN_FIRST(400, "Login first!!"), //
 <<<<<<< HEAD
@@ -51,6 +57,7 @@ public enum RtnCode {
 	RECORD_COMPLETED_FAILED(400, "Record completed failed!!"), //
 	RECORD_SHIPPING_FAILED(400, "Record shipping failed!!"), //
 >>>>>>> ian
+>>>>>>> b5ea93e62384850c6a89db11dd00712137c68d3b
 	;
 
 	private int code;
