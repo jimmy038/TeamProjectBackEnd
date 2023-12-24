@@ -16,6 +16,16 @@ public interface RecordService {
 	 * 取消訂單(valid => false)，(參數:record_id)
 	 **/
 	public RecordRes cancel(int id);
+	
+	/**
+	 * 訂單出貨(status => 已出貨)，(參數:record_id)
+	 **/
+	public RecordRes shipping(int id);
+
+	/**
+	 * 完成訂單(status => 已完成)，(參數:record_id)
+	 **/
+	public RecordRes completed(int id);
 
 	/**
 	 * 使用者刪除訂單記錄(參數:record_id) #刪除歷史紀錄

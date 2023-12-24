@@ -62,8 +62,10 @@ public class UserServiceImpl implements UserService {
 			userDao.save(user);
 			// 儲存後清空密碼(不回傳)
 			user.setPwd("");
-			// 寄電子郵件通知
-			Mail.sentSignUpMail(user.getEmail());
+			// 寄電子郵件通知(使用)
+			new Thread(() -> {
+				Mail.sentSignUpMail(user.getEmail());
+			}).start();
 
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -97,7 +99,10 @@ public class UserServiceImpl implements UserService {
 
 		try {
 			// 發送登入成功通知
-			Mail.sentLoginMail(req.getEmail());
+			new Thread(() -> {
+				Mail.sentLoginMail(req.getEmail());
+			}).start();
+
 			logger.info("login successful");
 			// 清除密碼(不回傳)
 			user.setPwd("");
@@ -127,13 +132,29 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserRes editUserInfo(User user) {
+		// 確認id是否存在
+		if (!userDao.existsById(user.getId())) {
+			return new UserRes(RtnCode.USER_ID_NOT_FOUND);
+		}
+
+		Optional<User> op = userDao.findById(user.getId());
 
 		// 確認User是否為空
-		if (user == null) {
+		if (op.isEmpty()) {
 			return new UserRes(RtnCode.USER_IS_EMPTY);
 		}
 
-		// TODO 不能更改信箱和密碼
+		// 不能更改信箱和密碼
+		if (!op.get().getEmail().matches(user.getEmail()) || //
+				!encoder.matches(user.getPwd(), op.get().getPwd())) {
+			return new UserRes(RtnCode.PARAM_ERROR);
+		}
+
+		// 加密後存入DB
+		user.setPwd(encoder.encode(user.getPwd()));
+
+		// 更新照片
+		op.get().setPhoto(user.getPhoto());
 
 		try {
 			userDao.save(user);

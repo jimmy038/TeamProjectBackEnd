@@ -58,6 +58,11 @@ public class Record {
 	@JsonProperty("user_id")
 	private int userId;
 
+	// 對應user資料表ID
+	@Column(name = "seller_id")
+	@JsonProperty("seller_id")
+	private int sellerId;
+
 	// 對應product資料表ID
 	@Column(name = "product_id")
 	@JsonProperty("product_id")
@@ -79,6 +84,22 @@ public class Record {
 		this.recordType = recordType;
 		this.valid = valid;
 		this.userId = userId;
+		this.productId = productId;
+	}
+
+	public Record(int recordId, LocalDateTime recordDate, int productCount, int productAmount, String status,
+			String productName, String recordType, boolean valid, int userId, int sellerId, int productId) {
+		super();
+		this.recordId = recordId;
+		this.recordDate = recordDate;
+		this.productCount = productCount;
+		this.productAmount = productAmount;
+		this.status = status;
+		this.productName = productName;
+		this.recordType = recordType;
+		this.valid = valid;
+		this.userId = userId;
+		this.sellerId = sellerId;
 		this.productId = productId;
 	}
 
@@ -160,6 +181,14 @@ public class Record {
 
 	public void setProductId(int productId) {
 		this.productId = productId;
+	}
+
+	public int getSellerId() {
+		return sellerId;
+	}
+
+	public void setSellerId(int sellerId) {
+		this.sellerId = sellerId;
 	}
 
 }
