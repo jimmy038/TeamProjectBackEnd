@@ -52,6 +52,10 @@ public class User {
 	@Column(name = "level")
 	private int level;
 
+	// 會員點數
+	@Column(name = "points")
+	private int points;
+
 	public User() {
 		super();
 	}
@@ -107,6 +111,20 @@ public class User {
 		this.address = address;
 		this.phoneNumber = phoneNumber;
 		this.level = level;
+	}
+
+	public User(int id, byte[] photo, String name, String email, String pwd, String address, String phoneNumber,
+			int level, int points) {
+		super();
+		this.id = id;
+		this.photo = photo;
+		this.name = name;
+		this.email = email;
+		this.pwd = pwd;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
+		this.level = level;
+		this.points = points;
 	}
 
 	public int getId() {
@@ -171,6 +189,14 @@ public class User {
 
 	public void setLevel(int level) {
 		this.level = level;
+	}
+
+	public int getPoints() {
+		return points;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
 	}
 
 }

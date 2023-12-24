@@ -14,6 +14,7 @@ import com.example.PipiShrimp.constants.RtnCode;
 import com.example.PipiShrimp.entity.Maintenance;
 import com.example.PipiShrimp.entity.Product;
 import com.example.PipiShrimp.entity.Record;
+import com.example.PipiShrimp.entity.User;
 import com.example.PipiShrimp.repository.MaintenanceDao;
 import com.example.PipiShrimp.repository.ProductDao;
 import com.example.PipiShrimp.repository.RecordDao;
@@ -177,17 +178,56 @@ public class RecordServiceImpl implements RecordService {
 			return new RecordRes(RtnCode.RECORD_IS_CANCELED);
 		}
 
+		// 取得商品資訊(增加商品銷售數)
+		Optional<Product> proOp = productDao.findById(record.getProductId());
+
+		if (proOp.isEmpty()) {
+			return new RecordRes(RtnCode.PRODUCT_IS_EMPTY);
+		}
+
+		Product product = proOp.get();
+
+		// 取得消費者資訊(扣除點數)
+		Optional<User> buyerOp = userDao.findById(record.getUserId());
+
+		if (buyerOp.isEmpty()) {
+			return new RecordRes(RtnCode.USER_IS_EMPTY);
+		}
+
+		User buyer = buyerOp.get();
+
+		// 取得賣家資訊(增加點數)
+		Optional<User> sellerOp = userDao.findById(record.getSellerId());
+
+		if (sellerOp.isEmpty()) {
+			return new RecordRes(RtnCode.USER_IS_EMPTY);
+		}
+
+		User seller = sellerOp.get();
+
+		// 更改訂單狀態
 		record.setStatus("已完成");
 
 		// 訂單完成後，電商抽取3%手續費
-
 		Maintenance maintenance = new Maintenance(record.getRecordId(), //
-				(int) Math.floor(record.getProductAmount() * 0.03));
+				(int) Math.floor(record.getProductAmount() * 0.07));
+
+		// 增加商品銷售數
+		product.setSaleCount(product.getSaleCount() + record.getProductCount());
+
+		// 扣除消費者點數
+		buyer.setPoints(buyer.getPoints() - record.getProductAmount());
+
+		// 賣家點數增加(總金額-手續費)
+		seller.setPoints(seller.getPoints() + (record.getProductAmount() - maintenance.getMaintenanceCost()));
 
 		// 將更新的資料存入DB
 		try {
 			dao.save(record);
 			maintenanceDao.save(maintenance);
+			productDao.save(product);
+			userDao.save(buyer);
+			userDao.save(seller);
 			// TODO 發送信件給買家和賣家
 		} catch (Exception e) {
 			logger.error(e.getMessage());
