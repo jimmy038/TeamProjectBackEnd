@@ -105,6 +105,21 @@ public class Record {
 		this.productId = productId;
 	}
 
+	public Record(LocalDateTime recordDate, int productCount, int productAmount, String status, String productName,
+			String recordType, boolean valid, int userId, int sellerId, int productId) {
+		super();
+		this.recordDate = recordDate;
+		this.productCount = productCount;
+		this.productAmount = productAmount;
+		this.status = status;
+		this.productName = productName;
+		this.recordType = recordType;
+		this.valid = valid;
+		this.userId = userId;
+		this.sellerId = sellerId;
+		this.productId = productId;
+	}
+
 	public int getRecordId() {
 		return recordId;
 	}

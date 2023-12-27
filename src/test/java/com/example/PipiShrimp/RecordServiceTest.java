@@ -19,10 +19,12 @@ public class RecordServiceTest {
 	@Autowired
 	private RecordDao dao;
 
+//	LocalDateTime recordDate, int productCount, int productAmount, String status, String productName,
+//	String recordType, boolean valid, int userId, int sellerId, int productId
 	@Test
 	public void createTest() {
-		Record record = new Record(LocalDateTime.now(), 10, 50, "已送達商品", //
-				"茶葉蛋", "buy", true, 5, 5);
+		Record record = new Record(LocalDateTime.now(), 1, 999, "已送達商品", //
+				"T91步槍的子彈", "food", true, 26, 28,20);
 		service.create(record);
 	}
 }
