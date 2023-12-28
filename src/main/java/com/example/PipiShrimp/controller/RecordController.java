@@ -53,4 +53,11 @@ public class RecordController {
 
 		return service.getRecordInfoByProductId(id);
 	}
+
+	@GetMapping(value = "/record/get/record_id")
+	public RecordRes getMaintenanceByRecordId(//
+			@RequestParam(value = "id") int id) {
+
+		return service.getMaintenanceByRecordId(id);
+	}
 }

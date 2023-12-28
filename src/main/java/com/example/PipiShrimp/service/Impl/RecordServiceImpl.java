@@ -292,4 +292,18 @@ public class RecordServiceImpl implements RecordService {
 		return new RecordSearchRes(RtnCode.SUCCESSFUL, recordList);
 	}
 
+	@Override
+	public RecordRes getMaintenanceByRecordId(int id) {
+		if (!dao.existsById(id)) {
+			return new RecordRes(RtnCode.RECORD_ID_NOT_FOUND);
+		}
+
+		Optional<Record> op = dao.findById(id);
+		if (op.isEmpty()) {
+			return new RecordRes(RtnCode.RECORD_IS_EMPTY);
+		}
+
+		return new RecordRes(RtnCode.SUCCESSFUL, op.get());
+	}
+
 }

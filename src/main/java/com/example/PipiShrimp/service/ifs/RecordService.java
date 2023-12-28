@@ -16,7 +16,7 @@ public interface RecordService {
 	 * 取消訂單(valid => false)，(參數:record_id)
 	 **/
 	public RecordRes cancel(int id);
-	
+
 	/**
 	 * 訂單出貨(status => 已出貨)，(參數:record_id)
 	 **/
@@ -41,5 +41,10 @@ public interface RecordService {
 	 * 查詢商品銷量記錄(參數:product_id) #查詢商品銷量之類的 兩張資料表的商品名稱要對應
 	 **/
 	public RecordSearchRes getRecordInfoByProductId(int id);
+
+	/**
+	 * 透過手續費明細取得訂單資料(參數:record_id) #點擊單筆手續費顯示資訊
+	 **/
+	public RecordRes getMaintenanceByRecordId(int id);
 
 }
