@@ -11,6 +11,11 @@ public interface CommentService {
 	public CommentRes create(Comment comment);
 
 	/**
+	 * 刪除評論(參數:comment_id)
+	 **/
+	public CommentRes delete(int id);
+
+	/**
 	 * 依據商品id查看對商品的評論(參數:product_id)
 	 **/
 	public CommentSearchRes getCommentInfo(int id);
@@ -19,7 +24,7 @@ public interface CommentService {
 	 * 按讚(參數:comment_id)
 	 **/
 	public CommentRes addLike(int id);
-	
+
 	/**
 	 * 倒讚(參數:comment_id)
 	 **/

@@ -533,3 +533,36 @@
 16:52:40.840 INFO  [http-nio-8080-exec-1][[/].log(DirectJDKLog.java:173)] Initializing Spring DispatcherServlet 'dispatcherServlet'
 16:52:40.841 INFO  [http-nio-8080-exec-1][DispatcherServlet.initServletBean(FrameworkServlet.java:525)] Initializing Servlet 'dispatcherServlet'
 16:52:40.842 INFO  [http-nio-8080-exec-1][DispatcherServlet.initServletBean(FrameworkServlet.java:547)] Completed initialization in 1 ms
+17:03:17.688 WARN  [HikariPool-1 housekeeper][HikariPool.run(HikariPool.java:788)] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m43s736ms391µs400ns).
+17:08:59.081 WARN  [http-nio-8080-exec-8][DefaultHandlerExceptionResolver.logException(AbstractHandlerExceptionResolver.java:208)] Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: "null"]
+17:10:39.842 WARN  [http-nio-8080-exec-9][DefaultHandlerExceptionResolver.logException(AbstractHandlerExceptionResolver.java:208)] Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: "null"]
+17:11:08.584 WARN  [http-nio-8080-exec-10][DefaultHandlerExceptionResolver.logException(AbstractHandlerExceptionResolver.java:208)] Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: "null"]
+17:12:29.263 INFO  [restartedMain][PipiShrimpApplication.logStarting(StartupInfoLogger.java:55)] Starting PipiShrimpApplication using Java 11.0.14.1 on LAPTOP-BS6O2N7Q with PID 20324 (C:\Users\user\Desktop\全端課程\小專案\teamProject\bin\main started by user in C:\Users\user\Desktop\全端課程\小專案\teamProject)
+17:12:29.267 INFO  [restartedMain][PipiShrimpApplication.logStartupProfileInfo(SpringApplication.java:632)] No active profile set, falling back to 1 default profile: "default"
+17:12:29.340 INFO  [restartedMain][DevToolsPropertyDefaultsPostProcessor.logTo(DeferredLog.java:255)] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+17:12:29.340 INFO  [restartedMain][DevToolsPropertyDefaultsPostProcessor.logTo(DeferredLog.java:255)] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+17:12:30.137 INFO  [restartedMain][RepositoryConfigurationDelegate.registerRepositoriesIn(RepositoryConfigurationDelegate.java:132)] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+17:12:30.249 INFO  [restartedMain][RepositoryConfigurationDelegate.registerRepositoriesIn(RepositoryConfigurationDelegate.java:201)] Finished Spring Data repository scanning in 95 ms. Found 6 JPA repository interfaces.
+17:12:31.393 INFO  [restartedMain][TomcatWebServer.initialize(TomcatWebServer.java:108)] Tomcat initialized with port(s): 8080 (http)
+17:12:31.408 INFO  [restartedMain][Http11NioProtocol.log(DirectJDKLog.java:173)] Initializing ProtocolHandler ["http-nio-8080"]
+17:12:31.410 INFO  [restartedMain][StandardService.log(DirectJDKLog.java:173)] Starting service [Tomcat]
+17:12:31.411 INFO  [restartedMain][StandardEngine.log(DirectJDKLog.java:173)] Starting Servlet engine: [Apache Tomcat/9.0.82]
+17:12:31.512 INFO  [restartedMain][[/].log(DirectJDKLog.java:173)] Initializing Spring embedded WebApplicationContext
+17:12:31.513 INFO  [restartedMain][ServletWebServerApplicationContext.prepareWebApplicationContext(ServletWebServerApplicationContext.java:292)] Root WebApplicationContext: initialization completed in 2171 ms
+17:12:31.668 INFO  [restartedMain][HikariDataSource.getConnection(HikariDataSource.java:110)] HikariPool-1 - Starting...
+17:12:31.897 INFO  [restartedMain][HikariDataSource.getConnection(HikariDataSource.java:123)] HikariPool-1 - Start completed.
+17:12:32.093 INFO  [restartedMain][LogHelper.logPersistenceUnitInformation(LogHelper.java:31)] HHH000204: Processing PersistenceUnitInfo [name: default]
+17:12:32.149 INFO  [restartedMain][Version.logVersion(Version.java:44)] HHH000412: Hibernate ORM core version 5.6.15.Final
+17:12:32.319 INFO  [restartedMain][Version.<clinit>(JavaReflectionManager.java:56)] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+17:12:32.471 INFO  [restartedMain][Dialect.<init>(Dialect.java:175)] HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+17:12:33.014 INFO  [restartedMain][JtaPlatformInitiator.initiateService(JtaPlatformInitiator.java:52)] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+17:12:33.022 INFO  [restartedMain][LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:437)] Initialized JPA EntityManagerFactory for persistence unit 'default'
+17:12:33.836 WARN  [restartedMain][JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor(JpaBaseConfiguration.java:223)] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+17:12:34.531 INFO  [restartedMain][OptionalLiveReloadServer.startServer(OptionalLiveReloadServer.java:59)] LiveReload server is running on port 35729
+17:12:34.560 INFO  [restartedMain][Http11NioProtocol.log(DirectJDKLog.java:173)] Starting ProtocolHandler ["http-nio-8080"]
+17:12:34.620 INFO  [restartedMain][TomcatWebServer.start(TomcatWebServer.java:220)] Tomcat started on port(s): 8080 (http) with context path ''
+17:12:34.637 INFO  [restartedMain][PipiShrimpApplication.logStarted(StartupInfoLogger.java:61)] Started PipiShrimpApplication in 5.76 seconds (JVM running for 6.415)
+17:12:39.620 INFO  [http-nio-8080-exec-1][[/].log(DirectJDKLog.java:173)] Initializing Spring DispatcherServlet 'dispatcherServlet'
+17:12:39.622 INFO  [http-nio-8080-exec-1][DispatcherServlet.initServletBean(FrameworkServlet.java:525)] Initializing Servlet 'dispatcherServlet'
+17:12:39.623 INFO  [http-nio-8080-exec-1][DispatcherServlet.initServletBean(FrameworkServlet.java:547)] Completed initialization in 1 ms
+17:12:55.205 WARN  [http-nio-8080-exec-3][DefaultHandlerExceptionResolver.logException(AbstractHandlerExceptionResolver.java:208)] Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: "null"]

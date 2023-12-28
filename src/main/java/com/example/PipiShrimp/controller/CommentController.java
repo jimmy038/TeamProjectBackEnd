@@ -25,6 +25,11 @@ public class CommentController {
 		return service.create(comment);
 	}
 
+	@PostMapping(value = "/comment/delete")
+	public CommentRes create(@RequestParam(value = "id") int id) {
+		return service.delete(id);
+	}
+
 	@GetMapping(value = "/comment/info")
 	public CommentSearchRes getCommentInfo(@RequestParam int id) {
 		return service.getCommentInfo(id);
@@ -34,7 +39,7 @@ public class CommentController {
 	public CommentRes addLike(@RequestParam int id) {
 		return service.addLike(id);
 	}
-	
+
 	@PostMapping(value = "/comment/dislike")
 	public CommentRes addDislike(@RequestParam int id) {
 		return service.addDislike(id);

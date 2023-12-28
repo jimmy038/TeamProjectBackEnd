@@ -1,0 +1,204 @@
+09:08:32.157 INFO  [restartedMain][PipiShrimpApplication.logStarting(StartupInfoLogger.java:55)] Starting PipiShrimpApplication using Java 11.0.14.1 on LAPTOP-BS6O2N7Q with PID 14072 (C:\Users\user\Desktop\全端課程\小專案\teamProject\bin\main started by user in C:\Users\user\Desktop\全端課程\小專案\teamProject)
+09:08:32.160 INFO  [restartedMain][PipiShrimpApplication.logStartupProfileInfo(SpringApplication.java:632)] No active profile set, falling back to 1 default profile: "default"
+09:08:32.221 INFO  [restartedMain][DevToolsPropertyDefaultsPostProcessor.logTo(DeferredLog.java:255)] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+09:08:32.224 INFO  [restartedMain][DevToolsPropertyDefaultsPostProcessor.logTo(DeferredLog.java:255)] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+09:08:33.076 INFO  [restartedMain][RepositoryConfigurationDelegate.registerRepositoriesIn(RepositoryConfigurationDelegate.java:132)] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+09:08:33.226 INFO  [restartedMain][RepositoryConfigurationDelegate.registerRepositoriesIn(RepositoryConfigurationDelegate.java:201)] Finished Spring Data repository scanning in 134 ms. Found 6 JPA repository interfaces.
+09:08:34.322 INFO  [restartedMain][TomcatWebServer.initialize(TomcatWebServer.java:108)] Tomcat initialized with port(s): 8080 (http)
+09:08:34.339 INFO  [restartedMain][Http11NioProtocol.log(DirectJDKLog.java:173)] Initializing ProtocolHandler ["http-nio-8080"]
+09:08:34.341 INFO  [restartedMain][StandardService.log(DirectJDKLog.java:173)] Starting service [Tomcat]
+09:08:34.342 INFO  [restartedMain][StandardEngine.log(DirectJDKLog.java:173)] Starting Servlet engine: [Apache Tomcat/9.0.82]
+09:08:34.468 INFO  [restartedMain][[/].log(DirectJDKLog.java:173)] Initializing Spring embedded WebApplicationContext
+09:08:34.469 INFO  [restartedMain][ServletWebServerApplicationContext.prepareWebApplicationContext(ServletWebServerApplicationContext.java:292)] Root WebApplicationContext: initialization completed in 2245 ms
+09:08:34.648 INFO  [restartedMain][HikariDataSource.getConnection(HikariDataSource.java:110)] HikariPool-1 - Starting...
+09:08:34.823 INFO  [restartedMain][HikariDataSource.getConnection(HikariDataSource.java:123)] HikariPool-1 - Start completed.
+09:08:35.013 INFO  [restartedMain][LogHelper.logPersistenceUnitInformation(LogHelper.java:31)] HHH000204: Processing PersistenceUnitInfo [name: default]
+09:08:35.053 INFO  [restartedMain][Version.logVersion(Version.java:44)] HHH000412: Hibernate ORM core version 5.6.15.Final
+09:08:35.238 INFO  [restartedMain][Version.<clinit>(JavaReflectionManager.java:56)] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+09:08:35.382 INFO  [restartedMain][Dialect.<init>(Dialect.java:175)] HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+09:08:35.992 INFO  [restartedMain][JtaPlatformInitiator.initiateService(JtaPlatformInitiator.java:52)] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09:08:36.001 INFO  [restartedMain][LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:437)] Initialized JPA EntityManagerFactory for persistence unit 'default'
+09:08:36.819 WARN  [restartedMain][JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor(JpaBaseConfiguration.java:223)] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+09:08:37.540 INFO  [restartedMain][OptionalLiveReloadServer.startServer(OptionalLiveReloadServer.java:59)] LiveReload server is running on port 35729
+09:08:37.565 INFO  [restartedMain][Http11NioProtocol.log(DirectJDKLog.java:173)] Starting ProtocolHandler ["http-nio-8080"]
+09:08:37.626 INFO  [restartedMain][TomcatWebServer.start(TomcatWebServer.java:220)] Tomcat started on port(s): 8080 (http) with context path ''
+09:08:37.648 INFO  [restartedMain][PipiShrimpApplication.logStarted(StartupInfoLogger.java:61)] Started PipiShrimpApplication in 5.853 seconds (JVM running for 6.636)
+09:20:58.413 INFO  [restartedMain][PipiShrimpApplication.logStarting(StartupInfoLogger.java:55)] Starting PipiShrimpApplication using Java 11.0.14.1 on LAPTOP-BS6O2N7Q with PID 772 (C:\Users\user\Desktop\全端課程\小專案\teamProject\bin\main started by user in C:\Users\user\Desktop\全端課程\小專案\teamProject)
+09:20:58.416 INFO  [restartedMain][PipiShrimpApplication.logStartupProfileInfo(SpringApplication.java:632)] No active profile set, falling back to 1 default profile: "default"
+09:20:58.479 INFO  [restartedMain][DevToolsPropertyDefaultsPostProcessor.logTo(DeferredLog.java:255)] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+09:20:58.479 INFO  [restartedMain][DevToolsPropertyDefaultsPostProcessor.logTo(DeferredLog.java:255)] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+09:20:59.294 INFO  [restartedMain][RepositoryConfigurationDelegate.registerRepositoriesIn(RepositoryConfigurationDelegate.java:132)] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+09:20:59.387 INFO  [restartedMain][RepositoryConfigurationDelegate.registerRepositoriesIn(RepositoryConfigurationDelegate.java:201)] Finished Spring Data repository scanning in 82 ms. Found 6 JPA repository interfaces.
+09:21:00.619 INFO  [restartedMain][TomcatWebServer.initialize(TomcatWebServer.java:108)] Tomcat initialized with port(s): 8080 (http)
+09:21:00.634 INFO  [restartedMain][Http11NioProtocol.log(DirectJDKLog.java:173)] Initializing ProtocolHandler ["http-nio-8080"]
+09:21:00.636 INFO  [restartedMain][StandardService.log(DirectJDKLog.java:173)] Starting service [Tomcat]
+09:21:00.636 INFO  [restartedMain][StandardEngine.log(DirectJDKLog.java:173)] Starting Servlet engine: [Apache Tomcat/9.0.82]
+09:21:00.773 INFO  [restartedMain][[/].log(DirectJDKLog.java:173)] Initializing Spring embedded WebApplicationContext
+09:21:00.774 INFO  [restartedMain][ServletWebServerApplicationContext.prepareWebApplicationContext(ServletWebServerApplicationContext.java:292)] Root WebApplicationContext: initialization completed in 2293 ms
+09:21:00.931 INFO  [restartedMain][HikariDataSource.getConnection(HikariDataSource.java:110)] HikariPool-1 - Starting...
+09:21:01.213 INFO  [restartedMain][HikariDataSource.getConnection(HikariDataSource.java:123)] HikariPool-1 - Start completed.
+09:21:01.487 INFO  [restartedMain][LogHelper.logPersistenceUnitInformation(LogHelper.java:31)] HHH000204: Processing PersistenceUnitInfo [name: default]
+09:21:01.536 INFO  [restartedMain][Version.logVersion(Version.java:44)] HHH000412: Hibernate ORM core version 5.6.15.Final
+09:21:01.719 INFO  [restartedMain][Version.<clinit>(JavaReflectionManager.java:56)] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+09:21:01.892 INFO  [restartedMain][Dialect.<init>(Dialect.java:175)] HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+09:21:02.614 INFO  [restartedMain][JtaPlatformInitiator.initiateService(JtaPlatformInitiator.java:52)] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09:21:02.623 INFO  [restartedMain][LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:437)] Initialized JPA EntityManagerFactory for persistence unit 'default'
+09:21:03.497 WARN  [restartedMain][JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor(JpaBaseConfiguration.java:223)] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+09:21:04.360 INFO  [restartedMain][OptionalLiveReloadServer.startServer(OptionalLiveReloadServer.java:59)] LiveReload server is running on port 35729
+09:21:04.380 INFO  [restartedMain][Http11NioProtocol.log(DirectJDKLog.java:173)] Starting ProtocolHandler ["http-nio-8080"]
+09:21:04.441 INFO  [restartedMain][TomcatWebServer.start(TomcatWebServer.java:220)] Tomcat started on port(s): 8080 (http) with context path ''
+09:21:04.479 INFO  [restartedMain][PipiShrimpApplication.logStarted(StartupInfoLogger.java:61)] Started PipiShrimpApplication in 6.44 seconds (JVM running for 7.108)
+09:21:24.497 INFO  [File Watcher][LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener.onApplicationEvent(LocalDevToolsAutoConfiguration.java:211)] Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+09:21:24.587 INFO  [Thread-5][Http11NioProtocol.log(DirectJDKLog.java:173)] Pausing ProtocolHandler ["http-nio-8080"]
+09:21:24.587 INFO  [Thread-5][StandardService.log(DirectJDKLog.java:173)] Stopping service [Tomcat]
+09:21:24.592 INFO  [Thread-5][Http11NioProtocol.log(DirectJDKLog.java:173)] Stopping ProtocolHandler ["http-nio-8080"]
+09:21:24.594 INFO  [Thread-5][Http11NioProtocol.log(DirectJDKLog.java:173)] Destroying ProtocolHandler ["http-nio-8080"]
+09:21:24.597 INFO  [Thread-5][LocalContainerEntityManagerFactoryBean.destroy(AbstractEntityManagerFactoryBean.java:651)] Closing JPA EntityManagerFactory for persistence unit 'default'
+09:21:24.602 INFO  [Thread-5][HikariDataSource.close(HikariDataSource.java:350)] HikariPool-1 - Shutdown initiated...
+09:21:24.627 INFO  [Thread-5][HikariDataSource.close(HikariDataSource.java:352)] HikariPool-1 - Shutdown completed.
+09:21:24.722 INFO  [restartedMain][PipiShrimpApplication.logStarting(StartupInfoLogger.java:55)] Starting PipiShrimpApplication using Java 11.0.14.1 on LAPTOP-BS6O2N7Q with PID 772 (C:\Users\user\Desktop\全端課程\小專案\teamProject\bin\main started by user in C:\Users\user\Desktop\全端課程\小專案\teamProject)
+09:21:24.722 INFO  [restartedMain][PipiShrimpApplication.logStartupProfileInfo(SpringApplication.java:632)] No active profile set, falling back to 1 default profile: "default"
+09:21:24.873 INFO  [restartedMain][RepositoryConfigurationDelegate.registerRepositoriesIn(RepositoryConfigurationDelegate.java:132)] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+09:21:24.899 INFO  [restartedMain][RepositoryConfigurationDelegate.registerRepositoriesIn(RepositoryConfigurationDelegate.java:201)] Finished Spring Data repository scanning in 25 ms. Found 6 JPA repository interfaces.
+09:21:24.979 INFO  [restartedMain][TomcatWebServer.initialize(TomcatWebServer.java:108)] Tomcat initialized with port(s): 8080 (http)
+09:21:24.980 INFO  [restartedMain][Http11NioProtocol.log(DirectJDKLog.java:173)] Initializing ProtocolHandler ["http-nio-8080"]
+09:21:24.980 INFO  [restartedMain][StandardService.log(DirectJDKLog.java:173)] Starting service [Tomcat]
+09:21:24.980 INFO  [restartedMain][StandardEngine.log(DirectJDKLog.java:173)] Starting Servlet engine: [Apache Tomcat/9.0.82]
+09:21:25.000 INFO  [restartedMain][[/].log(DirectJDKLog.java:173)] Initializing Spring embedded WebApplicationContext
+09:21:25.000 INFO  [restartedMain][ServletWebServerApplicationContext.prepareWebApplicationContext(ServletWebServerApplicationContext.java:292)] Root WebApplicationContext: initialization completed in 275 ms
+09:21:25.022 INFO  [restartedMain][HikariDataSource.getConnection(HikariDataSource.java:110)] HikariPool-2 - Starting...
+09:21:25.029 INFO  [restartedMain][HikariDataSource.getConnection(HikariDataSource.java:123)] HikariPool-2 - Start completed.
+09:21:25.049 INFO  [restartedMain][LogHelper.logPersistenceUnitInformation(LogHelper.java:31)] HHH000204: Processing PersistenceUnitInfo [name: default]
+09:21:25.055 INFO  [restartedMain][Dialect.<init>(Dialect.java:175)] HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+09:21:25.176 INFO  [restartedMain][JtaPlatformInitiator.initiateService(JtaPlatformInitiator.java:52)] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09:21:25.176 INFO  [restartedMain][LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:437)] Initialized JPA EntityManagerFactory for persistence unit 'default'
+09:21:25.379 WARN  [restartedMain][JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor(JpaBaseConfiguration.java:223)] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+09:21:25.475 INFO  [restartedMain][OptionalLiveReloadServer.startServer(OptionalLiveReloadServer.java:59)] LiveReload server is running on port 35729
+09:21:25.481 INFO  [restartedMain][Http11NioProtocol.log(DirectJDKLog.java:173)] Starting ProtocolHandler ["http-nio-8080"]
+09:21:25.487 INFO  [restartedMain][TomcatWebServer.start(TomcatWebServer.java:220)] Tomcat started on port(s): 8080 (http) with context path ''
+09:21:25.489 INFO  [restartedMain][PipiShrimpApplication.logStarted(StartupInfoLogger.java:61)] Started PipiShrimpApplication in 0.803 seconds (JVM running for 28.119)
+09:21:25.495 INFO  [restartedMain][ConditionEvaluationDeltaLoggingListener.onApplicationEvent(ConditionEvaluationDeltaLoggingListener.java:63)] Condition evaluation unchanged
+09:21:52.833 INFO  [File Watcher][LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener.onApplicationEvent(LocalDevToolsAutoConfiguration.java:211)] Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+09:21:52.929 INFO  [Thread-7][Http11NioProtocol.log(DirectJDKLog.java:173)] Pausing ProtocolHandler ["http-nio-8080"]
+09:21:52.929 INFO  [Thread-7][StandardService.log(DirectJDKLog.java:173)] Stopping service [Tomcat]
+09:21:52.933 INFO  [Thread-7][Http11NioProtocol.log(DirectJDKLog.java:173)] Stopping ProtocolHandler ["http-nio-8080"]
+09:21:52.935 INFO  [Thread-7][Http11NioProtocol.log(DirectJDKLog.java:173)] Destroying ProtocolHandler ["http-nio-8080"]
+09:21:52.936 INFO  [Thread-7][LocalContainerEntityManagerFactoryBean.destroy(AbstractEntityManagerFactoryBean.java:651)] Closing JPA EntityManagerFactory for persistence unit 'default'
+09:21:52.937 INFO  [Thread-7][HikariDataSource.close(HikariDataSource.java:350)] HikariPool-2 - Shutdown initiated...
+09:21:52.945 INFO  [Thread-7][HikariDataSource.close(HikariDataSource.java:352)] HikariPool-2 - Shutdown completed.
+09:21:53.030 INFO  [restartedMain][PipiShrimpApplication.logStarting(StartupInfoLogger.java:55)] Starting PipiShrimpApplication using Java 11.0.14.1 on LAPTOP-BS6O2N7Q with PID 772 (C:\Users\user\Desktop\全端課程\小專案\teamProject\bin\main started by user in C:\Users\user\Desktop\全端課程\小專案\teamProject)
+09:21:53.031 INFO  [restartedMain][PipiShrimpApplication.logStartupProfileInfo(SpringApplication.java:632)] No active profile set, falling back to 1 default profile: "default"
+09:21:53.237 INFO  [restartedMain][RepositoryConfigurationDelegate.registerRepositoriesIn(RepositoryConfigurationDelegate.java:132)] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+09:21:53.261 INFO  [restartedMain][RepositoryConfigurationDelegate.registerRepositoriesIn(RepositoryConfigurationDelegate.java:201)] Finished Spring Data repository scanning in 23 ms. Found 6 JPA repository interfaces.
+09:21:53.342 INFO  [restartedMain][TomcatWebServer.initialize(TomcatWebServer.java:108)] Tomcat initialized with port(s): 8080 (http)
+09:21:53.343 INFO  [restartedMain][Http11NioProtocol.log(DirectJDKLog.java:173)] Initializing ProtocolHandler ["http-nio-8080"]
+09:21:53.344 INFO  [restartedMain][StandardService.log(DirectJDKLog.java:173)] Starting service [Tomcat]
+09:21:53.344 INFO  [restartedMain][StandardEngine.log(DirectJDKLog.java:173)] Starting Servlet engine: [Apache Tomcat/9.0.82]
+09:21:53.368 INFO  [restartedMain][[/].log(DirectJDKLog.java:173)] Initializing Spring embedded WebApplicationContext
+09:21:53.369 INFO  [restartedMain][ServletWebServerApplicationContext.prepareWebApplicationContext(ServletWebServerApplicationContext.java:292)] Root WebApplicationContext: initialization completed in 330 ms
+09:21:53.391 INFO  [restartedMain][HikariDataSource.getConnection(HikariDataSource.java:110)] HikariPool-3 - Starting...
+09:21:53.399 INFO  [restartedMain][HikariDataSource.getConnection(HikariDataSource.java:123)] HikariPool-3 - Start completed.
+09:21:53.421 INFO  [restartedMain][LogHelper.logPersistenceUnitInformation(LogHelper.java:31)] HHH000204: Processing PersistenceUnitInfo [name: default]
+09:21:53.427 INFO  [restartedMain][Dialect.<init>(Dialect.java:175)] HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+09:21:53.516 INFO  [restartedMain][JtaPlatformInitiator.initiateService(JtaPlatformInitiator.java:52)] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09:21:53.516 INFO  [restartedMain][LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:437)] Initialized JPA EntityManagerFactory for persistence unit 'default'
+09:21:53.699 WARN  [restartedMain][JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor(JpaBaseConfiguration.java:223)] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+09:21:53.765 INFO  [restartedMain][OptionalLiveReloadServer.startServer(OptionalLiveReloadServer.java:59)] LiveReload server is running on port 35729
+09:21:53.769 INFO  [restartedMain][Http11NioProtocol.log(DirectJDKLog.java:173)] Starting ProtocolHandler ["http-nio-8080"]
+09:21:53.774 INFO  [restartedMain][TomcatWebServer.start(TomcatWebServer.java:220)] Tomcat started on port(s): 8080 (http) with context path ''
+09:21:53.776 INFO  [restartedMain][PipiShrimpApplication.logStarted(StartupInfoLogger.java:61)] Started PipiShrimpApplication in 0.781 seconds (JVM running for 56.405)
+09:21:53.778 INFO  [restartedMain][ConditionEvaluationDeltaLoggingListener.onApplicationEvent(ConditionEvaluationDeltaLoggingListener.java:63)] Condition evaluation unchanged
+09:22:13.362 INFO  [http-nio-8080-exec-1][[/].log(DirectJDKLog.java:173)] Initializing Spring DispatcherServlet 'dispatcherServlet'
+09:22:13.365 INFO  [http-nio-8080-exec-1][DispatcherServlet.initServletBean(FrameworkServlet.java:525)] Initializing Servlet 'dispatcherServlet'
+09:22:13.365 INFO  [http-nio-8080-exec-1][DispatcherServlet.initServletBean(FrameworkServlet.java:547)] Completed initialization in 0 ms
+09:26:28.625 INFO  [File Watcher][LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener.onApplicationEvent(LocalDevToolsAutoConfiguration.java:211)] Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+09:26:28.697 INFO  [Thread-11][Http11NioProtocol.log(DirectJDKLog.java:173)] Pausing ProtocolHandler ["http-nio-8080"]
+09:26:28.701 INFO  [Thread-11][StandardService.log(DirectJDKLog.java:173)] Stopping service [Tomcat]
+09:26:28.705 INFO  [Thread-11][[/].log(DirectJDKLog.java:173)] Destroying Spring FrameworkServlet 'dispatcherServlet'
+09:26:28.712 INFO  [Thread-11][Http11NioProtocol.log(DirectJDKLog.java:173)] Stopping ProtocolHandler ["http-nio-8080"]
+09:26:28.716 INFO  [Thread-11][Http11NioProtocol.log(DirectJDKLog.java:173)] Destroying ProtocolHandler ["http-nio-8080"]
+09:26:28.720 INFO  [Thread-11][LocalContainerEntityManagerFactoryBean.destroy(AbstractEntityManagerFactoryBean.java:651)] Closing JPA EntityManagerFactory for persistence unit 'default'
+09:26:28.721 INFO  [Thread-11][HikariDataSource.close(HikariDataSource.java:350)] HikariPool-3 - Shutdown initiated...
+09:26:28.732 INFO  [Thread-11][HikariDataSource.close(HikariDataSource.java:352)] HikariPool-3 - Shutdown completed.
+09:26:28.838 INFO  [restartedMain][PipiShrimpApplication.logStarting(StartupInfoLogger.java:55)] Starting PipiShrimpApplication using Java 11.0.14.1 on LAPTOP-BS6O2N7Q with PID 772 (C:\Users\user\Desktop\全端課程\小專案\teamProject\bin\main started by user in C:\Users\user\Desktop\全端課程\小專案\teamProject)
+09:26:28.839 INFO  [restartedMain][PipiShrimpApplication.logStartupProfileInfo(SpringApplication.java:632)] No active profile set, falling back to 1 default profile: "default"
+09:26:29.000 INFO  [restartedMain][RepositoryConfigurationDelegate.registerRepositoriesIn(RepositoryConfigurationDelegate.java:132)] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+09:26:29.025 INFO  [restartedMain][RepositoryConfigurationDelegate.registerRepositoriesIn(RepositoryConfigurationDelegate.java:201)] Finished Spring Data repository scanning in 25 ms. Found 6 JPA repository interfaces.
+09:26:29.102 INFO  [restartedMain][TomcatWebServer.initialize(TomcatWebServer.java:108)] Tomcat initialized with port(s): 8080 (http)
+09:26:29.103 INFO  [restartedMain][Http11NioProtocol.log(DirectJDKLog.java:173)] Initializing ProtocolHandler ["http-nio-8080"]
+09:26:29.104 INFO  [restartedMain][StandardService.log(DirectJDKLog.java:173)] Starting service [Tomcat]
+09:26:29.104 INFO  [restartedMain][StandardEngine.log(DirectJDKLog.java:173)] Starting Servlet engine: [Apache Tomcat/9.0.82]
+09:26:29.118 INFO  [restartedMain][[/].log(DirectJDKLog.java:173)] Initializing Spring embedded WebApplicationContext
+09:26:29.118 INFO  [restartedMain][ServletWebServerApplicationContext.prepareWebApplicationContext(ServletWebServerApplicationContext.java:292)] Root WebApplicationContext: initialization completed in 278 ms
+09:26:29.137 INFO  [restartedMain][HikariDataSource.getConnection(HikariDataSource.java:110)] HikariPool-4 - Starting...
+09:26:29.142 INFO  [restartedMain][HikariDataSource.getConnection(HikariDataSource.java:123)] HikariPool-4 - Start completed.
+09:26:29.166 INFO  [restartedMain][LogHelper.logPersistenceUnitInformation(LogHelper.java:31)] HHH000204: Processing PersistenceUnitInfo [name: default]
+09:26:29.174 INFO  [restartedMain][Dialect.<init>(Dialect.java:175)] HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+09:26:29.280 INFO  [restartedMain][JtaPlatformInitiator.initiateService(JtaPlatformInitiator.java:52)] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09:26:29.284 INFO  [restartedMain][LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:437)] Initialized JPA EntityManagerFactory for persistence unit 'default'
+09:26:29.526 WARN  [restartedMain][JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor(JpaBaseConfiguration.java:223)] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+09:26:29.592 INFO  [restartedMain][OptionalLiveReloadServer.startServer(OptionalLiveReloadServer.java:59)] LiveReload server is running on port 35729
+09:26:29.595 INFO  [restartedMain][Http11NioProtocol.log(DirectJDKLog.java:173)] Starting ProtocolHandler ["http-nio-8080"]
+09:26:29.600 INFO  [restartedMain][TomcatWebServer.start(TomcatWebServer.java:220)] Tomcat started on port(s): 8080 (http) with context path ''
+09:26:29.604 INFO  [restartedMain][PipiShrimpApplication.logStarted(StartupInfoLogger.java:61)] Started PipiShrimpApplication in 0.807 seconds (JVM running for 332.233)
+09:26:29.605 INFO  [restartedMain][ConditionEvaluationDeltaLoggingListener.onApplicationEvent(ConditionEvaluationDeltaLoggingListener.java:63)] Condition evaluation unchanged
+09:26:34.117 INFO  [File Watcher][LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener.onApplicationEvent(LocalDevToolsAutoConfiguration.java:211)] Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+09:26:34.202 INFO  [Thread-15][Http11NioProtocol.log(DirectJDKLog.java:173)] Pausing ProtocolHandler ["http-nio-8080"]
+09:26:34.202 INFO  [Thread-15][StandardService.log(DirectJDKLog.java:173)] Stopping service [Tomcat]
+09:26:34.214 INFO  [Thread-15][Http11NioProtocol.log(DirectJDKLog.java:173)] Stopping ProtocolHandler ["http-nio-8080"]
+09:26:34.219 INFO  [Thread-15][Http11NioProtocol.log(DirectJDKLog.java:173)] Destroying ProtocolHandler ["http-nio-8080"]
+09:26:34.222 INFO  [Thread-15][LocalContainerEntityManagerFactoryBean.destroy(AbstractEntityManagerFactoryBean.java:651)] Closing JPA EntityManagerFactory for persistence unit 'default'
+09:26:34.223 INFO  [Thread-15][HikariDataSource.close(HikariDataSource.java:350)] HikariPool-4 - Shutdown initiated...
+09:26:34.231 INFO  [Thread-15][HikariDataSource.close(HikariDataSource.java:352)] HikariPool-4 - Shutdown completed.
+09:26:34.337 INFO  [restartedMain][PipiShrimpApplication.logStarting(StartupInfoLogger.java:55)] Starting PipiShrimpApplication using Java 11.0.14.1 on LAPTOP-BS6O2N7Q with PID 772 (C:\Users\user\Desktop\全端課程\小專案\teamProject\bin\main started by user in C:\Users\user\Desktop\全端課程\小專案\teamProject)
+09:26:34.343 INFO  [restartedMain][PipiShrimpApplication.logStartupProfileInfo(SpringApplication.java:632)] No active profile set, falling back to 1 default profile: "default"
+09:26:34.570 INFO  [restartedMain][RepositoryConfigurationDelegate.registerRepositoriesIn(RepositoryConfigurationDelegate.java:132)] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+09:26:34.602 INFO  [restartedMain][RepositoryConfigurationDelegate.registerRepositoriesIn(RepositoryConfigurationDelegate.java:201)] Finished Spring Data repository scanning in 31 ms. Found 6 JPA repository interfaces.
+09:26:34.689 INFO  [restartedMain][TomcatWebServer.initialize(TomcatWebServer.java:108)] Tomcat initialized with port(s): 8080 (http)
+09:26:34.690 INFO  [restartedMain][Http11NioProtocol.log(DirectJDKLog.java:173)] Initializing ProtocolHandler ["http-nio-8080"]
+09:26:34.691 INFO  [restartedMain][StandardService.log(DirectJDKLog.java:173)] Starting service [Tomcat]
+09:26:34.692 INFO  [restartedMain][StandardEngine.log(DirectJDKLog.java:173)] Starting Servlet engine: [Apache Tomcat/9.0.82]
+09:26:34.714 INFO  [restartedMain][[/].log(DirectJDKLog.java:173)] Initializing Spring embedded WebApplicationContext
+09:26:34.714 INFO  [restartedMain][ServletWebServerApplicationContext.prepareWebApplicationContext(ServletWebServerApplicationContext.java:292)] Root WebApplicationContext: initialization completed in 366 ms
+09:26:34.737 INFO  [restartedMain][HikariDataSource.getConnection(HikariDataSource.java:110)] HikariPool-5 - Starting...
+09:26:34.742 INFO  [restartedMain][HikariDataSource.getConnection(HikariDataSource.java:123)] HikariPool-5 - Start completed.
+09:26:34.766 INFO  [restartedMain][LogHelper.logPersistenceUnitInformation(LogHelper.java:31)] HHH000204: Processing PersistenceUnitInfo [name: default]
+09:26:34.780 INFO  [restartedMain][Dialect.<init>(Dialect.java:175)] HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+09:26:34.862 INFO  [restartedMain][JtaPlatformInitiator.initiateService(JtaPlatformInitiator.java:52)] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09:26:34.863 INFO  [restartedMain][LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:437)] Initialized JPA EntityManagerFactory for persistence unit 'default'
+09:26:35.055 WARN  [restartedMain][JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor(JpaBaseConfiguration.java:223)] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+09:26:35.149 INFO  [restartedMain][OptionalLiveReloadServer.startServer(OptionalLiveReloadServer.java:59)] LiveReload server is running on port 35729
+09:26:35.154 INFO  [restartedMain][Http11NioProtocol.log(DirectJDKLog.java:173)] Starting ProtocolHandler ["http-nio-8080"]
+09:26:35.157 INFO  [restartedMain][TomcatWebServer.start(TomcatWebServer.java:220)] Tomcat started on port(s): 8080 (http) with context path ''
+09:26:35.161 INFO  [restartedMain][PipiShrimpApplication.logStarted(StartupInfoLogger.java:61)] Started PipiShrimpApplication in 0.873 seconds (JVM running for 337.79)
+09:26:35.162 INFO  [restartedMain][ConditionEvaluationDeltaLoggingListener.onApplicationEvent(ConditionEvaluationDeltaLoggingListener.java:63)] Condition evaluation unchanged
+09:27:18.926 INFO  [File Watcher][LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener.onApplicationEvent(LocalDevToolsAutoConfiguration.java:211)] Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+09:27:19.024 INFO  [Thread-19][Http11NioProtocol.log(DirectJDKLog.java:173)] Pausing ProtocolHandler ["http-nio-8080"]
+09:27:19.024 INFO  [Thread-19][StandardService.log(DirectJDKLog.java:173)] Stopping service [Tomcat]
+09:27:19.031 INFO  [Thread-19][Http11NioProtocol.log(DirectJDKLog.java:173)] Stopping ProtocolHandler ["http-nio-8080"]
+09:27:19.033 INFO  [Thread-19][Http11NioProtocol.log(DirectJDKLog.java:173)] Destroying ProtocolHandler ["http-nio-8080"]
+09:27:19.035 INFO  [Thread-19][LocalContainerEntityManagerFactoryBean.destroy(AbstractEntityManagerFactoryBean.java:651)] Closing JPA EntityManagerFactory for persistence unit 'default'
+09:27:19.036 INFO  [Thread-19][HikariDataSource.close(HikariDataSource.java:350)] HikariPool-5 - Shutdown initiated...
+09:27:19.043 INFO  [Thread-19][HikariDataSource.close(HikariDataSource.java:352)] HikariPool-5 - Shutdown completed.
+09:27:19.133 INFO  [restartedMain][PipiShrimpApplication.logStarting(StartupInfoLogger.java:55)] Starting PipiShrimpApplication using Java 11.0.14.1 on LAPTOP-BS6O2N7Q with PID 772 (C:\Users\user\Desktop\全端課程\小專案\teamProject\bin\main started by user in C:\Users\user\Desktop\全端課程\小專案\teamProject)
+09:27:19.134 INFO  [restartedMain][PipiShrimpApplication.logStartupProfileInfo(SpringApplication.java:632)] No active profile set, falling back to 1 default profile: "default"
+09:27:19.270 INFO  [restartedMain][RepositoryConfigurationDelegate.registerRepositoriesIn(RepositoryConfigurationDelegate.java:132)] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+09:27:19.296 INFO  [restartedMain][RepositoryConfigurationDelegate.registerRepositoriesIn(RepositoryConfigurationDelegate.java:201)] Finished Spring Data repository scanning in 25 ms. Found 6 JPA repository interfaces.
+09:27:19.405 INFO  [restartedMain][TomcatWebServer.initialize(TomcatWebServer.java:108)] Tomcat initialized with port(s): 8080 (http)
+09:27:19.406 INFO  [restartedMain][Http11NioProtocol.log(DirectJDKLog.java:173)] Initializing ProtocolHandler ["http-nio-8080"]
+09:27:19.407 INFO  [restartedMain][StandardService.log(DirectJDKLog.java:173)] Starting service [Tomcat]
+09:27:19.407 INFO  [restartedMain][StandardEngine.log(DirectJDKLog.java:173)] Starting Servlet engine: [Apache Tomcat/9.0.82]
+09:27:19.431 INFO  [restartedMain][[/].log(DirectJDKLog.java:173)] Initializing Spring embedded WebApplicationContext
+09:27:19.431 INFO  [restartedMain][ServletWebServerApplicationContext.prepareWebApplicationContext(ServletWebServerApplicationContext.java:292)] Root WebApplicationContext: initialization completed in 296 ms
+09:27:19.512 INFO  [restartedMain][HikariDataSource.getConnection(HikariDataSource.java:110)] HikariPool-6 - Starting...
+09:27:19.518 INFO  [restartedMain][HikariDataSource.getConnection(HikariDataSource.java:123)] HikariPool-6 - Start completed.
+09:27:19.538 INFO  [restartedMain][LogHelper.logPersistenceUnitInformation(LogHelper.java:31)] HHH000204: Processing PersistenceUnitInfo [name: default]
+09:27:19.545 INFO  [restartedMain][Dialect.<init>(Dialect.java:175)] HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+09:27:19.632 INFO  [restartedMain][JtaPlatformInitiator.initiateService(JtaPlatformInitiator.java:52)] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09:27:19.633 INFO  [restartedMain][LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:437)] Initialized JPA EntityManagerFactory for persistence unit 'default'
+09:27:19.832 WARN  [restartedMain][JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor(JpaBaseConfiguration.java:223)] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+09:27:19.890 INFO  [restartedMain][OptionalLiveReloadServer.startServer(OptionalLiveReloadServer.java:59)] LiveReload server is running on port 35729
+09:27:19.893 INFO  [restartedMain][Http11NioProtocol.log(DirectJDKLog.java:173)] Starting ProtocolHandler ["http-nio-8080"]
+09:27:19.900 INFO  [restartedMain][TomcatWebServer.start(TomcatWebServer.java:220)] Tomcat started on port(s): 8080 (http) with context path ''
+09:27:19.903 INFO  [restartedMain][PipiShrimpApplication.logStarted(StartupInfoLogger.java:61)] Started PipiShrimpApplication in 0.796 seconds (JVM running for 382.533)
+09:27:19.905 INFO  [restartedMain][ConditionEvaluationDeltaLoggingListener.onApplicationEvent(ConditionEvaluationDeltaLoggingListener.java:63)] Condition evaluation unchanged
