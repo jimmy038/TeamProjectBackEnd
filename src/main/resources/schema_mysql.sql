@@ -14,21 +14,21 @@ CREATE TABLE IF NOT EXISTS `product` (
   `product_id` int NOT NULL AUTO_INCREMENT,
   `product_name` varchar(100) NOT NULL,
   `description` varchar(45) DEFAULT NULL,
+  `release_date` date DEFAULT NULL,
   `price` int NOT NULL,
   `inventory` int NOT NULL,
   `sale_count` int NOT NULL DEFAULT '0',
+  `specification` varchar(45) DEFAULT NULL,
+  `product_type` varchar(45) NOT NULL,
   `shelves` tinyint NOT NULL DEFAULT '0',
   `photo` varchar(255) DEFAULT NULL,
   `user_id` int NOT NULL,
   PRIMARY KEY (`product_id`)
 );
 
-<<<<<<< HEAD
 
 
 
-=======
->>>>>>> ccb53b51ab44c1d0c7b76bcaa39d540e26c9b224
 CREATE TABLE IF NOT EXISTS `record` (
   `record_id` int NOT NULL AUTO_INCREMENT,
   `record_date` datetime DEFAULT NULL,
@@ -57,8 +57,5 @@ CREATE TABLE IF NOT EXISTS `cart` (
 
 
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> ccb53b51ab44c1d0c7b76bcaa39d540e26c9b224

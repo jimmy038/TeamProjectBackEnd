@@ -3,6 +3,7 @@ package com.example.PipiShrimp;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.access.event.PublicInvocationEvent;
 
 import com.example.PipiShrimp.entity.Mail;
 import com.example.PipiShrimp.entity.User;
@@ -21,58 +22,58 @@ public class UserServiceTest {
 
 	@Test
 	public void signUpTest() {
-		// ï¿½ï¿½ï¿½\ï¿½sï¿½W
+		// ¦¨¥\·s¼W
 		User user = new User("ian", "ian0217@gmail.com", "ian8787gogo");
 		UserRes res = service.signUp(user);
-		System.out.println("ï¿½ï¿½ï¿½æµ²ï¿½G:" + res.getRtnCode().getMessage());
+		System.out.println("°õ¦æµ²ªG:" + res.getRtnCode().getMessage());
 
-		// ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½
+		// ¸ê®Æ¬°ªÅ
 		user = new User("", "ian@gmail.com", "");
 		res = service.signUp(user);
-		System.out.println("ï¿½ï¿½ï¿½æµ²ï¿½G:" + res.getRtnCode().getMessage());
+		System.out.println("°õ¦æµ²ªG:" + res.getRtnCode().getMessage());
 
-		// ï¿½Hï¿½cï¿½wï¿½sï¿½b
+		// «H½c¤w¦s¦b
 		user = new User("jack", "ian0217@gmail.com", "ian1234fff");
 		res = service.signUp(user);
-		System.out.println("ï¿½ï¿½ï¿½æµ²ï¿½G:" + res.getRtnCode().getMessage());
+		System.out.println("°õ¦æµ²ªG:" + res.getRtnCode().getMessage());
 
-		// ï¿½Kï¿½Xï¿½æ¦¡ï¿½ï¿½ï¿½ï¿½
+		// ±K½X®æ¦¡¤£²Å
 		user = new User("jack", "jack@gmail.com", "12346789");
 		res = service.signUp(user);
-		System.out.println("ï¿½ï¿½ï¿½æµ²ï¿½G:" + res.getRtnCode().getMessage());
+		System.out.println("°õ¦æµ²ªG:" + res.getRtnCode().getMessage());
 
-		// emailï¿½æ¦¡ï¿½ï¿½ï¿½ï¿½
+		// email®æ¦¡¤£²Å
 //		user = new User("jack", "jackl.com", "ian1234fff");
 //		res = service.signUp(user);
-//		System.out.println("ï¿½ï¿½ï¿½æµ²ï¿½G:" + res.getRtnCode().getMessage());
+//		System.out.println("°õ¦æµ²ªG:" + res.getRtnCode().getMessage());
 	}
 
 	@Test
 	public void loginTest() {
 		UserReq req = new UserReq("ian0217@gmail.com", "ian8787gogo");
-		// ï¿½bï¿½ï¿½ï¿½Kï¿½Xï¿½ï¿½ï¿½T
-		UserRes res = service.login(req, null);
-		System.out.println("ï¿½ï¿½ï¿½æµ²ï¿½G:" + res.getRtnCode().getMessage());
+		// ±b¸¹±K½X¥¿½T
+		UserRes res = service.login(req);
+		System.out.println("°õ¦æµ²ªG:" + res.getRtnCode().getMessage());
 
-		// emailï¿½ï¿½ï¿½ï¿½ï¿½U
+		// email¥¼µù¥U
 		req = new UserReq("fuck1234@gmail.com", "ian8787gogo");
-		res = service.login(req, null);
-		System.out.println("ï¿½ï¿½ï¿½æµ²ï¿½G:" + res.getRtnCode().getMessage());
+		res = service.login(req);
+		System.out.println("°õ¦æµ²ªG:" + res.getRtnCode().getMessage());
 
-		// ï¿½Kï¿½Xï¿½ï¿½ï¿½~
+		// ±K½X¿ù»~
 		req = new UserReq("ian0217@gmail.com", "ianGG3cm");
-		res = service.login(req, null);
-		System.out.println("ï¿½ï¿½ï¿½æµ²ï¿½G:" + res.getRtnCode().getMessage());
+		res = service.login(req);
+		System.out.println("°õ¦æµ²ªG:" + res.getRtnCode().getMessage());
 
-		// ï¿½ï¿½ï¿½ï¿½Jï¿½ï¿½ï¿½
+		// ¥¼¿é¤J¸ê®Æ
 		req = new UserReq("", "ianGG3cm");
-		res = service.login(req, null);
-		System.out.println("ï¿½ï¿½ï¿½æµ²ï¿½G:" + res.getRtnCode().getMessage());
+		res = service.login(req);
+		System.out.println("°õ¦æµ²ªG:" + res.getRtnCode().getMessage());
 	}
 
 //	@Test
 //	public void sentMailTest() {
-//		Mail.sentSignUpMail();
+//		Mail.sendForgetPwdMail();
 //	}
 
 //	@Test

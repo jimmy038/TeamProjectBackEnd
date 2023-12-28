@@ -2,7 +2,6 @@ package com.example.PipiShrimp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,13 +19,12 @@ public class ProductController {
 
 	@Autowired
 	private ProductService service;
-//剩圖片
+
 	@PostMapping(value = "/product/create")
 	public ProductRes create(@RequestBody Product product) {
 
 		return service.create(product);
 	}
-<<<<<<< HEAD
 
 	@PostMapping(value = "/product/delete")
 	public ProductRes delete(@RequestParam(value = "id") int id) {
@@ -41,26 +39,6 @@ public class ProductController {
 		return service.getProductInfoByUserId(id);
 	}
 
-=======
-//搞定
-	@DeleteMapping(value = "/product/delete")
-	public ProductRes delete(@RequestParam(value = "id") int id) {
-	    // TODO 只有登入者可以刪除商品
-	    return service.delete(id);
-	}
-	
-	//每個帳號顯示不同商品
-
-	@GetMapping(value = "/product/get/info/user_id")
-	 public ProductSearchRes getProductInfoByUserId(//
-	   @RequestParam(value = "id") int id) {
-
-	  return service.getProductInfoByUserId(id);
-	 }
-	/**
-	 * 取得單一商品資訊(參數使用product_id)
-	 **/
->>>>>>> ccb53b51ab44c1d0c7b76bcaa39d540e26c9b224
 	@GetMapping(value = "/product/get/info")
 	public ProductRes getProductInfo(//
 			@RequestParam(value = "id") int id) {
@@ -72,18 +50,17 @@ public class ProductController {
 		return service.getAllProductInfo();
 	}
 
-	//上面收尋功能
 	@GetMapping(value = "/product/search")
 	public ProductSearchRes getProductByName(//
 			@RequestParam(value = "product", required = false) String productName) {
 		return service.getProductByName(productName);
 	}
-//種類
+
 	@GetMapping(value = "/product/price/sort")
 	public ProductSearchRes getProductByPrice() {
 		return service.getProductByPrice();
 	}
-//先不用
+
 	@GetMapping(value = "/product/price/sort/desc")
 	public ProductSearchRes getProductByPriceDesc() {
 		return service.getProductByPriceDesc();

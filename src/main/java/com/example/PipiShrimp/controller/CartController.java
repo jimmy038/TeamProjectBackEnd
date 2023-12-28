@@ -1,15 +1,7 @@
 package com.example.PipiShrimp.controller;
 
-<<<<<<< HEAD
 import java.util.List;
 
-<<<<<<< HEAD
-import javax.servlet.http.HttpSession;
-
-=======
->>>>>>> ccb53b51ab44c1d0c7b76bcaa39d540e26c9b224
-=======
->>>>>>> ian
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,16 +29,10 @@ public class CartController {
 		return service.create(cart);
 	}
 
-<<<<<<< HEAD
 	@PostMapping(value = "/cart/delete")
 	public CartSearchRes delete(@RequestParam List<Integer> idList) {
 
 		return service.delete(idList);
-=======
-	@PostMapping(value = "cart/delete")
-	public CartRes delete(@RequestParam(value = "id") int id) {
-		return service.delete(id);
->>>>>>> ccb53b51ab44c1d0c7b76bcaa39d540e26c9b224
 	}
 
 	@GetMapping(value = "/cart/get/user_id")
@@ -55,5 +41,4 @@ public class CartController {
 
 		return service.getCartInfoByUserId(id);
 	}
-	
 }
