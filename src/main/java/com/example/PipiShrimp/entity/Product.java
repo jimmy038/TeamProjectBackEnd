@@ -1,131 +1,128 @@
 package com.example.PipiShrimp.entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+
 
 @Entity
 @Table(name = "product")
 public class Product {
 
-	// ≠q≥Êid(≤£´~int AI)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "product_id")
-	@JsonProperty("product_id")
 	private int productId;
 
-	// ≤£´~¶W∫Ÿ
 	@Column(name = "product_name")
 	@JsonProperty("product_name")
 	private String productName;
-
-	// ≤£´~¥y≠z
+	
+	@Column(name = "product_type")
+	@JsonProperty("product_type")
+	private String productType;
+	
 	@Column(name = "description")
 	private String description;
 
-	// ≤£´~§W¨[§È¥¡
-	@Column(name = "release_date")
-	@JsonProperty("release_date")
-	private LocalDate releaseDate;
-
-	// ≤£´~ª˘ÆÊ
 	@Column(name = "price")
 	private int price;
 
-	// ∞”´~Æw¶sº∆∂q
+	// ÔøΩÔøΩÔâåÔøΩÓºªÊæàÊëÆÓ¶∑Óû≤ÔøΩÔøΩÔøΩ
 	@Column(name = "inventory")
 	private int inventory;
 
-	// ∞”´~æP∞‚º∆∂q
+	// ÔøΩÔøΩÔâåÔøΩÓºøÔííÔøΩÓúãÔøΩÓû≤ÔøΩÔøΩÔøΩ
 	@Column(name = "sale_count")
 	@JsonProperty("sale_count")
 	private int saleCount;
 
-	// ∞”´~≥WÆÊ(®“¶p:™A∏ÀS°BM°BL)
-	@Column(name = "specification")
-	private String specification;
-
-	// ∞”´~√˛´¨
-	@Column(name = "product_type")
-	@JsonProperty("product_type")
-	private String productType;
-
-	// ∞”´~¨Oß_§W¨[(boolean)
+	// ÔøΩÔøΩÔâåÔøΩÓººÓ¶ÄÔøΩÓíèÈäùÔìÅÓ¥µ(boolean)
 	@Column(name = "shelves")
 	private boolean shelves;
 
-	// •Œ∏ÙÆ|¶s©Òπœ§˘
-	@Column(name = "photo")
-	private String photo;
+	//ÔøΩÓúÖjson 64base
+	@Column(name = "photo", columnDefinition = "MEDIUMBLOB")  
+	private byte[] photo;
 
-	// πÔ¿≥user_id(•~≥°¡‰)
+	
 	@Column(name = "user_id")
 	@JsonProperty("user_id")
 	private int userId;
+	
+	@Column(name = "upload_time")
+	@JsonProperty("upload_time")
+	private LocalDate uploadTime;
+	
+	@Column(name = "seller_name")
+	@JsonProperty("seller_name")
+	private String sellerName;
+	
 
 	public Product() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	// ®S¶≥id°B≥WÆÊ
-	public Product(String productName, String description, LocalDate releaseDate, int price, int inventory,
-			int saleCount, String productType, boolean shelves, String photo, int userId) {
-		super();
-		this.productName = productName;
-		this.description = description;
-		this.releaseDate = releaseDate;
-		this.price = price;
-		this.inventory = inventory;
-		this.saleCount = saleCount;
-		this.productType = productType;
-		this.shelves = shelves;
-		this.photo = photo;
-		this.userId = userId;
-	}
+	
 
-	// ®S¶≥≥WÆÊ(•Œ®”ßÛ∑s∞”´~∏Í∞T)
-	public Product(int productId, String productName, String description, LocalDate releaseDate, int price,
-			int inventory, int saleCount, String productType, boolean shelves, String photo, int userId) {
+
+
+	public Product(int productId, String productName, String productType, String description, int price, int inventory,
+			int saleCount, boolean shelves, byte[] photo, int userId, LocalDate uploadTime, String sellerName) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
+		this.productType = productType;
 		this.description = description;
-		this.releaseDate = releaseDate;
 		this.price = price;
 		this.inventory = inventory;
 		this.saleCount = saleCount;
-		this.productType = productType;
 		this.shelves = shelves;
 		this.photo = photo;
 		this.userId = userId;
+		this.uploadTime = uploadTime;
+		this.sellerName = sellerName;
 	}
 
-	// •˛≥°≥£¶≥
-	public Product(int productId, String productName, String description, LocalDate releaseDate, int price,
-			int inventory, int saleCount, String specification, String productType, boolean shelves, String photo,
-			int userId) {
+
+
+
+
+	public String getSellerName() {
+		return sellerName;
+	}
+
+
+
+	public void setSellerName(String sellerName) {
+		this.sellerName = sellerName;
+	}
+
+
+
+	public Product(Product product, LocalDate currentDate) {
 		super();
-		this.productId = productId;
-		this.productName = productName;
-		this.description = description;
-		this.releaseDate = releaseDate;
-		this.price = price;
-		this.inventory = inventory;
-		this.saleCount = saleCount;
-		this.specification = specification;
-		this.productType = productType;
-		this.shelves = shelves;
-		this.photo = photo;
-		this.userId = userId;
+		this.productName = product.getProductName();
+		this.productType = product.getProductType();
+		this.description = product.getDescription();
+		this.price = product.getPrice();
+		this.inventory = product.getInventory();
+		this.saleCount = product.getSaleCount();
+		this.shelves = product.isShelves();
+		this.photo = product.getPhoto();
+		this.userId = product.getUserId();
+
 	}
 
 	public int getProductId() {
@@ -150,14 +147,6 @@ public class Product {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public LocalDate getReleaseDate() {
-		return releaseDate;
-	}
-
-	public void setReleaseDate(LocalDate releaseDate) {
-		this.releaseDate = releaseDate;
 	}
 
 	public int getPrice() {
@@ -192,13 +181,23 @@ public class Product {
 		this.shelves = shelves;
 	}
 
-	public String getPhoto() {
+
+
+	public byte[] getPhoto() {
 		return photo;
 	}
 
-	public void setPhoto(String photo) {
+
+
+
+
+	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
+
+
+
+
 
 	public int getUserId() {
 		return userId;
@@ -207,5 +206,57 @@ public class Product {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+
+
+
+
+
+	public LocalDate getUploadTime() {
+		return uploadTime;
+	}
+
+
+
+
+
+	public void setUploadTime(LocalDate uploadTime) {
+		this.uploadTime = uploadTime;
+	}
+
+
+
+
+
+
+
+
+
+
+
+	public String getProductType() {
+		return productType;
+	}
+
+
+
+
+
+
+
+
+
+
+
+	public void setProductType(String productType) {
+		this.productType = productType;
+	}
+
+
+
+
+
+
+
+	
 
 }

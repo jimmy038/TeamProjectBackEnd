@@ -10,8 +10,8 @@ import com.example.PipiShrimp.entity.Comment;
 @Repository
 public interface CommentDao extends JpaRepository<Comment, Integer> {
 
-	/**
-	 * 對應product_id，找出所有評論(參數:product_id)
-	 **/
-	public List<Comment> findAllByProductId(int id);
+ /**
+  * 對應product_id，找出所有評論(參數:product_id)
+  **/
+ public List<Comment> findAllByProductId(int id);
 }

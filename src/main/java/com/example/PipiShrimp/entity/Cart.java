@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,61 +16,63 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Table(name = "cart")
 public class Cart {
 
-	// ÁÊª«¨®id(»¼¼Wint AI)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cart_id")
-	@JsonProperty("cart_id")
 	private int cartId;
 
-	// °Ó«~¥[¤JÁÊª«¨®¤é´Á
+	//  Ó«~ [ J Êª      
 	@Column(name = "cart_date")
 	@JsonProperty("cart_date")
 	private LocalDateTime cartDate;
 
-	// °Ó«~¼Æ¶q
+	//  Ó«~ Æ¶q
 	@Column(name = "cart_count")
 	@JsonProperty("cart_count")
 	private int cartCount;
 
-	// °Ó«~(Á`)ª÷ÃB
+	//  Ó«~( `)   B
 	@Column(name = "cart_amount")
 	@JsonProperty("cart_amount")
 	private int productAmount;
 
-	// ²£«~¦WºÙ
 	@Column(name = "product_name")
 	@JsonProperty("product_name")
 	private String productName;
 
-	// ¹ïÀ³user¸ê®ÆªíID
+	//     user  Æª ID   
 	@Column(name = "user_id")
 	@JsonProperty("user_id")
 	private int userId;
 
-	// ¹ïÀ³product¸ê®ÆªíID
+	//     product  Æª ID
 	@Column(name = "product_id")
 	@JsonProperty("product_id")
 	private int productId;
+	
+	//ç”¨json 64base
+	@Column(name = "photo", columnDefinition = "MEDIUMBLOB")  // ä½¿ç”¨æ­£ç¡®çš„åˆ—å®šä¹‰ï¼Œä¾‹å¦‚ "LONGTEXT"ï¼Œæ ¹æ®å®é™…æƒ…å†µé€‰æ‹©
+
+	private byte[] photo;
+	
+	@Column(name = "product_type")
+	@JsonProperty("product_type")
+	private String productType;
+	
+	// å•†å“åº«å­˜æ•¸é‡
+	@Column(name = "inventory")
+	private int inventory;
+	
 
 	public Cart() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public Cart(int userId, LocalDateTime cartDate, int cartCount, int productAmount, String productName,
-			int productId) {
-		super();
-		this.userId = userId;
-		this.cartDate = cartDate;
-		this.cartCount = cartCount;
-		this.productAmount = productAmount;
-		this.productName = productName;
-		this.productId = productId;
-	}
+	
 
-	// §ó·s¸ê®Æ
 	public Cart(int cartId, LocalDateTime cartDate, int cartCount, int productAmount, String productName, int userId,
-			int productId) {
+			int productId, byte[] photo, String productType, int inventory) {
 		super();
 		this.cartId = cartId;
 		this.cartDate = cartDate;
@@ -78,6 +81,19 @@ public class Cart {
 		this.productName = productName;
 		this.userId = userId;
 		this.productId = productId;
+		this.photo = photo;
+		this.productType = productType;
+		this.inventory = inventory;
+	}
+
+
+
+	public int getCartId() {
+		return cartId;
+	}
+
+	public void setCartId(int cartId) {
+		this.cartId = cartId;
 	}
 
 	public LocalDateTime getCartDate() {
@@ -128,4 +144,34 @@ public class Cart {
 		this.productId = productId;
 	}
 
+	
+
+	public byte[] getPhoto() {
+		return photo;
+	}
+
+
+
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
+
+
+
+	public String getProductType() {
+		return productType;
+	}
+
+	public void setProductType(String productType) {
+		this.productType = productType;
+	}
+
+	public int getInventory() {
+		return inventory;
+	}
+
+	public void setInventory(int inventory) {
+		this.inventory = inventory;
+	}
+	
 }

@@ -1,6 +1,5 @@
 package com.example.PipiShrimp.service.Impl;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -51,29 +50,23 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public CartSearchRes delete(List<Integer> idList) {
-		// 存放要刪除的cart資料
-		List<Cart> cartList = new ArrayList<Cart>();
-
+	public CartRes delete(int id) {
 		// 檢查cart_id是否存在
-		for (int id : idList) {
-			if (!dao.existsById(id)) {
-				return new CartSearchRes(RtnCode.CART_ID_NOT_FOUND);
-			}
-
-			// 取得刪除商品資訊，用於回傳給使用者
-			Cart cart = dao.findById(id).get();
-			cartList.add(cart);
+		if (!dao.existsById(id)) {
+			return new CartRes(RtnCode.CART_ID_NOT_FOUND);
 		}
+
+		// 取得刪除商品資訊，用於回傳給使用者
+		Cart res = dao.findById(id).get();
 
 		try {
-			dao.deleteAllById(idList);
+			dao.deleteById(id);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
-			return new CartSearchRes(RtnCode.CART_DELETE_FAILED);
+			return new CartRes(RtnCode.CART_CREATE_FAILED);
 		}
 
-		return new CartSearchRes(RtnCode.SUCCESSFUL, cartList);
+		return new CartRes(RtnCode.SUCCESSFUL, res);
 	}
 
 	@Override

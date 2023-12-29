@@ -1,33 +1,26 @@
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE  IF NOT EXISTS `user` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   `password` varchar(60) NOT NULL,
   `address` varchar(45) DEFAULT NULL,
-  `phone_number` varchar(45) DEFAULT NULL,
-  `level` int DEFAULT '0',
+  `phone_number` varchar(45) NOT NULL,
+  `level` int NOT NULL,
   PRIMARY KEY (`id`)
 );
-
 
 CREATE TABLE IF NOT EXISTS `product` (
   `product_id` int NOT NULL AUTO_INCREMENT,
   `product_name` varchar(100) NOT NULL,
   `description` varchar(45) DEFAULT NULL,
-  `release_date` date DEFAULT NULL,
   `price` int NOT NULL,
   `inventory` int NOT NULL,
   `sale_count` int NOT NULL DEFAULT '0',
-  `specification` varchar(45) DEFAULT NULL,
-  `product_type` varchar(45) NOT NULL,
   `shelves` tinyint NOT NULL DEFAULT '0',
   `photo` varchar(255) DEFAULT NULL,
   `user_id` int NOT NULL,
   PRIMARY KEY (`product_id`)
 );
-
-
-
 
 CREATE TABLE IF NOT EXISTS `record` (
   `record_id` int NOT NULL AUTO_INCREMENT,
@@ -37,12 +30,10 @@ CREATE TABLE IF NOT EXISTS `record` (
   `status` varchar(45) NOT NULL,
   `product_name` varchar(45) NOT NULL,
   `record_type` varchar(45) NOT NULL,
-  `valid` tinyint NOT NULL DEFAULT '1',
   `user_id` int NOT NULL DEFAULT '0',
   `product_id` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`record_id`)
 );
-
 
 CREATE TABLE IF NOT EXISTS `cart` (
   `cart_id` int NOT NULL AUTO_INCREMENT,
@@ -54,8 +45,6 @@ CREATE TABLE IF NOT EXISTS `cart` (
   `product_id` int NOT NULL,
   PRIMARY KEY (`cart_id`)
 );
-
-
 
 
 

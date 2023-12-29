@@ -40,67 +40,69 @@ public class RecordServiceImpl implements RecordService {
 
 	@Autowired
 	private MaintenanceDao maintenanceDao;
-
+	// TODO ç™¼é€ä¿¡ä»¶çµ¦è²·å®¶å’Œè³£å®¶
 	@Override
 	public RecordRes create(Record record) {
-
-		// ½T»{°Ñ¼Æ¬O§_¥¿½T¶ñ¼g
-		if (!StringUtils.hasText(record.getProductName()) || //
-				!StringUtils.hasText(record.getStatus()) || //
-				!StringUtils.hasText(record.getRecordType()) || //
-				record.getProductCount() <= 0 || //
-				record.getProductAmount() <= 0) {
+		// ç¡®è®¤å‚æ•°æ˜¯å¦æ­£ç¡®å¡«å†™
+		if (!StringUtils.hasText(record.getProductName()) || !StringUtils.hasText(record.getStatus())
+				 || record.getProductCount() <= 0
+				|| record.getProductAmount() <= 0) {
+			logger.error("Invalid parameters provided for record creation.");
 			return new RecordRes(RtnCode.PARAM_ERROR);
 		}
 
-		// ¨ú±o°Ó«~¸ê°T
+		// å–å¾—å•†å“è³‡è¨Š
 		Optional<Product> op = productDao.findById(record.getProductId());
 		if (op.isEmpty()) {
 			return new RecordRes(RtnCode.PRODUCT_IS_EMPTY);
 		}
 
 		Product product = op.get();
-		// ½T»{ÁÊ¶R¼Æ¶q <= ®w¦s
+		// ç¢ºèªè³¼è²·æ•¸é‡ <= åº«å­˜
 		if (product.getInventory() < record.getProductCount()) {
 			return new RecordRes(RtnCode.PRODUCT_IS_SHORTAGE);
 		}
 
-		// °Ó«~®w¦s - ÁÊ¶R¼Æ
+		// å•†å“åº«å­˜ - è³¼è²·æ•¸
 		product.setInventory(product.getInventory() - record.getProductCount());
 
 		try {
 			productDao.save(product);
 			dao.save(record);
+			// TODO: åœ¨è¿™é‡Œæ·»åŠ å‘é€é‚®ä»¶ç»™ä¹°å®¶å’Œå–å®¶çš„é€»è¾‘
+
+			logger.info("Record created successfully. ID: {}", record.getRecordId());
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error("Error creating record: {}", e.getMessage(), e);
 			return new RecordRes(RtnCode.RECORD_CREATE_FAILED);
 		}
-
-		// TODO µo°e«H¥óµ¹½æ®a
 
 		return new RecordRes(RtnCode.SUCCESSFUL, record);
 	}
 
-	// TODO µo°e«H¥óµ¹¶R®a(¨ú®ø¦¨¥\)©M½æ®a(«È¤á¨ú®ø­q³æ)
+	// TODO ç™¼é€ä¿¡ä»¶çµ¦è²·å®¶(å–æ¶ˆæˆåŠŸ)å’Œè³£å®¶(å®¢æˆ¶å–æ¶ˆè¨‚å–®)
 	@Override
 	public RecordRes cancel(int id) {
-		// ½T»{­q³æ¬O§_¦s¦b
+		// ç¢ºèªè¨‚å–®æ˜¯å¦å­˜åœ¨
 		if (!dao.existsById(id)) {
 			return new RecordRes(RtnCode.RECORD_ID_NOT_FOUND);
 		}
-		// ¨ú±o­q³æ¸ê°T
+		// å–å¾—è¨‚å–®è³‡è¨Š
 		Optional<Record> op = dao.findById(id);
 
-		// ­q³æ¸ê®Æ¬°ªÅ
+		// è¨‚å–®è³‡æ–™ç‚ºç©º
 		if (op.isEmpty()) {
 			return new RecordRes(RtnCode.RECORD_IS_EMPTY);
 		}
 
-		// §ó§ï­q³æª¬ºA(valid => false)
+		// æ›´æ”¹è¨‚å–®ç‹€æ…‹(record_type => è¨‚å–®å–æ¶ˆ)
 		Record record = op.get();
-		record.setValid(false);
+		if (record.getStatus().matches("å‡ºè²¨ä¸­") || record.getStatus().matches("å·²å®Œæˆ")) {
+			return new RecordRes(RtnCode.RECORD_CAN_NOT_CANCEL);
+		}
+		record.setStatus("å–æ¶ˆè¨‚å–®");
 
-		// ¨ú±o°Ó«~¸ê°T
+		// å–å¾—å•†å“è³‡è¨Š
 		Optional<Product> proOp = productDao.findById(record.getProductId());
 		if (proOp.isEmpty()) {
 			return new RecordRes(RtnCode.PRODUCT_IS_EMPTY);
@@ -108,14 +110,14 @@ public class RecordServiceImpl implements RecordService {
 
 		Product product = proOp.get();
 
-		// °Ó«~®w¦s + ÁÊ¶R¼Æ
+		// å•†å“åº«å­˜ + è³¼è²·æ•¸
 		product.setInventory(product.getInventory() + record.getProductCount());
 
-		// ±N§ó·sªº¸ê®Æ¦s¤JDB
+		// å°‡æ›´æ–°çš„è³‡æ–™å­˜å…¥DB
 		try {
 			productDao.save(product);
 			dao.save(record);
-			// TODO µo°e«H¥óµ¹¶R®a©M½æ®a
+			// TODO ç™¼é€ä¿¡ä»¶çµ¦è²·å®¶å’Œè³£å®¶
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			return new RecordRes(RtnCode.RECORD_CANCEL_FAILED);
@@ -126,30 +128,30 @@ public class RecordServiceImpl implements RecordService {
 
 	@Override
 	public RecordRes shipping(int id) {
-		// ½T»{­q³æ¬O§_¦s¦b
+		// ç¢ºèªè¨‚å–®æ˜¯å¦å­˜åœ¨
 		if (!dao.existsById(id)) {
 			return new RecordRes(RtnCode.RECORD_ID_NOT_FOUND);
 		}
-		// ¨ú±o­q³æ¸ê°T
+		// å–å¾—è¨‚å–®è³‡è¨Š
 		Optional<Record> op = dao.findById(id);
 
-		// ­q³æ¸ê®Æ¬°ªÅ
+		// è¨‚å–®è³‡æ–™ç‚ºç©º
 		if (op.isEmpty()) {
 			return new RecordRes(RtnCode.RECORD_IS_EMPTY);
 		}
 
-		// §ó§ï­q³æª¬ºA(status => "¥X³f¤¤")
+		// æ›´æ”¹è¨‚å–®ç‹€æ…‹(status => "å‡ºè²¨ä¸­")
 		Record record = op.get();
-		if (record.getStatus().matches("¨ú®ø­q³æ")) {
+		if (record.getStatus().matches("å–æ¶ˆè¨‚å–®")) {
 			return new RecordRes(RtnCode.RECORD_IS_CANCELED);
 		}
 
-		record.setStatus("¥X³f¤¤");
+		record.setStatus("å‡ºè²¨ä¸­");
 
-		// ±N§ó·sªº¸ê®Æ¦s¤JDB
+		// å°‡æ›´æ–°çš„è³‡æ–™å­˜å…¥DB
 		try {
 			dao.save(record);
-			// TODO µo°e«H¥óµ¹¶R®a©M½æ®a
+			// TODO ç™¼é€ä¿¡ä»¶çµ¦è²·å®¶å’Œè³£å®¶
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			return new RecordRes(RtnCode.RECORD_SHIPPING_FAILED);
@@ -159,87 +161,134 @@ public class RecordServiceImpl implements RecordService {
 	}
 
 	@Override
-	public RecordRes completed(int id) {
-		// ½T»{­q³æ¬O§_¦s¦b
-		if (!dao.existsById(id)) {
-			return new RecordRes(RtnCode.RECORD_ID_NOT_FOUND);
+	 public RecordRes completed(int id) {
+	  // ç¢ºèªè¨‚å–®æ˜¯å¦å­˜åœ¨
+	  if (!dao.existsById(id)) {
+	   return new RecordRes(RtnCode.RECORD_ID_NOT_FOUND);
+	  }
+	  // å–å¾—è¨‚å–®è³‡è¨Š
+	  Optional<Record> op = dao.findById(id);
+
+	  // è¨‚å–®è³‡æ–™ç‚ºç©º
+	  if (op.isEmpty()) {
+	   return new RecordRes(RtnCode.RECORD_IS_EMPTY);
+	  }
+
+	  // æ›´æ”¹è¨‚å–®ç‹€æ…‹(status => "å·²å®Œæˆ")
+	  Record record = op.get();
+	  if (record.getStatus().matches("å–æ¶ˆè¨‚å–®")) {
+	   return new RecordRes(RtnCode.RECORD_IS_CANCELED);
+	  }
+
+	  // å–å¾—å•†å“è³‡è¨Š(å¢åŠ å•†å“éŠ·å”®æ•¸)
+	  Optional<Product> proOp = productDao.findById(record.getProductId());
+
+	  if (proOp.isEmpty()) {
+	   return new RecordRes(RtnCode.PRODUCT_IS_EMPTY);
+	  }
+
+	  Product product = proOp.get();
+
+	  // å–å¾—æ¶ˆè²»è€…è³‡è¨Š(æ‰£é™¤é»æ•¸)
+	  Optional<User> buyerOp = userDao.findById(record.getUserId());
+
+	  if (buyerOp.isEmpty()) {
+	   return new RecordRes(RtnCode.USER_IS_EMPTY);
+	  }
+
+	  User buyer = buyerOp.get();
+
+	  // å–å¾—è³£å®¶è³‡è¨Š(å¢åŠ é»æ•¸)
+	  Optional<User> sellerOp = userDao.findById(record.getSellerId());
+
+	  if (sellerOp.isEmpty()) {
+	   return new RecordRes(RtnCode.USER_IS_EMPTY);
+	  }
+
+	  User seller = sellerOp.get();
+
+	  // æ›´æ”¹è¨‚å–®ç‹€æ…‹
+	  record.setStatus("å·²å®Œæˆ");
+
+	  // è¨‚å–®å®Œæˆå¾Œï¼Œé›»å•†æŠ½å–3%æ‰‹çºŒè²»
+	  Maintenance maintenance = new Maintenance(record.getRecordId(), //
+	    (int) Math.floor(record.getProductAmount() * 0.07));
+
+	  // å¢åŠ å•†å“éŠ·å”®æ•¸
+	  product.setSaleCount(product.getSaleCount() + record.getProductCount());
+
+	  // æ‰£é™¤æ¶ˆè²»è€…é»æ•¸
+	  buyer.setPoints(buyer.getPoints() - record.getProductAmount());
+
+	  // è³£å®¶é»æ•¸å¢åŠ (ç¸½é‡‘é¡-æ‰‹çºŒè²»)
+	  seller.setPoints(seller.getPoints() + (record.getProductAmount() - maintenance.getMaintenanceCost()));
+
+	  // å°‡æ›´æ–°çš„è³‡æ–™å­˜å…¥DB
+	  try {
+	   dao.save(record);
+	   maintenanceDao.save(maintenance);
+	   productDao.save(product);
+	   userDao.save(buyer);
+	   userDao.save(seller);
+	   // TODO ç™¼é€ä¿¡ä»¶çµ¦è²·å®¶å’Œè³£å®¶
+	  } catch (Exception e) {
+	   logger.error(e.getMessage());
+	   return new RecordRes(RtnCode.RECORD_COMPLETED_FAILED);
+	  }
+
+	  return new RecordRes(RtnCode.SUCCESSFUL, record);
+	 }
+	@Override
+	public RecordSearchRes getRecordInfoByUserId(int id) {
+		// ç¢ºèªä½¿ç”¨è€…æ˜¯å¦å­˜åœ¨
+		if (!userDao.existsById(id)) {
+			return new RecordSearchRes(RtnCode.USER_ID_NOT_FOUND);
 		}
-		// ¨ú±o­q³æ¸ê°T
-		Optional<Record> op = dao.findById(id);
 
-		// ­q³æ¸ê®Æ¬°ªÅ
-		if (op.isEmpty()) {
-			return new RecordRes(RtnCode.RECORD_IS_EMPTY);
+		List<Record> recordList = dao.findAllByUserId(id);
+
+		// æœ‰å¯èƒ½æœƒæ²’æœ‰è³¼è²·æˆ–è³£å•†å“çš„äº¤æ˜“ç´€éŒ„->ä¸ç”¨é˜²recordListç‚ºç©ºï¼Œ
+		// ä½†è¦çµ¦ä¸€å€‹ç©ºListï¼Œè®“ä»–ä¸æ˜¯null
+		recordList = recordList.size() != 0 ? recordList : Collections.emptyList();
+
+		return new RecordSearchRes(RtnCode.SUCCESSFUL, recordList);
+	}
+
+	@Override
+	public RecordSearchRes getRecordInfoBySellerId(int id) {
+		// ç¢ºèªuser_idæ˜¯å¦å­˜åœ¨(è³£å®¶)
+		if (!userDao.existsById(id)) {
+			return new RecordSearchRes(RtnCode.USER_ID_NOT_FOUND);
 		}
 
-		// §ó§ï­q³æª¬ºA(status => "¤w§¹¦¨")
-		Record record = op.get();
-		if (record.getStatus().matches("¨ú®ø­q³æ")) {
-			return new RecordRes(RtnCode.RECORD_IS_CANCELED);
+		List<Record> recordList = dao.findAllBySellerId(id);
+
+		// æœ‰å¯èƒ½æœƒæ²’æœ‰è³¼è²·æˆ–è³£å•†å“çš„äº¤æ˜“ç´€éŒ„->ä¸ç”¨é˜²recordListç‚ºç©ºï¼Œ
+		// ä½†è¦çµ¦ä¸€å€‹ç©ºListï¼Œè®“ä»–ä¸æ˜¯null
+		recordList = recordList.size() != 0 ? recordList : Collections.emptyList();
+
+		return new RecordSearchRes(RtnCode.SUCCESSFUL, recordList);
+	}
+
+	@Override
+	public RecordSearchRes getRecordInfoByProductId(int id) {
+		// ç¢ºèªä½¿ç”¨è€…æ˜¯å¦å­˜åœ¨
+		if (!productDao.existsById(id)) {
+			return new RecordSearchRes(RtnCode.PRODUCT_ID_NOT_FOUND);
 		}
 
-		// ¨ú±o°Ó«~¸ê°T(¼W¥[°Ó«~¾P°â¼Æ)
-		Optional<Product> proOp = productDao.findById(record.getProductId());
+		List<Record> recordList = dao.findAllByProductId(id);
 
-		if (proOp.isEmpty()) {
-			return new RecordRes(RtnCode.PRODUCT_IS_EMPTY);
-		}
+		// æœ‰å¯èƒ½æœƒæ²’æœ‰è³¼è²·æˆ–è³£å•†å“çš„äº¤æ˜“ç´€éŒ„->ä¸ç”¨é˜²recordListç‚ºç©ºï¼Œ
+		// ä½†è¦çµ¦ä¸€å€‹ç©ºListï¼Œè®“ä»–ä¸æ˜¯null
+		recordList = recordList.size() != 0 ? recordList : Collections.emptyList();
 
-		Product product = proOp.get();
-
-		// ¨ú±o®ø¶OªÌ¸ê°T(¦©°£ÂI¼Æ)
-		Optional<User> buyerOp = userDao.findById(record.getUserId());
-
-		if (buyerOp.isEmpty()) {
-			return new RecordRes(RtnCode.USER_IS_EMPTY);
-		}
-
-		User buyer = buyerOp.get();
-
-		// ¨ú±o½æ®a¸ê°T(¼W¥[ÂI¼Æ)
-		Optional<User> sellerOp = userDao.findById(record.getSellerId());
-
-		if (sellerOp.isEmpty()) {
-			return new RecordRes(RtnCode.USER_IS_EMPTY);
-		}
-
-		User seller = sellerOp.get();
-
-		// §ó§ï­q³æª¬ºA
-		record.setStatus("¤w§¹¦¨");
-
-		// ­q³æ§¹¦¨«á¡A¹q°Ó©â¨ú3%¤âÄò¶O
-		Maintenance maintenance = new Maintenance(record.getRecordId(), //
-				(int) Math.floor(record.getProductAmount() * 0.07));
-
-		// ¼W¥[°Ó«~¾P°â¼Æ
-		product.setSaleCount(product.getSaleCount() + record.getProductCount());
-
-		// ¦©°£®ø¶OªÌÂI¼Æ
-		buyer.setPoints(buyer.getPoints() - record.getProductAmount());
-
-		// ½æ®aÂI¼Æ¼W¥[(Á`ª÷ÃB-¤âÄò¶O)
-		seller.setPoints(seller.getPoints() + (record.getProductAmount() - maintenance.getMaintenanceCost()));
-
-		// ±N§ó·sªº¸ê®Æ¦s¤JDB
-		try {
-			dao.save(record);
-			maintenanceDao.save(maintenance);
-			productDao.save(product);
-			userDao.save(buyer);
-			userDao.save(seller);
-			// TODO µo°e«H¥óµ¹¶R®a©M½æ®a
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-			return new RecordRes(RtnCode.RECORD_COMPLETED_FAILED);
-		}
-
-		return new RecordRes(RtnCode.SUCCESSFUL, record);
+		return new RecordSearchRes(RtnCode.SUCCESSFUL, recordList);
 	}
 
 	@Override
 	public RecordSearchRes delete(List<Integer> idList) {
-		// ½T»{­q³æid¬O§_¦s¦b
+		// ç¢ºèªè¨‚å–®idæ˜¯å¦å­˜åœ¨
 		for (int id : idList) {
 			if (!dao.existsById(id)) {
 				return new RecordSearchRes(RtnCode.USER_ID_NOT_FOUND);
@@ -247,7 +296,7 @@ public class RecordServiceImpl implements RecordService {
 
 		}
 
-		// ¦s©ñ§R°£record¸ê®Æ
+		// å­˜æ”¾åˆªé™¤recordè³‡æ–™
 		List<Record> records = dao.findAllById(idList);
 
 		try {
@@ -258,52 +307,6 @@ public class RecordServiceImpl implements RecordService {
 		}
 
 		return new RecordSearchRes(RtnCode.SUCCESSFUL, records);
-	}
-
-	@Override
-	public RecordSearchRes getRecordInfoByUserId(int id) {
-		// ½T»{¨Ï¥ÎªÌ¬O§_¦s¦b
-		if (!userDao.existsById(id)) {
-			return new RecordSearchRes(RtnCode.USER_ID_NOT_FOUND);
-		}
-
-		List<Record> recordList = dao.findAllByUserId(id);
-
-		// ¦³¥i¯à·|¨S¦³ÁÊ¶R©Î½æ°Ó«~ªº¥æ©ö¬ö¿ı->¤£¥Î¨¾recordList¬°ªÅ¡A
-		// ¦ı­nµ¹¤@­ÓªÅList¡AÅı¥L¤£¬Onull
-		recordList = recordList.size() != 0 ? recordList : Collections.emptyList();
-
-		return new RecordSearchRes(RtnCode.SUCCESSFUL, recordList);
-	}
-
-	@Override
-	public RecordSearchRes getRecordInfoByProductId(int id) {
-		// ½T»{¨Ï¥ÎªÌ¬O§_¦s¦b
-		if (!productDao.existsById(id)) {
-			return new RecordSearchRes(RtnCode.PRODUCT_ID_NOT_FOUND);
-		}
-
-		List<Record> recordList = dao.findAllByProductId(id);
-
-		// ¦³¥i¯à·|¨S¦³ÁÊ¶R©Î½æ°Ó«~ªº¥æ©ö¬ö¿ı->¤£¥Î¨¾recordList¬°ªÅ¡A
-		// ¦ı­nµ¹¤@­ÓªÅList¡AÅı¥L¤£¬Onull
-		recordList = recordList.size() != 0 ? recordList : Collections.emptyList();
-
-		return new RecordSearchRes(RtnCode.SUCCESSFUL, recordList);
-	}
-
-	@Override
-	public RecordRes getMaintenanceByRecordId(int id) {
-		if (!dao.existsById(id)) {
-			return new RecordRes(RtnCode.RECORD_ID_NOT_FOUND);
-		}
-
-		Optional<Record> op = dao.findById(id);
-		if (op.isEmpty()) {
-			return new RecordRes(RtnCode.RECORD_IS_EMPTY);
-		}
-
-		return new RecordRes(RtnCode.SUCCESSFUL, op.get());
 	}
 
 }

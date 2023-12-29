@@ -1,8 +1,11 @@
 package com.example.PipiShrimp.service.Impl;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+
+import javax.xml.bind.DatatypeConverter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +15,7 @@ import org.springframework.util.StringUtils;
 
 import com.example.PipiShrimp.constants.RtnCode;
 import com.example.PipiShrimp.entity.Product;
+import com.example.PipiShrimp.entity.User;
 import com.example.PipiShrimp.repository.ProductDao;
 import com.example.PipiShrimp.repository.UserDao;
 import com.example.PipiShrimp.service.ifs.ProductService;
@@ -30,35 +34,39 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private UserDao userDao;
 
-	// TODO Àx¦s¹Ï¤ù¤è¦¡
+	// TODO ï¿½ïƒŸæ‘®î¦¶ï¿½î¡¾ï¿½ï‹ªî¡æ’˜ï¿½
+	// TODO æ·»åŠ æ³¨é‡Šæˆ–å…¶ä»–å¿…è¦çš„æ“ä½œ
 	@Override
 	public ProductRes create(Product product) {
-		if (!StringUtils.hasText(product.getProductName()) || //
-				!StringUtils.hasText(product.getDescription()) || //
-				product.getPrice() <= 0 || //
-				product.getInventory() < 0 //
-		) {
-			return new ProductRes(RtnCode.PARAM_ERROR);
-		}
+	    if (!StringUtils.hasText(product.getProductName()) ||
+	        !StringUtils.hasText(product.getDescription()) ||
+	        product.getPrice() <= 0 ||
+	        product.getInventory() < 0) {
+	        return new ProductRes(RtnCode.PARAM_ERROR);
+	    }
 
-		try {
-			proDao.save(product);
 
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-			return new ProductRes(RtnCode.PRODUCT_CREATE_FAILED);
-		}
-		return new ProductRes(RtnCode.SUCCESSFUL, product);
+	    try {
+	        // ä¿å­˜äº§å“å¯¹è±¡åˆ°æ•°æ®åº“
+	        Product savedProduct = proDao.save(product);
+	        // è¿™é‡Œç›´æ¥è·å–ä¿å­˜åçš„äº§å“å¯¹è±¡ï¼Œè€Œä¸æ˜¯ä½¿ç”¨ Optional
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return new ProductRes(RtnCode.PRODUCT_CREATE_FAILED);
+	    }
+
+	    return new ProductRes(RtnCode.SUCCESSFUL, product);
 	}
+
 
 	@Override
 	public ProductRes delete(int id) {
-		// §ä¤£¨ì¸Ó°Ó«~id
+		// ï¿½ï¼éŠïš—ï‘é–°è„£ï¿½ï‰Œï¿½î»¡d
 		if (!proDao.existsById(id)) {
 			return new ProductRes(RtnCode.PRODUCT_ID_NOT_FOUND);
 		}
 
-		// ¨ú±o§R°£°Ó«~¸ê°T¡A¥Î©ó¦^¶Çµ¹¨Ï¥ÎªÌ
+		// ï¿½ï¿½î¡¼ï¿½î¤™ï‹ï¿½î¨’ï¿½ï¿½ï‰Œï¿½î¼¾ï¿½ï‹¬ï¿½ï“Šï¿½ï—¼îœ…ï¿½î¡“ï¿½ï¿½îµ¤î¾¦è¯è™«è™ï¿½îœ…ï¿½ï¿½
 		Product res = proDao.findById(id).get();
 
 		try {
@@ -72,27 +80,13 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public ProductSearchRes getProductInfoByUserId(int id) {
-		// user_id¤£¦s¦b
-		if (!userDao.existsById(id)) {
-			return new ProductSearchRes(RtnCode.USER_ID_NOT_FOUND);
-		}
-
-		List<Product> res = proDao.searchProductByUserId(id);
-		// ¦pªG°Ó«~¬°ªÅ => µ¹¤@­ÓªÅList
-		res = res.size() != 0 ? res : Collections.emptyList();
-
-		return new ProductSearchRes(RtnCode.SUCCESSFUL, res);
-	}
-
-	@Override
 	public ProductRes getProductInfo(int id) {
 		if (!proDao.existsById(id)) {
 			return new ProductRes(RtnCode.PRODUCT_ID_NOT_FOUND);
 		}
 
 		Optional<Product> op = proDao.findById(id);
-		// ¸ê®Æ¬°ªÅ(¸ê®Æ¦³°İÃD)
+		// éˆï‹ªï¿½î©•î¾­è›ï¿½(éˆï‹ªï¿½î©”ï¿½ï£ï¿½îµï¿½ï¿½)
 		if (op.isEmpty()) {
 			return new ProductRes(RtnCode.DATABASE_IS_EMPTY);
 		}
@@ -102,7 +96,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ProductSearchRes getAllProductInfo() {
 		List<Product> products = proDao.searchAllProduct();
-		// product¸ê®Æ®w¬°ªÅ
+		// productéˆï‹ªï¿½î©“æ¾ˆï¿½î¾­è›ï¿½
 		if (products.size() == 0) {
 			return new ProductSearchRes(RtnCode.PRODUCT_IS_EMPTY);
 		}
@@ -113,15 +107,13 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ProductSearchRes getProductByName(String productName) {
 		List<Product> products = proDao.searchProductByName(productName);
-		// ·j´MÄæ¥¼¿é¤J=>Åã¥Ü¥ş³¡
+		// ï¿½ï¿½î°ªï¿½ï•ï¿½ï„“î¯¯é ›è©¨ï…¯->æ†¿èˆå…§ï¿½ï…²ï¿½ï€¸
 		if (!StringUtils.hasText(productName)) {
 			getAllProductInfo();
 		}
 
-		// §ä¤£¨ì·j´M°Ó«~ => µ¹¤@­ÓªÅ°}¦C
-		if (products.size() == 0) {
-			products = Collections.emptyList();
-		}
+		// ï¿½ï¼éŠïš—ï‘ï¿½ï¿½î°ªï¿½ï•ï¿½ï‰Œï¿½ï¿½
+		products = products.size() != 0 ? products : Collections.emptyList();
 
 		return new ProductSearchRes(RtnCode.SUCCESSFUL, products);
 	}
@@ -136,4 +128,21 @@ public class ProductServiceImpl implements ProductService {
 		return new ProductSearchRes(RtnCode.SUCCESSFUL, proDao.searchProductByPriceDesc());
 	}
 
+	@Override
+	public ProductSearchRes getProductInfoByUserId(int id) {
+		// user_idä¸å­˜åœ¨
+		if (!userDao.existsById(id)) {
+			return new ProductSearchRes(RtnCode.USER_ID_NOT_FOUND);
+		}
+
+		List<Product> res = proDao.searchProductByUserId(id);
+		// å¦‚æœå•†å“ç‚ºç©º => çµ¦ä¸€å€‹ç©ºList
+		res = res.size() != 0 ? res : Collections.emptyList();
+
+		return new ProductSearchRes(RtnCode.SUCCESSFUL, res);
+	}
+	@Override
+	public ProductSearchRes getByProductType(String ProductType) {
+		return new ProductSearchRes(RtnCode.SUCCESSFUL, proDao.searchProductByType(ProductType));
+	}
 }

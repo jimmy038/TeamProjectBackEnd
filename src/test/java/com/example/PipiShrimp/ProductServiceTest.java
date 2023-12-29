@@ -1,6 +1,7 @@
 package com.example.PipiShrimp;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -20,28 +21,39 @@ public class ProductServiceTest {
 
 	@Autowired
 	private ProductDao dao;
-
 	@Test
 	public void createTest() {
-		Product product = new Product("¤j³Â", "§l­¹¥ÎÃÄª«", LocalDate.of(2010, 1, 1), 3999, 10, 999, "«O°·­¹«~", false, "", 16);
-		ProductRes res = service.create(product);
-		System.out.println("Àx¦sµ²ªG: " + res.getRtnCode().getMessage());
-		System.out.println("Àx¦s²£«~:" + res.getProduct().getProductName());
+	    LocalDate currentDate = LocalDate.now();
+
+	    Product product1 = new Product();
+	    ProductRes res1 = service.create(product1);
+	    System.out.println("åš™è¸ï¿½î¸‚î”´è¬¢è³‚è•­ï¿½ï¿½î»è•­åš™ï¿½: " + res1.getRtnCode().getMessage());
+	    System.out.println("åš™è¸ï¿½î¸‚î”´è¬¢è³ƒî­§åš™è¸è•­åš™ï¿½:" + res1.getProduct().getProductName());
+
+	    Product product2 = new Product();
+	    ProductRes res2 = service.create(product2);
+	    System.out.println("åš™è¸ï¿½î¸‚î”´è¬¢è³‚è•­ï¿½ï¿½î»è•­åš™ï¿½: " + res2.getRtnCode().getMessage());
+	    System.out.println("åš™è¸ï¿½î¸‚î”´è¬¢è³ƒî­§åš™è¸è•­åš™ï¿½:" + res2.getProduct().getProductName());
+
+	    Product product3 = new Product();
+	    ProductRes res3 = service.create(product3);
+	    System.out.println("åš™è¸ï¿½î¸‚î”´è¬¢è³‚è•­ï¿½ï¿½î»è•­åš™ï¿½: " + res3.getRtnCode().getMessage());
+	    System.out.println("åš™è¸ï¿½î¸‚î”´è¬¢è³ƒî­§åš™è¸è•­åš™ï¿½:" + res3.getProduct().getProductName());
 	}
 
 	@Test
 	public void searchAllTest() {
 		List<Product> res = service.getAllProductInfo().getProducts();
 		for (Product item : res) {
-			System.out.println("²£«~¦WºÙ: " + item.getProductName());
+			System.out.println("åš™è¸î­§åš™è¸è•­è¹“é³´è•­ï¿½ï¿½î©–ï¿½ï¿½: " + item.getProductName());
 		}
 	}
 
 	@Test
 	public void searchByNameTest() {
-		List<Product> res = service.getProductByName("¥¬¤B").getProducts();
+		List<Product> res = service.getProductByName("ï¿½î—†ï¿½î¼Šåš™è¸è•­").getProducts();
 		for (Product item : res) {
-			System.out.println("²£«~¦WºÙ: " + item.getProductName());
+			System.out.println("åš™è¸î­§åš™è¸è•­è¹“é³´è•­ï¿½ï¿½î©–ï¿½ï¿½: " + item.getProductName());
 		}
 	}
 
@@ -49,8 +61,8 @@ public class ProductServiceTest {
 	public void getProductByPriceTest() {
 		List<Product> res = service.getProductByPrice().getProducts();
 		for (Product item : res) {
-			System.out.println("²£«~¦WºÙ: " + item.getProductName());
-			System.out.println("²£«~¦WºÙ: " + item.getPrice());
+			System.out.println("åš™è¸î­§åš™è¸è•­è¹“é³´è•­ï¿½ï¿½î©–ï¿½ï¿½: " + item.getProductName());
+			System.out.println("åš™è¸î­§åš™è¸è•­è¹“é³´è•­ï¿½ï¿½î©–ï¿½ï¿½: " + item.getPrice());
 			System.out.println("-----------------");
 		}
 	}
@@ -59,18 +71,8 @@ public class ProductServiceTest {
 	public void getProductByPriceDescTest() {
 		List<Product> res = service.getProductByPriceDesc().getProducts();
 		for (Product item : res) {
-			System.out.println("²£«~¦WºÙ: " + item.getProductName());
-			System.out.println("²£«~¦WºÙ: " + item.getPrice());
-			System.out.println("-----------------");
-		}
-	}
-
-	@Test
-	public void daoTest() {
-		List<Product> res = dao.searchProductByUserId(1);
-		for (Product item : res) {
-			System.out.println("²£«~¦WºÙ: " + item.getProductName());
-			System.out.println("²£«~¦WºÙ: " + item.getPrice());
+			System.out.println("åš™è¸î­§åš™è¸è•­è¹“é³´è•­ï¿½ï¿½î©–ï¿½ï¿½: " + item.getProductName());
+			System.out.println("åš™è¸î­§åš™è¸è•­è¹“é³´è•­ï¿½ï¿½î©–ï¿½ï¿½: " + item.getPrice());
 			System.out.println("-----------------");
 		}
 	}
@@ -78,6 +80,6 @@ public class ProductServiceTest {
 	@Test
 	public void deleteAllProduct() {
 		dao.deleteAll();
-		System.out.println("¸ê®Æ¤w¥ş¼Æ²M°£");
+		System.out.println("ï¿½ï¿½ïï”¢åš™è¸ï¿½îš¦ï¿½ï‹³è•­ï¿½ï…¼åš™è¸î´±ï¿½ï¿½î°´ïˆšè¬’ï¿½");
 	}
 }

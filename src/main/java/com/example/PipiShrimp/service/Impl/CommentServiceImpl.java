@@ -32,8 +32,10 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public CommentRes create(Comment comment) {
-		if (!StringUtils.hasText(comment.getComment()) || //
-				!StringUtils.hasText(comment.getUserName())) {
+		if (!StringUtils.hasText(comment.getComment()) 
+//				|| !StringUtils.hasText(comment.getUserName())
+				
+				) {
 			return new CommentRes(RtnCode.PARAM_ERROR);
 		}
 
@@ -46,29 +48,6 @@ public class CommentServiceImpl implements CommentService {
 			System.out.println("¿ù»~:" + e);
 			return new CommentRes(RtnCode.COMMENT_CREATE_FAILED);
 		}
-	}
-
-	@Override
-	public CommentRes delete(int id) {
-		if (!dao.existsById(id)) {
-			return new CommentRes(RtnCode.COMMENT_ID_NOT_FOUND);
-		}
-
-		Optional<Comment> op = dao.findById(id);
-		if (op.isEmpty()) {
-			return new CommentRes(RtnCode.COMMENT_IS_EMPTY);
-		}
-		Comment comment = op.get();
-
-		try {
-			dao.deleteById(id);
-
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-			return new CommentRes(RtnCode.COMMENT_DELETE_FAILED);
-		}
-
-		return new CommentRes(RtnCode.SUCCESSFUL, comment);
 	}
 
 	@Override
@@ -141,5 +120,4 @@ public class CommentServiceImpl implements CommentService {
 
 		return new CommentRes(RtnCode.SUCCESSFUL, comment);
 	}
-
 }

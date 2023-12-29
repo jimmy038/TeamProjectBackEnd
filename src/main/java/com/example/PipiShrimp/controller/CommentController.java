@@ -17,31 +17,26 @@ import com.example.PipiShrimp.vo.CommentSearchRes;
 @RestController
 public class CommentController {
 
-	@Autowired
-	private CommentService service;
+ @Autowired
+ private CommentService service;
 
-	@PostMapping(value = "/comment/create")
-	public CommentRes create(@RequestBody Comment comment) {
-		return service.create(comment);
-	}
+ @PostMapping(value = "/comment/create")
+ public CommentRes create(@RequestBody Comment comment) {
+  return service.create(comment);
+ }
 
-	@PostMapping(value = "/comment/delete")
-	public CommentRes create(@RequestParam(value = "id") int id) {
-		return service.delete(id);
-	}
+ @GetMapping(value = "/comment/info")
+ public CommentSearchRes getCommentInfo(@RequestParam int id) {
+  return service.getCommentInfo(id);
+ }
 
-	@GetMapping(value = "/comment/info")
-	public CommentSearchRes getCommentInfo(@RequestParam int id) {
-		return service.getCommentInfo(id);
-	}
-
-	@PostMapping(value = "/comment/like")
-	public CommentRes addLike(@RequestParam int id) {
-		return service.addLike(id);
-	}
-
-	@PostMapping(value = "/comment/dislike")
-	public CommentRes addDislike(@RequestParam int id) {
-		return service.addDislike(id);
-	}
+ @PostMapping(value = "/comment/like")
+ public CommentRes addLike(@RequestParam int id) {
+  return service.addLike(id);
+ }
+ 
+ @PostMapping(value = "/comment/dislike")
+ public CommentRes addDislike(@RequestParam int id) {
+  return service.addDislike(id);
+ }
 }
