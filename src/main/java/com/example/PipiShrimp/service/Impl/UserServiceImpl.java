@@ -1,6 +1,10 @@
 package com.example.PipiShrimp.service.Impl;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
@@ -164,6 +168,36 @@ public class UserServiceImpl implements UserService {
 
 		return new UserRes(RtnCode.SUCCESSFUL, user);
 	}
+	
+	private String generateRandomPassword() {
+		 // 產生一個隨機數生成器
+		Random random = new Random();
+		 // 產生一個 StringBuilder 物件來儲存密碼
+		StringBuilder pwd = new StringBuilder();
+		// 產生字母和數字的字串    		  // 包含所有大小寫字母
+		String englishCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+		String numbers = "0123456789";// 包含數字 0 到 9
+		
+		//使英文及數字交替排列成亂數
+		for(int i = 0 ; i < 6 ; i++) {
+			pwd.append(englishCharacters.charAt(random.nextInt(englishCharacters.length())));
+			pwd.append(numbers.charAt(random.nextInt(numbers.length())));
+		}
+		
+	    // 將密碼 的字元存入 List 中 ， List包含集合及繼承
+		List<Character> chars = pwd.chars().mapToObj(e ->(char)e).collect(Collectors.toList());
+		 // 將 List 中的字元進行洗牌，即打亂順序
+		Collections.shuffle(chars);
+		// 創建一個新的 StringBuilder 來存放洗牌後的密碼字串
+	    StringBuilder shuffledPassword = new StringBuilder();
+	    
+	    // 將洗牌後的字元逐一添加到新的 StringBuilder 中，組成最後的密碼
+	    for (Character character : chars) {
+	        shuffledPassword.append(character);
+	    }
+	    // 回傳洗牌後的密碼字串
+	    return shuffledPassword.toString();
+	}
 	@Override /** 忘記密碼 **/
 	public UserRes sentForgotPwd(String email) {
 		if (!StringUtils.hasText(email)) {
@@ -178,7 +212,7 @@ public class UserServiceImpl implements UserService {
 		}
 
 		// 產生新密碼，並暫存起來
-		String cachedRandomPwd = RandomString.make(12);
+		String cachedRandomPwd = generateRandomPassword() ;
 		// 將生成的亂碼設定到使用者物件中，設為使用者一次性密碼暫存
 		user.setPwd(encoder.encode(cachedRandomPwd)); // 使用先前暫存的亂碼
 		user.setResetPwd(true); // 將判斷是否需要更改密碼狀態的欄位改為true

@@ -64,6 +64,18 @@ public class Cart {
 	private int inventory;
 	
 
+	@Column(name = "price")
+	@JsonProperty("price")
+	private int price;
+	
+	@Column(name = "seller_name")
+	@JsonProperty("seller_name")
+	private String sellerName;
+	
+	@Column(name = "seller_id")
+	@JsonProperty("seller_id")
+	private int sellerId;
+
 	public Cart() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -72,7 +84,7 @@ public class Cart {
 	
 
 	public Cart(int cartId, LocalDateTime cartDate, int cartCount, int productAmount, String productName, int userId,
-			int productId, byte[] photo, String productType, int inventory) {
+			int productId, byte[] photo, String productType, int inventory, int price, String sellerName, int sellerId) {
 		super();
 		this.cartId = cartId;
 		this.cartDate = cartDate;
@@ -84,6 +96,9 @@ public class Cart {
 		this.photo = photo;
 		this.productType = productType;
 		this.inventory = inventory;
+		this.price = price;
+		this.sellerName = sellerName;
+		this.sellerId = sellerId;
 	}
 
 
@@ -144,19 +159,13 @@ public class Cart {
 		this.productId = productId;
 	}
 
-	
-
 	public byte[] getPhoto() {
 		return photo;
 	}
 
-
-
 	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
-
-
 
 	public String getProductType() {
 		return productType;
@@ -173,5 +182,32 @@ public class Cart {
 	public void setInventory(int inventory) {
 		this.inventory = inventory;
 	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public String getSellerName() {
+		return sellerName;
+	}
+
+	public void setSellerName(String sellerName) {
+		this.sellerName = sellerName;
+	}
+
+	public int getSellerId() {
+		return sellerId;
+	}
+
+	public void setSellerId(int sellerId) {
+		this.sellerId = sellerId;
+	}
+	
 	
 }
+	
+

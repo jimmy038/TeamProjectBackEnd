@@ -44,6 +44,7 @@ public enum RtnCode {
 	FORGOT_PASSWORD_ERROR(400, "Forgot password error!!"), //
 	OLD_PASSWORD_AND_NEW_PASSWORD_ARE_IDENITCAL(400, "Old password and new password aare identitcal!!"), //
 	CHANGE_PASSWORD_ERROR(400, "Change password error!!"), //
+	FEEDBACK_ID_NOT_FOUND(400, "Feedback id not found!!"), //
 
 	
 	
