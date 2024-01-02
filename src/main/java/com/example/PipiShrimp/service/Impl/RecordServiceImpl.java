@@ -357,8 +357,14 @@ public class RecordServiceImpl implements RecordService {
 
 		// 開始、結束日期都有輸入
 		if (startDate != null && endDate != null) {
-			recordList = dao.findAllByDate(startDate, endDate);
-			return new RecordSearchRes(RtnCode.SUCCESSFUL, recordList);
+
+			// 開始日期>>>結束日期 防呆
+			if (startDate.isAfter(endDate)) {
+				return new RecordSearchRes(RtnCode.PARAM_ERROR);
+			} else {
+				recordList = dao.findAllByDate(startDate, endDate);
+				return new RecordSearchRes(RtnCode.SUCCESSFUL, recordList);
+			}
 		}
 
 		// 只有開始日期
@@ -373,7 +379,6 @@ public class RecordServiceImpl implements RecordService {
 			return new RecordSearchRes(RtnCode.SUCCESSFUL, recordList);
 		}
 
-		// 開始日期<<<結束日期 防呆
 		return new RecordSearchRes(RtnCode.PARAM_ERROR);
 	}
 
