@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import com.example.PipiShrimp.entity.Maintenance;
 import com.example.PipiShrimp.entity.Product;
 import com.example.PipiShrimp.entity.Record;
 import com.example.PipiShrimp.entity.User;
+import com.example.PipiShrimp.repository.CartDao;
 import com.example.PipiShrimp.repository.MaintenanceDao;
 import com.example.PipiShrimp.repository.ProductDao;
 import com.example.PipiShrimp.repository.RecordDao;
@@ -37,6 +40,9 @@ public class RecordServiceImpl implements RecordService {
 
 	@Autowired
 	private ProductDao productDao;
+
+	@Autowired
+	private CartDao cartDao;
 
 	@Autowired
 	private MaintenanceDao maintenanceDao;
@@ -79,6 +85,53 @@ public class RecordServiceImpl implements RecordService {
 		// TODO 發送信件給賣家
 
 		return new RecordRes(RtnCode.SUCCESSFUL, record);
+	}
+
+	@Transactional
+	@Override
+	public RecordSearchRes create(List<Record> records) {
+		// 判斷訂單是否為空
+		if (records.size() == 0 || records == null) {
+			return new RecordSearchRes(RtnCode.RECORD_IS_EMPTY);
+		}
+
+		// 檢查參數
+		for (Record record : records) {
+			if (!StringUtils.hasText(record.getProductName()) || //
+					!StringUtils.hasText(record.getStatus()) || //
+					!StringUtils.hasText(record.getRecordType()) || //
+					record.getProductCount() <= 0 || //
+					record.getProductAmount() <= 0) {
+				return new RecordSearchRes(RtnCode.PARAM_ERROR);
+			}
+		}
+
+		try {
+			dao.saveAll(records);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return new RecordSearchRes(RtnCode.RECORD_CREATE_FAILED);
+		}
+
+		// 取得userId
+		int userId = 0;
+		for (Record record : records) {
+			userId = record.getUserId();
+		}
+		
+		// 新增完訂單後 => 刪除購物車 #用user_id + product_id
+		for (Record record : records) {
+			int id = record.getProductId();
+
+			try {
+				cartDao.deleteCartById(userId, id);
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+				return new RecordSearchRes(RtnCode.CART_DELETE_FAILED);
+			}
+		}
+
+		return new RecordSearchRes(RtnCode.SUCCESSFUL);
 	}
 
 	// TODO 發送信件給買家(取消成功)和賣家(客戶取消訂單)

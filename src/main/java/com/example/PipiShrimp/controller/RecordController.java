@@ -28,6 +28,12 @@ public class RecordController {
 
 		return service.create(record);
 	}
+	
+	@PostMapping(value = "/records/create")
+	public RecordSearchRes create(@RequestBody List<Record> records) {
+
+		return service.create(records);
+	}
 
 	@PostMapping(value = "/record/cancel")
 	public RecordRes cancel(@RequestParam(value = "id") int id) {

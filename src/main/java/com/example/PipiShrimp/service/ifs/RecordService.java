@@ -8,9 +8,14 @@ import com.example.PipiShrimp.vo.RecordSearchRes;
 
 public interface RecordService {
 	/**
-	 * 新增訂單
+	 * 新增訂單(單筆)
 	 **/
 	public RecordRes create(Record record);
+	
+	/**
+	 * 新增訂單(多筆) #結清購物車資料
+	 **/
+	public RecordSearchRes create(List<Record> records);
 
 	/**
 	 * 取消訂單(valid => false)，(參數:record_id)
