@@ -1,5 +1,6 @@
 package com.example.PipiShrimp.service.ifs;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.example.PipiShrimp.entity.Record;
@@ -11,7 +12,7 @@ public interface RecordService {
 	 * 新增訂單(單筆)
 	 **/
 	public RecordRes create(Record record);
-	
+
 	/**
 	 * 新增訂單(多筆) #結清購物車資料
 	 **/
@@ -46,6 +47,12 @@ public interface RecordService {
 	 * 查詢商品銷量記錄(參數:product_id) #查詢商品銷量之類的 兩張資料表的商品名稱要對應
 	 **/
 	public RecordSearchRes getRecordInfoByProductId(int id);
+
+	/**
+	 * 使用者查詢訂單記錄(參數:user_id,開始、結束日期) #查詢特定時間的訂單
+	 **/
+	public RecordSearchRes getRecordInfoByDate(int id, //
+			LocalDate startDate, LocalDate endDate);
 
 	/**
 	 * 透過手續費明細取得訂單資料(參數:record_id) #點擊單筆手續費顯示資訊

@@ -1,8 +1,10 @@
 package com.example.PipiShrimp.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,7 +30,7 @@ public class RecordController {
 
 		return service.create(record);
 	}
-	
+
 	@PostMapping(value = "/records/create")
 	public RecordSearchRes create(@RequestBody List<Record> records) {
 
@@ -58,6 +60,14 @@ public class RecordController {
 			@RequestParam(value = "id") int id) {
 
 		return service.getRecordInfoByProductId(id);
+	}
+
+	@GetMapping(value = "/record/get/date")
+	public RecordSearchRes getRecordInfoByDate(//
+			@RequestParam(value = "id") int id, //
+			@RequestParam(required = false, value = "startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate, //
+			@RequestParam(required = false, value = "endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+		return service.getRecordInfoByDate(id, startDate, endDate);
 	}
 
 	@GetMapping(value = "/record/get/record_id")

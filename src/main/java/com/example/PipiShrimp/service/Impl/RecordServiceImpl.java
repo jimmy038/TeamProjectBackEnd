@@ -1,5 +1,6 @@
 package com.example.PipiShrimp.service.Impl;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -118,7 +119,7 @@ public class RecordServiceImpl implements RecordService {
 		for (Record record : records) {
 			userId = record.getUserId();
 		}
-		
+
 		// 新增完訂單後 => 刪除購物車 #用user_id + product_id
 		for (Record record : records) {
 			int id = record.getProductId();
@@ -343,6 +344,37 @@ public class RecordServiceImpl implements RecordService {
 		recordList = recordList.size() != 0 ? recordList : Collections.emptyList();
 
 		return new RecordSearchRes(RtnCode.SUCCESSFUL, recordList);
+	}
+
+	@Override
+	public RecordSearchRes getRecordInfoByDate(int id, //
+			LocalDate startDate, LocalDate endDate) {
+		List<Record> recordList = getRecordInfoByUserId(id).getRecordList();
+		// 如果沒輸入時間 => 顯示指定user全部訂單
+		if (startDate == null && endDate == null) {
+			return new RecordSearchRes(RtnCode.SUCCESSFUL, recordList);
+		}
+
+		// 開始、結束日期都有輸入
+		if (startDate != null && endDate != null) {
+			recordList = dao.findAllByDate(startDate, endDate);
+			return new RecordSearchRes(RtnCode.SUCCESSFUL, recordList);
+		}
+
+		// 只有開始日期
+		if (startDate != null && endDate == null) {
+			recordList = dao.findAllByStartDate(startDate);
+			return new RecordSearchRes(RtnCode.SUCCESSFUL, recordList);
+		}
+
+		// 只有結束日期
+		if (startDate == null && endDate != null) {
+			recordList = dao.findAllByEndDate(endDate);
+			return new RecordSearchRes(RtnCode.SUCCESSFUL, recordList);
+		}
+
+		// 開始日期<<<結束日期 防呆
+		return new RecordSearchRes(RtnCode.PARAM_ERROR);
 	}
 
 	@Override
