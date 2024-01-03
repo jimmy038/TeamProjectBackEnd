@@ -17,4 +17,5 @@ public interface UserDao extends JpaRepository<User, Integer> {
 	 * 找出符合信箱的User資料
 	 **/
 	public User findByEmail(String email);
+
 }

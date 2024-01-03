@@ -25,15 +25,15 @@ public interface UserService {
 	 * 絪胯user戈
 	 **/
 	public UserRes editUserInfo(User user);
-	
+
 	/**
 	 * 盚癳纗翴计喷靡絏
 	 **/
 	public String getVerifyMail(String email);
 
 	/**
-	 * 纗翴计
+	 * 纗翴计 (把计:user_id, pwd, point)
 	 **/
-	public UserRes addPointsVerify(User user, int points);
+	public UserRes addPoints(int id, String password, int points);
 
 }
