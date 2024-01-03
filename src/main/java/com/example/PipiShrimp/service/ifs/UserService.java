@@ -32,6 +32,11 @@ public interface UserService {
 	public String getVerifyMail(String email);
 
 	/**
+	 * 纗翴计 (把计:user_id, point)
+	 **/
+	public UserRes addPoints(int id, int points);
+
+	/**
 	 * 纗翴计 (把计:user_id, pwd, point)
 	 **/
 	public UserRes addPoints(int id, String password, int points);

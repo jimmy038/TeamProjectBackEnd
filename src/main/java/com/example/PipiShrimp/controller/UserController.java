@@ -66,9 +66,8 @@ public class UserController {
 
 	@PostMapping(value = "/user/point/edit")
 	public UserRes addPoints(@RequestParam(name = "id") int id, //
-			@RequestBody String password,
 			@RequestParam(name = "points") int points) {
-		return service.addPoints(id, password, points);
+		return service.addPoints(id, points);
 	}
 
 }

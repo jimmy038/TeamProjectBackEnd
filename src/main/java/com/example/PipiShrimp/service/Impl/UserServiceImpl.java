@@ -186,6 +186,27 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public UserRes addPoints(int id, int points) {
+		if (!userDao.existsById(id)) {
+			return new UserRes(RtnCode.PARAM_ERROR);
+		}
+
+		User user = userDao.findById(id).get();
+
+		user.setPoints(user.getPoints() + points);
+
+		try {
+			userDao.save(user);
+			user.setPwd("");
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return new UserRes(RtnCode.USER_UPDATE_FAILED);
+		}
+
+		return new UserRes(RtnCode.SUCCESSFUL, user);
+	}
+
+	@Override
 	public UserRes addPoints(int id, String password, int points) {
 		if (!userDao.existsById(id)) {
 			return new UserRes(RtnCode.PARAM_ERROR);
