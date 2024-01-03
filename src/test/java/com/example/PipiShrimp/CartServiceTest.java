@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.servlet.http.HttpSessionIdListener;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,6 +28,11 @@ public class CartServiceTest {
 		for (Cart cart : res) {
 			System.out.println("§R°£¸ê®Æ: " + cart.getProductName());
 		}
+	}
+	
+	@Test
+	public void delete() {
+		dao.deleteCartById(26, 9);
 	}
 
 }

@@ -1,8 +1,11 @@
 package com.example.PipiShrimp.service.Impl;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +18,7 @@ import com.example.PipiShrimp.entity.Maintenance;
 import com.example.PipiShrimp.entity.Product;
 import com.example.PipiShrimp.entity.Record;
 import com.example.PipiShrimp.entity.User;
+import com.example.PipiShrimp.repository.CartDao;
 import com.example.PipiShrimp.repository.MaintenanceDao;
 import com.example.PipiShrimp.repository.ProductDao;
 import com.example.PipiShrimp.repository.RecordDao;
@@ -37,6 +41,9 @@ public class RecordServiceImpl implements RecordService {
 
 	@Autowired
 	private ProductDao productDao;
+
+	@Autowired
+	private CartDao cartDao;
 
 	@Autowired
 	private MaintenanceDao maintenanceDao;
@@ -80,7 +87,58 @@ public class RecordServiceImpl implements RecordService {
 		return new RecordRes(RtnCode.SUCCESSFUL, record);
 	}
 
+<<<<<<< HEAD
 	// TODO ÁôºÈÄÅ‰ø°‰ª∂Áµ¶Ë≤∑ÂÆ∂(ÂèñÊ∂àÊàêÂäü)ÂíåË≥£ÂÆ∂(ÂÆ¢Êà∂ÂèñÊ∂àË®ÇÂñÆ)
+=======
+	@Transactional
+	@Override
+	public RecordSearchRes create(List<Record> records) {
+		// ßP¬_≠q≥Ê¨Oß_¨∞™≈
+		if (records.size() == 0 || records == null) {
+			return new RecordSearchRes(RtnCode.RECORD_IS_EMPTY);
+		}
+
+		// ¿À¨d∞—º∆
+		for (Record record : records) {
+			if (!StringUtils.hasText(record.getProductName()) || //
+					!StringUtils.hasText(record.getStatus()) || //
+					!StringUtils.hasText(record.getRecordType()) || //
+					record.getProductCount() <= 0 || //
+					record.getProductAmount() <= 0) {
+				return new RecordSearchRes(RtnCode.PARAM_ERROR);
+			}
+		}
+
+		try {
+			dao.saveAll(records);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return new RecordSearchRes(RtnCode.RECORD_CREATE_FAILED);
+		}
+
+		// ®˙±ouserId
+		int userId = 0;
+		for (Record record : records) {
+			userId = record.getUserId();
+		}
+
+		// ∑sºWßπ≠q≥Ê´· => ßR∞£¡ ™´®Æ #•Œuser_id + product_id
+		for (Record record : records) {
+			int id = record.getProductId();
+
+			try {
+				cartDao.deleteCartById(userId, id);
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+				return new RecordSearchRes(RtnCode.CART_DELETE_FAILED);
+			}
+		}
+
+		return new RecordSearchRes(RtnCode.SUCCESSFUL);
+	}
+
+	// TODO µo∞e´H•Ûµπ∂RÆa(®˙Æ¯¶®•\)©MΩÊÆa(´»§·®˙Æ¯≠q≥Ê)
+>>>>>>> ian
 	@Override
 	public RecordRes cancel(int id) {
 		// Á¢∫Ë™çË®ÇÂñÆÊòØÂê¶Â≠òÂú®
@@ -309,4 +367,89 @@ public class RecordServiceImpl implements RecordService {
 		return new RecordSearchRes(RtnCode.SUCCESSFUL, records);
 	}
 
+<<<<<<< HEAD
+=======
+	@Override
+	public RecordSearchRes getRecordInfoByUserId(int id) {
+		// ΩTª{®œ•Œ™Ã¨Oß_¶s¶b
+		if (!userDao.existsById(id)) {
+			return new RecordSearchRes(RtnCode.USER_ID_NOT_FOUND);
+		}
+
+		List<Record> recordList = dao.findAllByUserId(id);
+
+		// ¶≥•iØ‡∑|®S¶≥¡ ∂R©ŒΩÊ∞”´~™∫•Ê©ˆ¨ˆø˝->§£•Œ®ærecordList¨∞™≈°A
+		// ¶˝≠nµπ§@≠”™≈List°A≈˝•L§£¨Onull
+		recordList = recordList.size() != 0 ? recordList : Collections.emptyList();
+
+		return new RecordSearchRes(RtnCode.SUCCESSFUL, recordList);
+	}
+
+	@Override
+	public RecordSearchRes getRecordInfoByProductId(int id) {
+		// ΩTª{®œ•Œ™Ã¨Oß_¶s¶b
+		if (!productDao.existsById(id)) {
+			return new RecordSearchRes(RtnCode.PRODUCT_ID_NOT_FOUND);
+		}
+
+		List<Record> recordList = dao.findAllByProductId(id);
+
+		// ¶≥•iØ‡∑|®S¶≥¡ ∂R©ŒΩÊ∞”´~™∫•Ê©ˆ¨ˆø˝->§£•Œ®ærecordList¨∞™≈°A
+		// ¶˝≠nµπ§@≠”™≈List°A≈˝•L§£¨Onull
+		recordList = recordList.size() != 0 ? recordList : Collections.emptyList();
+
+		return new RecordSearchRes(RtnCode.SUCCESSFUL, recordList);
+	}
+
+	@Override
+	public RecordSearchRes getRecordInfoByDate(int id, //
+			LocalDate startDate, LocalDate endDate) {
+		List<Record> recordList = getRecordInfoByUserId(id).getRecordList();
+		// ¶p™G®SøÈ§JÆ…∂° => ≈„•‹´¸©wuser•˛≥°≠q≥Ê
+		if (startDate == null && endDate == null) {
+			return new RecordSearchRes(RtnCode.SUCCESSFUL, recordList);
+		}
+
+		// ∂}©l°Bµ≤ßÙ§È¥¡≥£¶≥øÈ§J
+		if (startDate != null && endDate != null) {
+
+			// ∂}©l§È¥¡>>>µ≤ßÙ§È¥¡ ®æßb
+			if (startDate.isAfter(endDate)) {
+				return new RecordSearchRes(RtnCode.PARAM_ERROR);
+			} else {
+				recordList = dao.findAllByDate(startDate, endDate);
+				return new RecordSearchRes(RtnCode.SUCCESSFUL, recordList);
+			}
+		}
+
+		// •u¶≥∂}©l§È¥¡
+		if (startDate != null && endDate == null) {
+			recordList = dao.findAllByStartDate(startDate);
+			return new RecordSearchRes(RtnCode.SUCCESSFUL, recordList);
+		}
+
+		// •u¶≥µ≤ßÙ§È¥¡
+		if (startDate == null && endDate != null) {
+			recordList = dao.findAllByEndDate(endDate);
+			return new RecordSearchRes(RtnCode.SUCCESSFUL, recordList);
+		}
+
+		return new RecordSearchRes(RtnCode.PARAM_ERROR);
+	}
+
+	@Override
+	public RecordRes getMaintenanceByRecordId(int id) {
+		if (!dao.existsById(id)) {
+			return new RecordRes(RtnCode.RECORD_ID_NOT_FOUND);
+		}
+
+		Optional<Record> op = dao.findById(id);
+		if (op.isEmpty()) {
+			return new RecordRes(RtnCode.RECORD_IS_EMPTY);
+		}
+
+		return new RecordRes(RtnCode.SUCCESSFUL, op.get());
+	}
+
+>>>>>>> ian
 }

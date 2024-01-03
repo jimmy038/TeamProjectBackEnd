@@ -16,10 +16,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.example.PipiShrimp.constants.RtnCode;
-import com.example.PipiShrimp.entity.Mail;
 import com.example.PipiShrimp.entity.User;
 import com.example.PipiShrimp.repository.UserDao;
 import com.example.PipiShrimp.service.ifs.UserService;
+import com.example.PipiShrimp.utils.Mail;
+import com.example.PipiShrimp.utils.RandomCode;
 import com.example.PipiShrimp.vo.UserReq;
 import com.example.PipiShrimp.vo.UserRes;
 
@@ -211,6 +212,7 @@ public class UserServiceImpl implements UserService {
 			return new UserRes(RtnCode.EMAIL_NOT_FOUND);
 		}
 
+<<<<<<< HEAD
 		// 產生新密碼，並暫存起來
 		String cachedRandomPwd = generateRandomPassword() ;
 		// 將生成的亂碼設定到使用者物件中，設為使用者一次性密碼暫存
@@ -272,4 +274,67 @@ public class UserServiceImpl implements UserService {
 		}
 		return new UserRes(RtnCode.SUCCESSFUL);
 	}
+=======
+	@Override
+	public String getVerifyMail(String email) {
+		if (!StringUtils.hasText(email)) {
+			return "email is null";
+		}
+
+		String verCode = RandomCode.generateVerificationCode();
+
+		// �o�e���ҽX
+		new Thread(() -> {
+			Mail.sentConfirmMail(email, verCode);
+		}).start();
+
+		return verCode;
+	}
+
+	@Override
+	public UserRes addPoints(int id, int points) {
+		if (!userDao.existsById(id)) {
+			return new UserRes(RtnCode.PARAM_ERROR);
+		}
+
+		User user = userDao.findById(id).get();
+
+		user.setPoints(user.getPoints() + points);
+
+		try {
+			userDao.save(user);
+			user.setPwd("");
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return new UserRes(RtnCode.USER_UPDATE_FAILED);
+		}
+
+		return new UserRes(RtnCode.SUCCESSFUL, user);
+	}
+
+	@Override
+	public UserRes addPoints(int id, String password, int points) {
+		if (!userDao.existsById(id)) {
+			return new UserRes(RtnCode.PARAM_ERROR);
+		}
+
+		User user = userDao.findById(id).get();
+		if (!encoder.matches(password, user.getPwd())) {
+			return new UserRes(RtnCode.PASSWORD_ERROR);
+		}
+
+		user.setPoints(user.getPoints() + points);
+
+		try {
+			userDao.save(user);
+			user.setPwd("");
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return new UserRes(RtnCode.USER_UPDATE_FAILED);
+		}
+
+		return new UserRes(RtnCode.SUCCESSFUL, user);
+	}
+
+>>>>>>> ian
 }

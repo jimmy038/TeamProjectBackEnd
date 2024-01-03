@@ -52,6 +52,7 @@ public class UserController {
 	  return service.getUserInfo(id);
 	 }
 	@PostMapping(value = "/user/edit")
+<<<<<<< HEAD
 	 public UserRes editUserInfo(@RequestBody User user) {
 	  return service.editUserInfo(user);
 	 }
@@ -70,4 +71,21 @@ public class UserController {
 //			}
 			return service.changePwd(req.getEmail(), req.getOldPwd(), req.getNewPwd());
 		}
+=======
+	public UserRes editUserInfo(@RequestBody User user) {
+		return service.editUserInfo(user);
+	}
+
+	@GetMapping(value = "/verify/sent")
+	public String getVerifyMail(@RequestParam(name = "mail") String email) {
+		return service.getVerifyMail(email);
+	}
+
+	@PostMapping(value = "/user/point/edit")
+	public UserRes addPoints(@RequestParam(name = "id") int id, //
+			@RequestParam(name = "points") int points) {
+		return service.addPoints(id, points);
+	}
+
+>>>>>>> ian
 }

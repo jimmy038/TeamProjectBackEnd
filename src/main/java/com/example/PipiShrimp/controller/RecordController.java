@@ -1,8 +1,10 @@
 package com.example.PipiShrimp.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +31,16 @@ public class RecordController {
 		return service.create(record);
 	}
 
+<<<<<<< HEAD
 	// 取消訂單買家賣家用
+=======
+	@PostMapping(value = "/records/create")
+	public RecordSearchRes create(@RequestBody List<Record> records) {
+
+		return service.create(records);
+	}
+
+>>>>>>> ian
 	@PostMapping(value = "/record/cancel")
 	public RecordRes cancel(@RequestParam(value = "id") int id) {
 		return service.cancel(id);
@@ -71,4 +82,36 @@ public class RecordController {
 	public RecordSearchRes delete(@RequestParam List<Integer> idList) {
 		return service.delete(idList);
 	}
+<<<<<<< HEAD
+=======
+
+	@GetMapping(value = "/record/get/user_id")
+	public RecordSearchRes getRecordInfoByUserId(//
+			@RequestParam(value = "id") int id) {
+
+		return service.getRecordInfoByUserId(id);
+	}
+
+	@GetMapping(value = "/record/get/product_id")
+	public RecordSearchRes getRecordInfoByProductId(//
+			@RequestParam(value = "id") int id) {
+
+		return service.getRecordInfoByProductId(id);
+	}
+
+	@GetMapping(value = "/record/get/date")
+	public RecordSearchRes getRecordInfoByDate(//
+			@RequestParam(value = "id") int id, //
+			@RequestParam(required = false, value = "startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate, //
+			@RequestParam(required = false, value = "endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+		return service.getRecordInfoByDate(id, startDate, endDate);
+	}
+
+	@GetMapping(value = "/record/get/record_id")
+	public RecordRes getMaintenanceByRecordId(//
+			@RequestParam(value = "id") int id) {
+
+		return service.getMaintenanceByRecordId(id);
+	}
+>>>>>>> ian
 }
