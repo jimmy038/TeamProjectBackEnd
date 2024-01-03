@@ -59,4 +59,9 @@ public class UserController {
 		return service.editUserInfo(user);
 	}
 
+	@GetMapping(value = "/verify/sent")
+	public String getVerifyMail(@RequestParam(name = "mail") String email) {
+		return service.getVerifyMail(email);
+	}
+
 }

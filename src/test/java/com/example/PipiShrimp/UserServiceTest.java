@@ -1,14 +1,17 @@
 package com.example.PipiShrimp;
 
+import static org.mockito.ArgumentMatchers.intThat;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.access.event.PublicInvocationEvent;
 
-import com.example.PipiShrimp.entity.Mail;
 import com.example.PipiShrimp.entity.User;
 import com.example.PipiShrimp.repository.UserDao;
 import com.example.PipiShrimp.service.ifs.UserService;
+import com.example.PipiShrimp.utils.Mail;
+import com.example.PipiShrimp.utils.RandomCode;
 import com.example.PipiShrimp.vo.UserReq;
 import com.example.PipiShrimp.vo.UserRes;
 
@@ -69,6 +72,14 @@ public class UserServiceTest {
 		req = new UserReq("", "ianGG3cm");
 		res = service.login(req);
 		System.out.println("執行結果:" + res.getRtnCode().getMessage());
+	}
+
+	@Test
+	public void ranDomcode() {
+		for (int i = 0; i < 10; i++) {
+			String verificationCode = RandomCode.generateVerificationCode();
+			System.out.println("驗證碼: " + verificationCode);
+		}
 	}
 
 //	@Test

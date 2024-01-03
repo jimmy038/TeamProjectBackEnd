@@ -1,7 +1,5 @@
 package com.example.PipiShrimp.service.ifs;
 
-
-
 import com.example.PipiShrimp.entity.User;
 import com.example.PipiShrimp.vo.UserReq;
 import com.example.PipiShrimp.vo.UserRes;
@@ -17,15 +15,25 @@ public interface UserService {
 	 * 查詢DB內是否有符合的資料 #登入
 	 **/
 	public UserRes login(UserReq req);
-	
+
 	/**
 	 * 查詢user資料
 	 **/
 	public UserRes getUserInfo(int id);
-	
+
 	/**
 	 * 編輯user資料
 	 **/
 	public UserRes editUserInfo(User user);
+	
+	/**
+	 * 寄送儲值點數驗證碼
+	 **/
+	public String getVerifyMail(String email);
+
+	/**
+	 * 儲值點數
+	 **/
+	public UserRes addPointsVerify(User user, int points);
 
 }

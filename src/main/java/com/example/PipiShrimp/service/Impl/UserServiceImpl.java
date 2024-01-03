@@ -10,10 +10,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.example.PipiShrimp.constants.RtnCode;
-import com.example.PipiShrimp.entity.Mail;
 import com.example.PipiShrimp.entity.User;
 import com.example.PipiShrimp.repository.UserDao;
 import com.example.PipiShrimp.service.ifs.UserService;
+import com.example.PipiShrimp.utils.Mail;
+import com.example.PipiShrimp.utils.RandomCode;
 import com.example.PipiShrimp.vo.UserReq;
 import com.example.PipiShrimp.vo.UserRes;
 
@@ -166,6 +167,28 @@ public class UserServiceImpl implements UserService {
 		}
 
 		return new UserRes(RtnCode.SUCCESSFUL, user);
+	}
+
+	@Override
+	public String getVerifyMail(String email) {
+		if (!StringUtils.hasText(email)) {
+			return "email is null";
+		}
+
+		String verCode = RandomCode.generateVerificationCode();
+
+		// µo°eÅçÃÒ½X
+		new Thread(() -> {
+			Mail.sentConfirmMail(email, verCode);
+		}).start();
+
+		return verCode;
+	}
+
+	@Override
+	public UserRes addPointsVerify(User user, int points) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
